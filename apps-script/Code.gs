@@ -107,20 +107,22 @@ function json_(obj) {
 // 1) 코드 검증
 // ─────────────────────────────────────────────────────────────
 /**
- * 역할 값 — consultants 탭 '역할' 열에 아래 세 글자 중 하나를 정확히 적습니다.
+ * 역할 값 — consultants 탭 '역할' 열에 아래 넷 중 하나를 정확히 적습니다.
  * 대소문자는 가리지 않습니다 (admin / Admin / ADMIN 모두 됨).
- *   Admin      관리자     — 진단 · 교육 · 관리자
- *   Educator   에듀케이터 — 교육
- *   Consultant 컨설턴트   — 진단
+ *   Admin      AD  관리자           — 진단 · 교육 · 관리자
+ *   Educator   ED  에듀케이터       — 교육
+ *   Consultant CS  컨설턴트         — 진단
+ *   Master     MS  마스터컨설턴트   — 진단 · 교육
  */
 var ROLE_SCOPE = {
   'ADMIN':      ['diag', 'edu', 'adm'],
   'EDUCATOR':   ['edu'],
-  'CONSULTANT': ['diag']
+  'CONSULTANT': ['diag'],
+  'MASTER':     ['diag', 'edu']
 };
-var ROLE_LABEL  = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant' };
-var ROLE_PREFIX = { 'ADMIN': 'AD',    'EDUCATOR': 'ED',       'CONSULTANT': 'CS' };
-var PREFIX_ROLE = { 'AD': 'ADMIN',    'ED': 'EDUCATOR',       'CS': 'CONSULTANT' };
+var ROLE_LABEL  = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant', 'MASTER': 'Master' };
+var ROLE_PREFIX = { 'ADMIN': 'AD',    'EDUCATOR': 'ED',       'CONSULTANT': 'CS',         'MASTER': 'MS'     };
+var PREFIX_ROLE = { 'AD': 'ADMIN',    'ED': 'EDUCATOR',       'CS': 'CONSULTANT',         'MS': 'MASTER'     };
 
 /**
  * 코드 정규화 — 대문자로 올리고 영문·숫자만 남긴다.
@@ -249,13 +251,13 @@ function readRecord_(id) {
 //   기본값을 바꾸려면 아래 세 줄을 고쳐서 실행하세요.
 // ─────────────────────────────────────────────────────────────
 function issueCode() {
-  var role   = 'Consultant';        // Admin / Educator / Consultant
+  var role   = 'Consultant';        // Admin / Educator / Consultant / Master
   var name   = '(이름)';
   var org    = '';
   var months = 12;                  // 유효 개월 수
 
   var key = String(role).trim().toUpperCase();
-  if (!ROLE_SCOPE[key]) throw new Error('역할은 Admin / Educator / Consultant 중 하나여야 합니다: ' + role);
+  if (!ROLE_SCOPE[key]) throw new Error('역할은 Admin / Educator / Consultant / Master 중 하나여야 합니다: ' + role);
 
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONSULTANTS);
   var prefix = ROLE_PREFIX[key];

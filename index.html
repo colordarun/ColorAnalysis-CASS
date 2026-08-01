@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>K-Color 컬러진단표준시스템 · 와이어프레임</title>
+<title>K-Color Analysis Standard System · 색다른컬러연구소</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
@@ -26,14 +26,22 @@ button{font-family:inherit;cursor:pointer}
 
 header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
 .hd{max-width:1080px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
-.logo{font-weight:700;letter-spacing:-.02em;font-size:15px;white-space:nowrap}
-.logo small{display:block;font-weight:400;color:var(--muted);font-size:11px;letter-spacing:0}
+.logo{font-weight:700;letter-spacing:-.02em;font-size:15px;white-space:nowrap;flex:none}
+.logo img{height:24px;width:auto;display:block}
+.logo small{display:block;font-weight:600;color:var(--muted);font-size:9px;letter-spacing:.1em;margin-top:3px}
 .steps{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
 .steps::-webkit-scrollbar{display:none}
 .step{font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid var(--line);
   background:var(--panel);color:var(--muted);white-space:nowrap}
 .step.on{background:var(--accent);color:var(--onAccent);border-color:var(--accent)}
 .step.done{color:var(--ink)}
+/* 모드 버튼 — 각각 독립 버튼. 코드 확인 전에는 감춘다 */
+.modeBtns{display:none;gap:6px;flex:none}
+body.authed .modeBtns{display:flex}
+.modeBtns button{border:1px solid var(--line);background:var(--panel);border-radius:20px;
+  padding:6px 14px;font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap}
+.modeBtns button.on{background:var(--accent);color:var(--onAccent);border-color:var(--accent)}
+.modeBtns button.hide{display:none}
 .sw2{display:flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--panel);flex:none}
 .sw2 button{border:0;background:transparent;padding:6px 11px;font-size:11px;color:var(--muted);white-space:nowrap}
 .sw2 button.on{background:var(--accent);color:var(--onAccent)}
@@ -64,15 +72,14 @@ textarea{resize:vertical;min-height:64px}
 .sect:first-of-type{border-top:0;margin-top:0;padding-top:0}
 .req{color:#b4453a}
 
-.login{max-width:420px;margin:70px auto;text-align:center}
-.login .card{padding:34px}
-.login input{text-align:center;letter-spacing:.22em;font-size:16px;text-transform:uppercase}
-.roleTbl{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:16px;text-align:left}
-.roleTbl th,.roleTbl td{padding:6px 8px;border-bottom:1px solid var(--softLine)}
-.roleTbl th{color:var(--muted);font-weight:600;font-size:11px}
-.roleTbl code{font-size:11px}
-.roleTag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:5px;
-  background:var(--accent);color:var(--onAccent);letter-spacing:.02em}
+/* ── 코드 입력 화면 ── */
+.login{max-width:400px;margin:86px auto;text-align:center}
+.login .card{padding:44px 38px 38px}
+.loginLogo{width:200px;max-width:74%;height:auto;display:block;margin:0 auto 16px}
+.loginSys{margin:0 0 26px;font-size:10.5px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.login input{text-align:center;letter-spacing:.2em;font-size:16px;text-transform:uppercase;padding:13px 12px}
+.loginMsg{min-height:18px;margin:10px 0 16px;font-size:12px;color:#b4453a}
+.loginMsg.wait{color:var(--muted)}
 
 .skinImg{width:100%;border:1px solid var(--line);border-radius:10px;display:block;margin-bottom:10px}
 .skinOpts{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
@@ -247,7 +254,8 @@ table.band .cell span{font-size:9.5px;color:var(--muted);margin-left:3px}
 .a4-head{display:flex;justify-content:space-between;align-items:flex-start;
   border-bottom:2px solid #232120;padding-bottom:10px}
 .a4-brand{font-size:14px;font-weight:700;letter-spacing:-.01em}
-.a4-brand span{display:block;font-size:8.5px;font-weight:400;letter-spacing:.18em;color:#8b857e;margin-top:3px}
+.a4-brand img{height:30px;width:auto;display:block;margin-bottom:5px}
+.a4-brand span{display:block;font-size:8px;font-weight:600;letter-spacing:.16em;color:#8b857e}
 .a4-meta{text-align:right;font-size:9px;color:#8b857e;line-height:1.7}
 .a4-who{padding:16px 0 4px}
 .a4-who b{font-size:26px;letter-spacing:-.03em}
@@ -303,7 +311,8 @@ table.band .cell span{font-size:9.5px;color:var(--muted);margin-left:3px}
 .thanksCard h1{font-size:26px;margin:10px 0 4px;letter-spacing:-.03em}
 .thanksCard>p{margin:0;font-size:14px;color:var(--muted)}
 .tkMsg{font-size:13px;color:var(--ink);line-height:1.8;margin:0 0 22px}
-.tkSign{font-size:12px;color:var(--muted);letter-spacing:.02em;line-height:1.7}
+.tkLogo{width:170px;max-width:60%;height:auto;display:block;margin:0 auto 14px}
+.tkSign{font-size:11px;color:var(--muted);letter-spacing:.06em;line-height:1.8;font-weight:600}
 .tkSign small{font-size:9.5px;letter-spacing:.2em}
 
 /* ── ★ 미지정 경고 ── */
@@ -338,9 +347,12 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
 
 <header>
   <div class="hd">
-    <div class="logo">K-COLOR<small data-i18n="tagline">컬러진단표준시스템 · CASS</small></div>
+    <div class="logo">
+      <img src="assets/logo_tras.png" alt="DARUN COLOR INSTITUTE" onerror="this.style.display='none'">
+      <small data-i18n="tagline">K-Color Analysis Standard System</small>
+    </div>
     <div class="steps" id="steps"></div>
-    <div class="sw2" id="modeSw">
+    <div class="modeBtns" id="modeSw">
       <button id="mDiag" class="on" onclick="setMode('diag')" data-i18n="mDiag">진단</button>
       <button id="mEdu" onclick="setMode('edu')" data-i18n="mEdu">교육</button>
       <button id="mAdm" onclick="setMode('adm')" data-i18n="mAdm">관리자</button>
@@ -362,20 +374,13 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
 <section class="screen on" id="s0">
   <div class="login">
     <div class="card">
-      <h1 style="font-size:19px" data-i18n="loginTitle">코드 입력</h1>
-      <p class="sub" style="margin-bottom:20px" data-i18n="loginSub">발급받은 코드를 입력하세요. 코드 종류에 따라 사용 범위가 달라집니다.</p>
-      <input id="ccode" placeholder="AD / ED / CS - XXXX" maxlength="16" autocomplete="off">
-      <p class="note" id="cmsg" data-i18n="loginHint">대소문자·하이픈·띄어쓰기는 가리지 않습니다. 앞 두 글자가 AD=관리자, ED=에듀케이터, CS=컨설턴트.</p>
-      <div style="margin-top:16px"><button class="btn" style="width:100%" onclick="login()" data-i18n="confirm">확인</button></div>
-      <table class="roleTbl">
-        <tr><th data-i18n="roleCol">코드 종류</th><th data-i18n="prefixCol">예시</th><th data-i18n="scopeCol">사용 범위</th></tr>
-        <tr><td data-i18n="roleAdmin">관리자 코드</td><td><code>AD-0001</code></td><td data-i18n="scopeAdmin">진단 · 교육 · 관리자</td></tr>
-        <tr><td data-i18n="roleEdu">에듀케이터 코드</td><td><code>ED-0001</code></td><td data-i18n="scopeEdu">교육만</td></tr>
-        <tr><td data-i18n="roleCons">컨설턴트 코드</td><td><code>CS-0001</code></td><td data-i18n="scopeCons">진단만</td></tr>
-      </table>
-      <div class="wf" style="margin-top:16px;text-align:left" data-i18n="loginNote">
-        실제 동작 — Apps Script 웹앱으로 코드 전송 → 시트의 명부에서 코드 종류·만료일·활성여부 확인 → 권한이 담긴 세션 토큰 발급. 코드 목록은 앱에 포함되지 않습니다.
-      </div>
+      <img class="loginLogo" src="assets/logo_tras.png" alt="K-Color Analysis Standard System"
+           onerror="this.style.display='none'">
+      <p class="loginSys">K-Color Analysis Standard System</p>
+      <input id="ccode" placeholder="AD / ED / CS - 0000" maxlength="24" autocomplete="off"
+             onkeydown="if(event.key==='Enter')login()">
+      <p class="loginMsg" id="cmsg"></p>
+      <button class="btn" style="width:100%" onclick="login()" data-i18n="confirm">확인</button>
     </div>
   </div>
 </section>
@@ -560,7 +565,9 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
       <div class="rc-strip" id="tkStrip" style="height:26px;margin:22px 0"></div>
       <p class="tkMsg" data-i18n="thanksMsg">오늘 찾은 색이 일상에서 오래 쓰이길 바랍니다.<br>
         무채색으로 살기엔 세상은 너무나 다채롭습니다. 색으로 더 풍성한 하루가 되길 바랍니다!</p>
-      <p class="tkSign">색다른컬러연구소<br><small>DARUN COLOR INSTITUTE<br>@2026 YUZEN by DCI. All rights reserved.</small></p>
+      <img class="tkLogo" src="assets/logo_tras.png" alt="DARUN COLOR INSTITUTE"
+         onerror="this.style.display='none'">
+    <p class="tkSign">K-Color Analysis Standard System<br><small>@2026 YUZEN by DCI. All rights reserved.</small></p>
       <div class="row" style="justify-content:center;margin-top:24px">
         <button class="btn" onclick="openCardModal()" data-i18n="viewCard">결과 카드 다시 보기</button>
       </div>
@@ -609,7 +616,10 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
 <div id="a4stage">
   <div id="resultCard">
     <div class="a4-head">
-      <div class="a4-brand">색다른컬러연구소<span>DARUN COLOR INSTITUTE<br>COLOR ANALYSIS STANDARD SYSTEM</span></div>
+      <div class="a4-brand">
+        <img src="assets/logo_tras.png" alt="" onerror="this.style.display='none'">
+        <span>K-COLOR ANALYSIS STANDARD SYSTEM</span>
+      </div>
       <div class="a4-meta"><span id="rDate">—</span><br><span id="rCons">—</span></div>
     </div>
     <div class="a4-who">
@@ -739,13 +749,8 @@ const SKIN=[['V8+','v8'],['V7','v7'],['V5~6','v56'],['V4','v4'],['V3−','v3'],[
 
 /* ═══════════ 다국어 ═══════════ */
 const I18N={ko:{
- tagline:'컬러진단표준시스템 · CASS', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
- loginTitle:'코드 입력', loginSub:'발급받은 코드를 입력하세요. 코드 종류에 따라 사용 범위가 달라집니다.',
- loginHint:'대소문자·하이픈·띄어쓰기는 가리지 않습니다. 앞 두 글자가 AD=관리자, ED=에듀케이터, CS=컨설턴트.',
- confirm:'확인', roleCol:'코드 종류', prefixCol:'예시', scopeCol:'사용 범위',
- roleAdmin:'관리자 코드', roleEdu:'에듀케이터 코드', roleCons:'컨설턴트 코드',
- scopeAdmin:'진단 · 교육 · 관리자', scopeEdu:'교육만', scopeCons:'진단만',
- loginNote:'실제 동작 — Apps Script 웹앱으로 코드 전송 → 시트의 명부에서 코드 종류·만료일·활성여부 확인 → 권한이 담긴 세션 토큰 발급. 코드 목록은 앱에 포함되지 않습니다.',
+ tagline:'K-Color Analysis Standard System', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
+ confirm:'확인',
  s1Title:'진단자 정보', s1Sub:'이 정보는 결과 카드에 표시되고 구글 스프레드시트에 함께 저장됩니다. * 표시만 필수입니다.',
  secBasic:'기본 정보', fName:'이름', fEmail:'이메일', fBirth:'생년월일', fSex:'성별',
  fTel:'연락처', fRace:'인종', fRaceEtc:'인종 직접 입력', fJob:'직업', fDate:'진단일',
@@ -805,13 +810,8 @@ const I18N={ko:{
  viewCard:'결과 카드 다시 보기', newSession:'새 진단 시작',
  thanksMsg:'오늘 찾은 색이 일상에서 오래 쓰이길 바랍니다.<br>무채색으로 살기엔 세상은 너무나 다채롭습니다. 색으로 더 풍성한 하루가 되길 바랍니다!'
 },en:{
- tagline:'Color Analysis Standard System', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
- loginTitle:'Enter Code', loginSub:'Enter your issued code. Access scope depends on the code type.',
- loginHint:'Case, hyphens and spaces are ignored. First two letters: AD = Admin, ED = Educator, CS = Consultant.',
- confirm:'Continue', roleCol:'Code type', prefixCol:'Example', scopeCol:'Access',
- roleAdmin:'Admin code', roleEdu:'Educator code', roleCons:'Consultant code',
- scopeAdmin:'Diagnosis · Education · Admin', scopeEdu:'Education only', scopeCons:'Diagnosis only',
- loginNote:'In production — the code is sent to an Apps Script web app, checked against the roster sheet for type, expiry and active status, and a scoped session token is returned. The code list is never bundled with the app.',
+ tagline:'K-Color Analysis Standard System', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
+ confirm:'Continue',
  s1Title:'Client Information', s1Sub:'Shown on the result card and saved to Google Sheets. Only * fields are required.',
  secBasic:'Basic', fName:'Name', fEmail:'Email', fBirth:'Date of birth', fSex:'Gender',
  fTel:'Phone', fRace:'Ethnicity', fRaceEtc:'Ethnicity (free text)', fJob:'Occupation', fDate:'Session date',
@@ -915,7 +915,12 @@ let ST={screen:0,mode:'diag',code:'',role:'',modes:null,resultId:'',scope:new Se
 let F={fam:new Set(),group:new Set(),tone:new Set(),v:new Set(),c:new Set()};
 let EF={fam:new Set(),hue:new Set(),group:new Set(),tone:new Set(),v:new Set(),c:new Set(),type:new Set()};
 let curDetail=null;
-const ROLE={AD:{key:'Admin',modes:['diag','edu','adm']},ED:{key:'Educator',modes:['edu']},CS:{key:'Consultant',modes:['diag']}};
+/* 코드 접두사 → 역할 · 사용 범위
+   AD Admin 진단·교육·관리자 / MS Master 진단·교육 / CS Consultant 진단 / ED Educator 교육 */
+const ROLE={AD:{key:'Admin',modes:['diag','edu','adm']},
+            MS:{key:'Master',modes:['diag','edu']},
+            ED:{key:'Educator',modes:['edu']},
+            CS:{key:'Consultant',modes:['diag']}};
 /* 코드 정규화 — 대소문자·하이픈·공백을 무시한다. ad 0002 / Ad-0002 / AD0002 모두 같은 코드 */
 const normCode=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
 
@@ -972,7 +977,8 @@ const STEP_KO=['코드','진단자 정보','시즌','유형','팔레트','설명
 const STEP_EN=['Code','Client','Season','Type','Palette','Description','Done'];
 function renderSteps(){
   const L=LANG==='en'?STEP_EN:STEP_KO;
-  document.getElementById('steps').innerHTML= ST.mode!=='diag' ? '' :
+  /* 코드 확인 전 · 진단 모드가 아닐 때는 단계 버튼을 내보내지 않는다 */
+  document.getElementById('steps').innerHTML= (!ST.code||ST.mode!=='diag') ? '' :
     L.map((l,i)=>`<div class="step ${i===ST.screen?'on':(i<ST.screen?'done':'')}"
       onclick="${i<=ST.screen?`go(${i})`:''}">${i}. ${l}</div>`).join('');
 }
@@ -1006,8 +1012,8 @@ const LOGIN_ERR={NOT_FOUND:'등록되지 않은 코드입니다.',INACTIVE:'사�
 async function login(){
   const v=document.getElementById('ccode').value.trim().toUpperCase();
   const msg=document.getElementById('cmsg');
-  if(!v){ msg.textContent=LANG==='en'?'Please enter a code.':'코드를 입력해 주세요.'; return; }
-  msg.textContent=LANG==='en'?'Checking…':'확인 중…';
+  if(!v){ msg.className='loginMsg'; msg.textContent=LANG==='en'?'Please enter a code.':'코드를 입력해 주세요.'; return; }
+  msg.className='loginMsg wait'; msg.textContent=LANG==='en'?'Checking…':'확인 중…';
 
   let modes=null, roleKey='';
   const r=await api('verify',{code:v});
@@ -1016,18 +1022,22 @@ async function login(){
     const pre=normCode(v).slice(0,2);
     if(!ROLE[pre]){ msg.textContent=LANG==='en'
       ?'Unknown code type. It must start with AD, ED or CS.'
-      :'알 수 없는 코드입니다. AD · ED · CS 로 시작해야 합니다.'; return; }
+      :'알 수 없는 코드입니다. AD · ED · CS 로 시작해야 합니다.'; msg.className='loginMsg'; return; }
     modes=ROLE[pre].modes; roleKey=ROLE[pre].key;
   }
-  else { msg.textContent=(LANG==='en'?(r.error||'Verification failed.')
+  else { msg.className='loginMsg'; msg.textContent=(LANG==='en'?(r.error||'Verification failed.')
     :(LOGIN_ERR[r.error]||('확인 실패 — '+r.error))); return; }
 
   ST.code=v; ST.role=roleKey; ST.modes=modes;
+  /* 권한이 없는 모드 버튼은 감춘다 (비활성이 아니라 아예 보이지 않게) */
   ['mDiag','mEdu','mAdm'].forEach((id,i)=>{
-    document.getElementById(id).disabled=!modes.includes(['diag','edu','adm'][i]); });
+    document.getElementById(id).classList.toggle('hide',!modes.includes(['diag','edu','adm'][i])); });
+  document.body.classList.add('authed');
   document.getElementById('pDate').value=new Date().toISOString().slice(0,10);
-  msg.textContent='';
-  if(modes.includes('diag')) go(1); else setMode('edu');
+  msg.className='loginMsg'; msg.textContent='';
+  if(modes.includes('diag')){ ST.mode='diag'; setMode('diag'); go(1); }
+  else if(modes.includes('edu')) setMode('edu');
+  else setMode('adm');
 }
 
 /* ═══════════ 폼 ═══════════ */
