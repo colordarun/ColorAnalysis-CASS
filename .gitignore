@@ -1,0 +1,25 @@
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 편집기
+.vscode/
+.idea/
+*.swp
+
+# 작업 중 파일
+*.tmp
+~$*
+*.bak
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 개인 정보가 들어갈 수 있는 것 — 저장소에 올리지 않습니다
+secrets.*
+*_private.*
+records_export*.csv
