@@ -54,9 +54,9 @@ function setup() {
   if (cs.getLastRow() < 2) {
     var today = new Date();
     var next  = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
-    cs.appendRow(['KA-0001', 'Admin',      '유잰',  '색다른컬러연구소', today, next, 'Y', '', 0]);
-    cs.appendRow(['KE-0001', 'Educator',   '(예시)', '',                today, next, 'Y', '', 0]);
-    cs.appendRow(['KC-0001', 'Consultant', '(예시)', '',                today, next, 'Y', '', 0]);
+    cs.appendRow(['AD-0001', 'Admin',      '유잰',  '색다른컬러연구소', today, next, 'Y', '', 0]);
+    cs.appendRow(['ED-0001', 'Educator',   '(예시)', '',                today, next, 'Y', '', 0]);
+    cs.appendRow(['CS-0001', 'Consultant', '(예시)', '',                today, next, 'Y', '', 0]);
   }
   try {
     SpreadsheetApp.getUi().alert('설정 완료 — consultants / records / rules 탭이 준비되었습니다.');
@@ -118,22 +118,40 @@ var ROLE_SCOPE = {
   'EDUCATOR':   ['edu'],
   'CONSULTANT': ['diag']
 };
-var ROLE_LABEL = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant' };
-var ROLE_PREFIX = { 'ADMIN': 'KA', 'EDUCATOR': 'KE', 'CONSULTANT': 'KC' };
+var ROLE_LABEL  = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant' };
+var ROLE_PREFIX = { 'ADMIN': 'AD',    'EDUCATOR': 'ED',       'CONSULTANT': 'CS' };
+var PREFIX_ROLE = { 'AD': 'ADMIN',    'ED': 'EDUCATOR',       'CS': 'CONSULTANT' };
+
+/**
+ * 코드 정규화 — 대문자로 올리고 영문·숫자만 남긴다.
+ *   'ad 0002' · 'Ad-0002' · 'AD0002'           → 'AD0002'
+ *   'ad-2608kr-001' · 'AD 2608 KR 001'         → 'AD2608KR001'
+ * 시트에 적힌 코드와 앱에서 입력한 코드를 이 형태로 맞춰 비교한다.
+ */
+function normCode_(s) {
+  return String(s === null || s === undefined ? '' : s).toUpperCase().replace(/[^A-Z0-9]/g, '');
+}
 
 function verifyCode_(code) {
-  if (!code) return { ok: false, error: 'NO_CODE' };
-  code = String(code).trim().toUpperCase();
+  var key = normCode_(code);
+  if (!key) return { ok: false, error: 'NO_CODE' };
 
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONSULTANTS);
   var rows = sh.getDataRange().getValues();
 
   for (var i = 1; i < rows.length; i++) {
-    if (String(rows[i][0]).trim().toUpperCase() !== code) continue;
+    if (normCode_(rows[i][0]) !== key) continue;
 
+    var sheetCode = String(rows[i][0]).trim();          // 시트에 적힌 원래 표기
     var role   = String(rows[i][1]).trim().toUpperCase();
     var expiry = rows[i][5];
     var active = String(rows[i][6]).trim().toUpperCase();
+
+    // 역할 칸이 비어 있으면 코드 접두사(AD/ED/CS)로 보완한다
+    if (!ROLE_SCOPE[role]) {
+      var byPrefix = PREFIX_ROLE[key.substring(0, 2)];
+      if (byPrefix) role = byPrefix;
+    }
 
     if (active !== 'Y') return { ok: false, error: 'INACTIVE' };
     if (expiry instanceof Date && expiry < new Date()) return { ok: false, error: 'EXPIRED' };
@@ -142,7 +160,7 @@ function verifyCode_(code) {
     sh.getRange(i + 1, 8).setValue(new Date());   // 최근접속
     return {
       ok: true,
-      code: code,
+      code: sheetCode,
       role: ROLE_LABEL[role],
       name: rows[i][2],
       org:  rows[i][3],
@@ -185,7 +203,7 @@ function saveRecord_(r) {
   var cs = ss.getSheetByName(SHEET_CONSULTANTS);
   var rows = cs.getDataRange().getValues();
   for (var i = 1; i < rows.length; i++) {
-    if (String(rows[i][0]).trim().toUpperCase() === v.code) {
+    if (normCode_(rows[i][0]) === normCode_(v.code)) {
       cs.getRange(i + 1, 9).setValue((Number(rows[i][8]) || 0) + 1);
       break;
     }
@@ -242,11 +260,13 @@ function issueCode() {
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONSULTANTS);
   var prefix = ROLE_PREFIX[key];
 
-  // 같은 접두사 중 가장 큰 번호 + 1
+  // 같은 접두사 중 맨 뒤 숫자가 가장 큰 값 + 1
   var rows = sh.getDataRange().getValues(), max = 0;
   for (var i = 1; i < rows.length; i++) {
-    var m = String(rows[i][0]).trim().toUpperCase().match(/^([A-Z]{2})-(\d+)$/);
-    if (m && m[1] === prefix) max = Math.max(max, Number(m[2]));
+    var n = normCode_(rows[i][0]);
+    if (n.substring(0, 2) !== prefix) continue;
+    var m = n.match(/(\d+)$/);
+    if (m) max = Math.max(max, Number(m[1]));
   }
   var code = prefix + '-' + ('000' + (max + 1)).slice(-4);
 

@@ -364,14 +364,14 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div class="card">
       <h1 style="font-size:19px" data-i18n="loginTitle">코드 입력</h1>
       <p class="sub" style="margin-bottom:20px" data-i18n="loginSub">발급받은 코드를 입력하세요. 코드 종류에 따라 사용 범위가 달라집니다.</p>
-      <input id="ccode" placeholder="KA / KE / KC - XXXX" maxlength="16" autocomplete="off">
-      <p class="note" id="cmsg" data-i18n="loginHint">데모: 앞 두 글자로 권한이 정해집니다. KA=관리자, KE=에듀케이터, KC=컨설턴트.</p>
+      <input id="ccode" placeholder="AD / ED / CS - XXXX" maxlength="16" autocomplete="off">
+      <p class="note" id="cmsg" data-i18n="loginHint">대소문자·하이픈·띄어쓰기는 가리지 않습니다. 앞 두 글자가 AD=관리자, ED=에듀케이터, CS=컨설턴트.</p>
       <div style="margin-top:16px"><button class="btn" style="width:100%" onclick="login()" data-i18n="confirm">확인</button></div>
       <table class="roleTbl">
         <tr><th data-i18n="roleCol">코드 종류</th><th data-i18n="prefixCol">예시</th><th data-i18n="scopeCol">사용 범위</th></tr>
-        <tr><td data-i18n="roleAdmin">관리자 코드</td><td><code>KA-0001</code></td><td data-i18n="scopeAdmin">진단 · 교육 · 관리자</td></tr>
-        <tr><td data-i18n="roleEdu">에듀케이터 코드</td><td><code>KE-0001</code></td><td data-i18n="scopeEdu">교육만</td></tr>
-        <tr><td data-i18n="roleCons">컨설턴트 코드</td><td><code>KC-0001</code></td><td data-i18n="scopeCons">진단만</td></tr>
+        <tr><td data-i18n="roleAdmin">관리자 코드</td><td><code>AD-0001</code></td><td data-i18n="scopeAdmin">진단 · 교육 · 관리자</td></tr>
+        <tr><td data-i18n="roleEdu">에듀케이터 코드</td><td><code>ED-0001</code></td><td data-i18n="scopeEdu">교육만</td></tr>
+        <tr><td data-i18n="roleCons">컨설턴트 코드</td><td><code>CS-0001</code></td><td data-i18n="scopeCons">진단만</td></tr>
       </table>
       <div class="wf" style="margin-top:16px;text-align:left" data-i18n="loginNote">
         실제 동작 — Apps Script 웹앱으로 코드 전송 → 시트의 명부에서 코드 종류·만료일·활성여부 확인 → 권한이 담긴 세션 토큰 발급. 코드 목록은 앱에 포함되지 않습니다.
@@ -501,7 +501,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div class="count"><span data-i18n="showing">표시 중</span> <b id="cnt">0</b><span data-i18n="colorsUnit">색</span> <span id="cntSub"></span></div>
     <div class="row">
       <button class="btn ghost" onclick="resetF()" data-i18n="resetF">필터 초기화</button>
-      <button class="btn ghost" id="autoPickBtn" onclick="pickTop()">상위 10색 자동 담기</button>
+      <button class="btn ghost" id="autoPickBtn" onclick="pickTop()">상위 12색 자동 담기</button>
       <button class="btn" id="toDescBtn" onclick="go(5)" data-i18n="toDesc">유형 설명 →</button>
     </div>
   </div>
@@ -563,7 +563,6 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
       <p class="tkSign">색다른컬러연구소<br><small>DARUN COLOR INSTITUTE<br>@2026 YUZEN by DCI. All rights reserved.</small></p>
       <div class="row" style="justify-content:center;margin-top:24px">
         <button class="btn" onclick="openCardModal()" data-i18n="viewCard">결과 카드 다시 보기</button>
-        <button class="btn ghost" onclick="shareLink()" data-i18n="shareLink">공유 링크 만들기</button>
       </div>
       <div class="row" style="justify-content:center;margin-top:10px">
         <button class="btn ghost" onclick="go(5)" data-i18n="backDesc">← 유형 설명</button>
@@ -665,7 +664,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
    배포 후 나오는 https://script.google.com/macros/s/.../exec 를 넣으세요.
    비워 두면 데모 모드로 동작합니다 (코드 아무거나 통과, 저장 안 됨).
    ══════════════════════════════════════════════════════════ */
-    const API_URL = 'https://script.google.com/macros/s/AKfycbw2di40hBhC7dtnNbw8RAcqt699KJx2JqqV73_QQ-yslCeTJ6ck-CYON7g1KNDpNSX0VQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw2di40hBhC7dtnNbw8RAcqt699KJx2JqqV73_QQ-yslCeTJ6ck-CYON7g1KNDpNSX0VQ/exec';
 
 async function api(action, data){
   if(!API_URL) return {ok:false, error:'DEMO'};
@@ -742,7 +741,7 @@ const SKIN=[['V8+','v8'],['V7','v7'],['V5~6','v56'],['V4','v4'],['V3−','v3'],[
 const I18N={ko:{
  tagline:'컬러진단표준시스템 · CASS', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
  loginTitle:'코드 입력', loginSub:'발급받은 코드를 입력하세요. 코드 종류에 따라 사용 범위가 달라집니다.',
- loginHint:'데모: 앞 두 글자로 권한이 정해집니다. KA=관리자, KE=에듀케이터, KC=컨설턴트.',
+ loginHint:'대소문자·하이픈·띄어쓰기는 가리지 않습니다. 앞 두 글자가 AD=관리자, ED=에듀케이터, CS=컨설턴트.',
  confirm:'확인', roleCol:'코드 종류', prefixCol:'예시', scopeCol:'사용 범위',
  roleAdmin:'관리자 코드', roleEdu:'에듀케이터 코드', roleCons:'컨설턴트 코드',
  scopeAdmin:'진단 · 교육 · 관리자', scopeEdu:'교육만', scopeCons:'진단만',
@@ -765,7 +764,7 @@ const I18N={ko:{
  backInfo:'← 진단자 정보', s3Title:'2단계 · 세부 유형 선택', s3Sub:'선택한 시즌 안에서 3가지 유형으로 다시 나뉩니다.',
  backSeason:'← 시즌 선택',
  s4Sub:'유형 색을 좁힌 뒤 색상 계열·명도·채도·톤으로 다시 걸러 교집합을 봅니다. 스와치 더블클릭 = 베스트컬러 담기 · ★ = 베스트 오브 베스트 1색.',
- showing:'표시 중', colorsUnit:'색', resetF:'필터 초기화', autoPick:'상위 10색 자동 담기', clearPicks:'모두 빼기', toDesc:'유형 설명 →',
+ showing:'표시 중', colorsUnit:'색', resetF:'필터 초기화', autoPick:'상위 12색 자동 담기', clearPicks:'모두 빼기', toDesc:'유형 설명 →',
  fFam:'색상 계열', fHue:'색상', fVal:'명도', fChr:'채도', fTone:'톤', fType:'유형',
  v8:'매우 밝음', v7:'밝음', v56:'중간', v4:'어두움', v3:'매우 어두움',
  hiC:'고채도', midC:'중채도', loC:'저채도', achC:'무채색', warm:'웜', cool:'쿨',
@@ -775,7 +774,7 @@ const I18N={ko:{
  backPalette:'← 팔레트', makeCard:'결과 카드 만들기 →',
  autoSaveNote:'「결과 카드 만들기」를 누르면 A4 결과 카드가 팝업으로 열립니다.',
  s6Title:'5단계 · 결과 카드', s6Sub:'한 장에 모두 담긴 개인 결과지입니다.',
- savePng:'PNG 저장', shareLink:'공유 링크 만들기', reSave:'시트에 다시 저장', backDesc:'← 유형 설명',
+ savePng:'PNG 저장', backDesc:'← 유형 설명',
  eduTitle:'교육 모드 · 색 탐색기',
  eduSub:'776색 전체를 대상으로 유형·색상·명도·채도·톤을 조합해 교집합을 봅니다. 유형을 고르면 그 유형에 해당하는 항목이 금색 테두리로 표시됩니다.',
  sortHue:'색상 순', sortVal:'명도 순', sortChr:'채도 순', sortTone:'톤 순',
@@ -785,7 +784,7 @@ const I18N={ko:{
  admRec:'진단 기록', admRecBody:'컨설턴트별 진단 건수 · 기간별 조회 · CSV 내려받기',
  pickSeason:'선택 →', scopeHint:'★ = 진단 유형 · 같은 시즌의 다른 유형도 켤 수 있습니다', shareNoId:'먼저 「결과 카드 만들기」를 눌러 기록을 저장해야 링크가 만들어집니다.', hueWheelNote:'먼셀 40색상환에서 선택', vcNote:'가로 = 채도 · 세로 = 명도 · 빗금 = 해당 조합 없음',
  allHues:'전체 색상', vcFine:'명도 × 채도 낱칸', vcBand:'명도 5구간 × 채도 4구간', zonePrefix:'표시 중인 톤 구역 —',
- pickToggle:'담기/빼기', noPick:'베스트컬러 없음 — 스와치를 더블클릭해 담고, ★를 눌러 베스트 오브 베스트 1색을 정하세요. 최대 10색.',
+ pickToggle:'담기/빼기', noPick:'베스트컬러 없음 — 스와치를 더블클릭해 담고, ★를 눌러 베스트 오브 베스트 1색을 정하세요. 최대 12색.',
  noBob:'베스트 오브 베스트 1색이 지정되지 않았습니다. 팔레트 화면에서 ★를 눌러 지정하면 TPO 배색이 만들어집니다.',
  noHit:'조건을 모두 만족하는 색이 없습니다. 필터를 하나씩 해제해 보세요.',
  relHint:'금색 테두리 = 선택한 유형에 해당하는 항목',
@@ -808,7 +807,7 @@ const I18N={ko:{
 },en:{
  tagline:'Color Analysis Standard System', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
  loginTitle:'Enter Code', loginSub:'Enter your issued code. Access scope depends on the code type.',
- loginHint:'Demo: the first two letters set the role. KA = Admin, KE = Educator, KC = Consultant.',
+ loginHint:'Case, hyphens and spaces are ignored. First two letters: AD = Admin, ED = Educator, CS = Consultant.',
  confirm:'Continue', roleCol:'Code type', prefixCol:'Example', scopeCol:'Access',
  roleAdmin:'Admin code', roleEdu:'Educator code', roleCons:'Consultant code',
  scopeAdmin:'Diagnosis · Education · Admin', scopeEdu:'Education only', scopeCons:'Diagnosis only',
@@ -831,7 +830,7 @@ const I18N={ko:{
  backInfo:'← Client info', s3Title:'Step 2 · Sub-type', s3Sub:'Each season splits into three sub-types.',
  backSeason:'← Season',
  s4Sub:'Narrow by type first, then filter again to see the intersection. Double-click a swatch to add it; ★ marks the single best-of-best colour.',
- showing:'Showing', colorsUnit:' colours', resetF:'Reset filters', autoPick:'Auto-pick top 10', clearPicks:'Clear all', toDesc:'Type description →',
+ showing:'Showing', colorsUnit:' colours', resetF:'Reset filters', autoPick:'Auto-pick top 12', clearPicks:'Clear all', toDesc:'Type description →',
  fFam:'Hue Family', fHue:'Hue', fVal:'Value', fChr:'Chroma', fTone:'Tone', fType:'Type',
  v8:'Very light', v7:'Light', v56:'Medium', v4:'Deep', v3:'Very deep',
  hiC:'High chroma', midC:'Mid chroma', loC:'Low chroma', achC:'Achromatic', warm:'Warm', cool:'Cool',
@@ -841,7 +840,7 @@ const I18N={ko:{
  backPalette:'← Palette', makeCard:'Create result card →',
  autoSaveNote:'“Create result card” opens the A4 report in a popup.',
  s6Title:'Step 5 · Result Card', s6Sub:'A single personal result sheet.',
- savePng:'Save PNG', shareLink:'Create share link', reSave:'Save to sheet again', backDesc:'← Description',
+ savePng:'Save PNG', backDesc:'← Description',
  eduTitle:'Education Mode · Colour Explorer',
  eduSub:'Combine type, hue, value, chroma and tone across all 776 colours. Selecting a type outlines the matching options in gold.',
  sortHue:'By hue', sortVal:'By value', sortChr:'By chroma', sortTone:'By tone',
@@ -851,7 +850,7 @@ const I18N={ko:{
  admRec:'Records', admRecBody:'Sessions per consultant · date range · CSV export',
  pickSeason:'select →', scopeHint:'★ = diagnosed type · other types of the same season can be added', shareNoId:'Create the result card first so the record is saved.', hueWheelNote:'pick on the Munsell 40-hue circle', vcNote:'x = chroma · y = value · hatched = no such colour',
  allHues:'All hues', vcFine:'value × chroma cells', vcBand:'5 value bands × 4 chroma bands', zonePrefix:'Tone zone shown —',
- pickToggle:'Add / remove', noPick:'No best colours yet — double-click a swatch to add, then press ★ to set the single best-of-best. Up to 10.',
+ pickToggle:'Add / remove', noPick:'No best colours yet — double-click a swatch to add, then press ★ to set the single best-of-best. Up to 12.',
  noBob:'No best-of-best colour set. Press ★ on the palette screen to build the TPO combinations.',
  noHit:'No colour satisfies all conditions. Try removing a filter.',
  relHint:'Gold outline = belongs to the selected type',
@@ -916,7 +915,9 @@ let ST={screen:0,mode:'diag',code:'',role:'',modes:null,resultId:'',scope:new Se
 let F={fam:new Set(),group:new Set(),tone:new Set(),v:new Set(),c:new Set()};
 let EF={fam:new Set(),hue:new Set(),group:new Set(),tone:new Set(),v:new Set(),c:new Set(),type:new Set()};
 let curDetail=null;
-const ROLE={KA:{key:'Admin',modes:['diag','edu','adm']},KE:{key:'Educator',modes:['edu']},KC:{key:'Consultant',modes:['diag']}};
+const ROLE={AD:{key:'Admin',modes:['diag','edu','adm']},ED:{key:'Educator',modes:['edu']},CS:{key:'Consultant',modes:['diag']}};
+/* 코드 정규화 — 대소문자·하이픈·공백을 무시한다. ad 0002 / Ad-0002 / AD0002 모두 같은 코드 */
+const normCode=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
 
 /* ═══════════ 테마 · 언어 ═══════════ */
 function setTheme(t){
@@ -986,7 +987,8 @@ function go(n){
   if(n===2) renderSeasons(); if(n===3) renderTypes();
   if(n===4){buildFilters();renderGrid();} if(n===5) renderTypeInfo(); if(n===6) renderResult();
 }
-function allowed(m){ return !ST.role||ROLE[ST.role].modes.includes(m); }
+/* 로그인 때 받은 허용 모드 목록으로 판단한다 (역할 이름이 아니라 modes 를 쓴다) */
+function allowed(m){ return !ST.modes||ST.modes.includes(m); }
 function setMode(m){
   if(!allowed(m)) return;
   ST.mode=m;
@@ -1011,10 +1013,10 @@ async function login(){
   const r=await api('verify',{code:v});
   if(r.ok){ modes=r.modes; roleKey=r.role; }
   else if(r.error==='DEMO'){                       // API_URL 미설정 — 접두사로 판별
-    const pre=v.slice(0,2);
+    const pre=normCode(v).slice(0,2);
     if(!ROLE[pre]){ msg.textContent=LANG==='en'
-      ?'Unknown code type. It must start with KA, KE or KC.'
-      :'알 수 없는 코드입니다. KA · KE · KC 로 시작해야 합니다.'; return; }
+      ?'Unknown code type. It must start with AD, ED or CS.'
+      :'알 수 없는 코드입니다. AD · ED · CS 로 시작해야 합니다.'; return; }
     modes=ROLE[pre].modes; roleKey=ROLE[pre].key;
   }
   else { msg.textContent=(LANG==='en'?(r.error||'Verification failed.')
@@ -1376,7 +1378,7 @@ const TPO_RULES={
   event:{ hue:'opposite', vMin:3,         cMin:3 }
 };
 const PARTNERS=4;
-const PICK_MAX=10;   /* BOC — 베스트 오브 컬러 최대 색 수 */
+const PICK_MAX=12;   /* BOC — 베스트 오브 컬러 최대 색 수 */
 const LOW_C=c=>c.chroma>=0.5&&c.chroma<4;              // 저채도 = C 0.5~3.5
 
 function ruleCheck(r,bob,c,relax){
@@ -1650,13 +1652,6 @@ function printCard(){
   w.document.close();
 }
 function savePng(){ openCardModal(); }
-function shareLink(){
-  const box=document.getElementById('shareOut');
-  const id=ST.resultId;
-  if(!id){ box.innerHTML=`<div class="hint">${T('shareNoId')}</div>`; return; }
-  const url=location.origin+location.pathname+'?r='+id;
-  box.innerHTML=`<div class="hint ok"><b>${T('shareLink')}</b><br><code>${url}</code></div>`;
-}
 
 /* ═══════════ 교육 모드 ═══════════ */
 function relatedSets(){
