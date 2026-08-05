@@ -251,6 +251,9 @@ table.band .cell span{font-size:9.5px;color:var(--muted);margin-left:3px}
 .relaxTag{font-size:9px;border:1px solid var(--line);border-radius:4px;padding:0 4px;color:var(--muted);margin-left:auto}
 .tpoList li{gap:5px}
 
+.flashReq{outline:2px solid #b4453a;outline-offset:3px;border-radius:8px;transition:outline .2s}
+.typeImgWrap{position:relative}
+.typeImg{width:100%;border-radius:10px;display:none;object-fit:cover;max-height:200px}
 .imgslot{border:1px dashed var(--line);border-radius:10px;height:120px;display:flex;
   align-items:center;justify-content:center;color:var(--muted);font-size:12px;background:var(--soft);text-align:center;padding:12px}
 .kv{display:grid;grid-template-columns:96px 1fr;gap:7px 12px;font-size:13px}
@@ -279,10 +282,15 @@ table.band .cell span{font-size:9.5px;color:var(--muted);margin-left:3px}
 .a4-who{padding:16px 0 4px}
 .a4-who b{font-size:26px;letter-spacing:-.03em}
 .a4-who p{margin:4px 0 0;font-size:10.5px;color:#8b857e}
-.a4-type{text-align:center;padding:14px 0 18px;border-bottom:1px solid #e3e0db;margin-bottom:16px}
+.a4-type{display:flex;align-items:center;gap:20px;padding:14px 0 18px;border-bottom:1px solid #e3e0db;margin-bottom:16px}
+.a4-type-txt{flex:1;text-align:center}
 .a4-type em{font-style:normal;font-size:9.5px;letter-spacing:.3em;color:#8b857e;display:block}
 .a4-type b{font-size:38px;letter-spacing:-.04em;display:block;margin:6px 0 9px;line-height:1}
 .a4-type p{margin:0 auto;font-size:11.5px;color:#5c5651;max-width:520px;line-height:1.6}
+.a4-type-img{width:150px;height:188px;object-fit:cover;border-radius:10px;flex:none;display:none;border:1px solid #e3e0db}
+.rc-imgs{display:flex;gap:10px}
+.rc-imgs img{width:50%;max-height:230px;object-fit:cover;border-radius:8px;display:none;border:1px solid #e3e0db}
+/* 이미지가 없으면 텍스트만 가운데로 (display:none 이면 flex 에서 빠짐) */
 .a4-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .a4-box{border:1px solid #e3e0db;border-radius:10px;padding:12px 14px;background:rgba(255,255,255,.55);margin-bottom:12px}
 .a4-2col .a4-box{margin-bottom:12px}
@@ -484,7 +492,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
         </span></label>
     </div>
 
-    <div class="row" style="margin-top:22px"><button class="btn" onclick="go(2)" data-i18n="toSeason">시즌 선택으로 →</button></div>
+    <div class="row" style="margin-top:22px"><button class="btn" onclick="toSeasonGuard()" data-i18n="toSeason">시즌 선택으로 →</button></div>
   </div>
 </section>
 
@@ -560,11 +568,17 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
           <textarea id="typeStyle" style="min-height:80px"></textarea>
         </div>
         <div>
-          <h3 style="margin-top:0" data-i18n="images">이미지 <span class="badge">추후 업로드</span></h3>
-          <div class="imgslot" style="margin-bottom:10px">① type image</div>
-          <div class="imgslot" style="margin-bottom:10px">② styling</div>
-          <div class="imgslot">③ makeup / hair</div>
-          <p class="note"><code>assets/types/&lt;code&gt;/1.jpg</code></p>
+          <h3 style="margin-top:0" data-i18n="images">유형 이미지</h3>
+          <div class="typeImgWrap" style="margin-bottom:10px">
+            <img id="ti1" class="typeImg" data-ph="ti1ph" alt="">
+            <div class="imgslot" id="ti1ph">① 유형 이미지</div></div>
+          <div class="typeImgWrap" style="margin-bottom:10px">
+            <img id="ti2" class="typeImg" data-ph="ti2ph" alt="">
+            <div class="imgslot" id="ti2ph">② 스타일링</div></div>
+          <div class="typeImgWrap">
+            <img id="ti3" class="typeImg" data-ph="ti3ph" alt="">
+            <div class="imgslot" id="ti3ph">③ 메이크업 / 헤어</div></div>
+          <p class="note" id="tiHint"></p>
         </div>
       </div>
     </div>
@@ -649,7 +663,10 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
       <b id="rName">—</b>
       <p id="rMeta">—</p>
     </div>
-    <div class="a4-type"><em id="rEn">—</em><b id="rKo">—</b><p id="rDesc">—</p></div>
+    <div class="a4-type">
+      <div class="a4-type-txt"><em id="rEn">—</em><b id="rKo">—</b><p id="rDesc">—</p></div>
+      <img id="rTypeImg" class="a4-type-img" alt="">
+    </div>
     <div class="a4-2col">
       <div class="a4-box" id="rSkinSec"><h4>SKIN ANALYSIS</h4><div class="rc-skin" id="rSkin"></div></div>
       <div class="a4-box"><h4>BEST OF BEST</h4><div class="rc-bob" id="rBob"></div></div>
@@ -659,6 +676,8 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
       <p class="a4-note" id="rStripNote"></p></div>
     <div class="a4-box"><h4>TPO COMBINATION</h4><div class="rc-tpo" id="rTpo"></div></div>
     <div class="a4-box"><h4>STYLING</h4><div class="rc-memo" id="rStyle">—</div></div>
+    <div class="a4-box" id="rBeautyBox" style="display:none"><h4>STYLING &amp; BEAUTY</h4>
+      <div class="rc-imgs"><img id="rImg2" alt=""><img id="rImg3" alt=""></div></div>
     <div class="a4-foot"><span>@2026 YUZEN by DCI. All rights reserved.</span><span id="rFootType">—</span></div>
   </div>
 </div>
@@ -1013,8 +1032,38 @@ function renderSteps(){
     L.map((l,i)=>`<div class="step ${i===ST.screen?'on':(i<ST.screen?'done':'')}"
       onclick="${i<=ST.screen?`go(${i})`:''}">${i}. ${l}</div>`).join('');
 }
+/* 관리자(Admin) 코드는 진단자 정보를 건너뛰고 시즌 선택으로 바로 갈 수 있다.
+   그 외 코드(마스터·진단자)는 피부 측색을 뺀 모든 항목과 개인정보 동의를 채워야 한다. */
+function isAdmin(){ return ST.role==='Admin'; }
+function firstMissingInfo(){
+  const need=[['pName','이름 / Name'],['pEmail','이메일 / Email'],['pBirth','생년월일 / Birth'],
+    ['pSex','성별 / Sex'],['pTel','연락처 / Tel'],['pRace','인종 / Ethnicity'],
+    ['pJob','직업 / Job'],['pDate','진단일 / Date'],['oHair','모발 색 / Hair'],['oEye','눈동자 색 / Eye']];
+  const etc={pRace:'pRaceEtc',oHair:'oHairEtc',oEye:'oEyeEtc'};
+  for(const [id,label] of need){
+    const el=document.getElementById(id);
+    if(!el||!String(el.value||'').trim()) return {id,label};
+    if(el.value==='__etc'&&etc[id]&&!val(etc[id]).trim()) return {id:etc[id],label:label+' (직접 입력)'};
+  }
+  if(!ST.skin) return {id:'skinOpts',label:'피부 명도 / Skin lightness'};
+  if(ST.skin==='etc'&&!val('pSkinEtc').trim()) return {id:'pSkinEtc',label:'피부 명도 (직접 입력)'};
+  if(!document.getElementById('pAgree').checked) return {id:'pAgree',label:'개인정보 수집·이용 동의 / Consent'};
+  return null;
+}
+function toSeasonGuard(){
+  if(isAdmin()){ go(2); return; }
+  const m=firstMissingInfo();
+  if(!m){ go(2); return; }
+  const el=document.getElementById(m.id);
+  if(el){ el.scrollIntoView({behavior:'smooth',block:'center'});
+    const box=(m.id==='skinOpts'||m.id==='pAgree')?el.closest('.sect')||el:el;
+    box.classList.add('flashReq'); setTimeout(()=>box.classList.remove('flashReq'),1800);
+    try{ if(el.type!=='checkbox'&&el.focus) el.focus(); }catch(e){} }
+  alert((LANG==='en'?'Please complete this field: ':'다음 항목을 입력하세요: ')+m.label);
+}
 function go(n){
   if(n===2&&!ST.code) return;
+  if(n===1) updateInfoRequirement();
   /* 베스트 오브 베스트(★) 미지정이면 유형 설명 이후로 넘어갈 수 없다 */
   if(n>=5&&!ST.bob){ flashBobWarn(); return; }
   ST.screen=n;
@@ -1023,6 +1072,16 @@ function go(n){
   renderSteps(); window.scrollTo({top:0,behavior:'smooth'});
   if(n===2) renderSeasons(); if(n===3) renderTypes();
   if(n===4){buildFilters();renderGrid();} if(n===5) renderTypeInfo(); if(n===6) renderResult();
+}
+/* 진단자 정보 화면의 안내 문구를 역할에 따라 바꾼다 */
+function updateInfoRequirement(){
+  const sub=document.querySelector('#s1 .sub'); if(!sub) return;
+  if(isAdmin()) sub.textContent = LANG==='en'
+    ? 'Admin code — you may proceed to season selection without filling in the form.'
+    : '관리자 코드입니다. 정보 입력 없이 시즌 선택으로 바로 진행할 수 있습니다.';
+  else sub.textContent = LANG==='en'
+    ? 'All fields except skin colorimetry, plus consent, are required before season selection.'
+    : '피부 측색을 제외한 모든 항목과 개인정보 수집·이용 동의를 작성해야 시즌 선택으로 넘어갑니다.';
 }
 /* 로그인 때 받은 허용 모드 목록으로 판단한다 (역할 이름이 아니라 modes 를 쓴다) */
 function allowed(m){ return !ST.modes||ST.modes.includes(m); }
@@ -1541,8 +1600,23 @@ function tpoHtml(bob,h){
 const c2=c=>LANG==='en'?'':c.ks;
 
 /* ═══════════ 유형 설명 ═══════════ */
+/* 유형 이미지 경로 — assets/types/<코드>-<번호>.jpg (없으면 .png, 둘 다 없으면 자리표시)
+   예: 봄브라이트 1번 이미지 → assets/types/SP-BR-1.jpg */
+function typeImgPath(code,n){ return 'assets/types/'+code+'-'+n; }
+function loadTypeImg(imgEl, code, n){
+  const base=typeImgPath(code,n), ph=imgEl.dataset.ph?document.getElementById(imgEl.dataset.ph):null;
+  imgEl.onerror=function(){
+    if(imgEl.src.slice(-4).toLowerCase()==='.jpg'){ imgEl.src=base+'.png'; return; }
+    imgEl.onerror=null; imgEl.style.display='none'; if(ph) ph.style.display='';
+  };
+  imgEl.onload=function(){ imgEl.style.display=''; if(ph) ph.style.display='none'; };
+  imgEl.src=base+'.jpg';
+}
 function renderTypeInfo(){
   const t=typeObj(ST.type), a=colorsOf(ST.type);
+  [1,2,3].forEach(n=>{ const e=document.getElementById('ti'+n); if(e) loadTypeImg(e,t.code,n); });
+  document.getElementById('tiHint').innerHTML=
+    `<code>assets/types/${t.code}-1.jpg</code> · ${t.ko} (${t.en})`;
   document.getElementById('cr5').innerHTML=`<b>${SEN(ST.season)}</b> › <b>${TYN(t)}</b>`;
   document.getElementById('s5t').textContent=(LANG==='en'?'Step 4 · ':'4단계 · ')+TYN(t);
   const bob=ST.bob?COLORS.find(c=>c.id===ST.bob):null;
@@ -1629,6 +1703,15 @@ function renderResult(){
   document.getElementById('rKo').textContent=TYN(t)+(LANG==='en'?'':' · '+SEN(t.season));
   document.getElementById('rDesc').textContent=val('typeDesc');
   document.getElementById('rStyle').textContent=val('typeStyle')||'—';
+  /* 결과 카드의 유형 이미지 — 유형설명의 1번 이미지와 같은 파일 */
+  const setCardImg=(el,n,box)=>{ if(!el) return; el.style.display='none';
+    el.onload=function(){ el.style.display=''; if(box) box.style.display=''; };
+    el.onerror=function(){ if(el.src.slice(-4).toLowerCase()==='.jpg'){ el.src=typeImgPath(t.code,n)+'.png'; return; } el.onerror=null; el.style.display='none'; };
+    el.src=typeImgPath(t.code,n)+'.jpg'; };
+  setCardImg(document.getElementById('rTypeImg'),1,null);            // 유형 이미지 (헤더)
+  const bBox=document.getElementById('rBeautyBox'); if(bBox) bBox.style.display='none';
+  setCardImg(document.getElementById('rImg2'),2,bBox);              // 스타일링
+  setCardImg(document.getElementById('rImg3'),3,bBox);              // 메이크업 / 헤어
   document.getElementById('rDate').textContent=val('pDate')||new Date().toISOString().slice(0,10);
   document.getElementById('rFootType').textContent=t.en.toUpperCase()+' / '+t.code;
 
