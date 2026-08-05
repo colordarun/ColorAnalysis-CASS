@@ -557,6 +557,8 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <p class="note" id="s5StripNote"></p>
     <h2><span data-i18n="tpoTitle">TPO 활용 배색</span> <span class="badge" data-i18n="tpoBadge">베스트 오브 베스트 기준</span></h2>
     <div class="tpo" id="tpoBox"></div>
+    <h2 style="margin-top:26px"><span data-i18n="fashionTitle">패션 컬러 배색</span> <span class="badge" data-i18n="fashionBadge">유형별 상용 패션색</span></h2>
+    <div class="tpo" id="fashionBox"></div>
     <div class="sect" style="margin-top:26px">
       <div class="g2" style="gap:0 24px">
         <div>
@@ -675,6 +677,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div class="a4-box"><h4>TYPE PALETTE</h4><div class="rc-strip" id="rStrip"></div>
       <p class="a4-note" id="rStripNote"></p></div>
     <div class="a4-box"><h4>TPO COMBINATION</h4><div class="rc-tpo" id="rTpo"></div></div>
+    <div class="a4-box"><h4>FASHION COMBINATION</h4><div class="rc-tpo" id="rFashion"></div></div>
     <div class="a4-box"><h4>STYLING</h4><div class="rc-memo" id="rStyle">—</div></div>
     <div class="a4-box" id="rBeautyBox" style="display:none"><h4>STYLING &amp; BEAUTY</h4>
       <div class="rc-imgs"><img id="rImg2" alt=""><img id="rImg3" alt=""></div></div>
@@ -844,7 +847,7 @@ const I18N={ko:{
  assigned:'배정 유형', repColors:'대표', typeCode:'유형코드', enName:'영문명', colorCount:'해당 색 수',
  avgV:'평균 명도', avgC:'평균 채도', mainTone:'주요 톤', season:'시즌', type:'유형',
  daily:'데일리', biz:'비즈니스', event:'이벤트',
- dailyRule:'유사색상 · 명도차 3~4 · 채도차 3 이하', bizRule:'유사색상 · 명도차 2~3 · 저채도만',
+ dailyRule:'유사색상 · 명도차 3~4 · 채도차 3 이하', bizRule:'유사색상 · 명도차 2~3 · 저채도만', fashionTitle:'패션 컬러 배색', fashionBadge:'유형별 상용 패션색', fashionTag:'패션',
  eventRule:'반대색상 · 명도차 3 이상 · 채도차 3 이상',
  relaxed:'완화', relaxNote:'※ 조건에 맞는 색이 부족해 일부는 기준을 완화해 채웠습니다', shortOf:'조건 충족 색 부족 —',
  paletteMix:'구성', mainType:'본인 유형', 
@@ -909,7 +912,7 @@ const I18N={ko:{
  assigned:'Assigned types', repColors:'representative', typeCode:'Type code', enName:'English name', colorCount:'Colours',
  avgV:'Avg value', avgC:'Avg chroma', mainTone:'Main tones', season:'Season', type:'Type',
  daily:'Daily', biz:'Business', event:'Event',
- dailyRule:'Analogous · ΔV 3–4 · ΔC ≤3', bizRule:'Analogous · ΔV 2–3 · low chroma only',
+ dailyRule:'Analogous · ΔV 3–4 · ΔC ≤3', bizRule:'Analogous · ΔV 2–3 · low chroma only', fashionTitle:'Fashion Colour Combinations', fashionBadge:'Everyday fashion staples', fashionTag:'Fashion',
  eventRule:'Opposite hue · ΔV ≥3 · ΔC ≥3',
  relaxed:'relaxed', relaxNote:'* Not enough colours met the rule, so some were filled with relaxed criteria', shortOf:'Short of rule —',
  paletteMix:'Mix', mainType:'own type', 
@@ -1576,6 +1579,50 @@ function harmony(bob){
   return {daily:pickSet('daily',bob), biz:pickSet('biz',bob), event:pickSet('event',bob),
           oppGroup:oppositeGroup(bob.hue)};
 }
+/* ═══════════ 패션 컬러 배색 ═══════════
+   BOB 와 무관하게, 각 유형에 어울리는 "패션 산업 상용색"(브라운·베이지·네이비·무채색 등)으로
+   TPO 별 배색을 하나씩 제시한다. 색은 [hex, 색이름] 쌍. */
+const FC={
+  ivory:['#F0E6D2','아이보리'], cream:['#F5EFE0','크림'], scamel:['#C79A6B','소프트카멜'],
+  beige:['#D8C3A5','베이지'], wgray:['#A79B8E','웜그레이'], camel:['#B4885C','카멜'],
+  khaki:['#7A6A4F','카키'], brown:['#6E4B2F','브라운'], choco:['#3E2A20','초콜릿'],
+  mustard:['#C9A227','머스타드'], terra:['#B5651D','테라코타'], coral:['#F27E63','코랄'],
+  red:['#C0392B','레드'], wburg:['#7A2E2A','와인브라운'], wnavy:['#2A3550','웜네이비'],
+  white:['#FFFFFF','화이트'], lgray:['#CDCDCD','라이트그레이'], cbeige:['#CFC6BC','쿨베이지'],
+  greige:['#B7B0AA','그레이지'], silver:['#C4C4CC','실버'], navy:['#24324D','네이비'],
+  charcoal:['#363A40','차콜'], black:['#1A1A1A','블랙'], ppink:['#F3D3DA','파스텔핑크'],
+  drose:['#C99AA0','더스티로즈'], lav:['#C9BBDD','라벤더'], burg:['#6E2436','버건디'], mag:['#B0338C','마젠타']
+};
+const FASHION={
+  'SP-LT':{daily:['ivory','scamel','wgray'], biz:['beige','camel','wgray'],  event:['coral','ivory','scamel']},
+  'SP-BR':{daily:['ivory','camel','wnavy'],  biz:['wnavy','ivory','camel'],  event:['red','ivory','brown']},
+  'SP-WR':{daily:['cream','camel','khaki'],  biz:['beige','brown','wgray'],  event:['mustard','cream','brown']},
+  'SM-LT':{daily:['white','lgray','cbeige'], biz:['greige','silver','navy'], event:['ppink','white','lgray']},
+  'SM-MT':{daily:['greige','cbeige','lgray'],biz:['charcoal','greige','navy'],event:['drose','lgray','white']},
+  'SM-CL':{daily:['white','cbeige','lgray'], biz:['navy','silver','white'],  event:['lav','white','lgray']},
+  'AT-MT':{daily:['beige','khaki','wgray'],  biz:['brown','beige','khaki'],  event:['terra','beige','brown']},
+  'AT-DP':{daily:['camel','brown','cream'],  biz:['choco','khaki','beige'],  event:['wburg','camel','choco']},
+  'AT-WR':{daily:['camel','mustard','cream'],biz:['brown','khaki','beige'],  event:['terra','mustard','choco']},
+  'WT-BR':{daily:['white','lgray','black'],  biz:['navy','white','silver'],  event:['red','white','black']},
+  'WT-DP':{daily:['charcoal','white','silver'],biz:['black','navy','white'], event:['burg','black','white']},
+  'WT-CL':{daily:['white','lgray','charcoal'],biz:['navy','silver','white'], event:['mag','white','black']}
+};
+function fashionBars(code){
+  const f=FASHION[code]; if(!f) return [];
+  return ['daily','biz','event'].map(k=>({key:k, cols:(f[k]||[]).map(id=>FC[id]).filter(Boolean)}));
+}
+/* 유형설명 화면용 — 라벨 + 색 띠 + 색이름 */
+function fashionHtml(code){
+  return fashionBars(code).map(b=>`<div class="tpoCard"><h4>${T(b.key)} <span class="badge">${T('fashionTag')}</span></h4>
+    <div class="tpoBar">${b.cols.map(c=>`<i style="background:${c[0]}" title="${c[1]}"></i>`).join('')}</div>
+    <ul class="tpoList">${b.cols.map(c=>`<li><em style="background:${c[0]}"></em>${c[1]}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+/* 결과 카드용 — 작은 색 띠 3개 */
+function fashionCardHtml(code){
+  return fashionBars(code).map(b=>`<div><div class="b">${b.cols.map(c=>`<i style="background:${c[0]}"></i>`).join('')}</div>
+    <p>${T(b.key)}</p></div>`).join('');
+}
 function tpoHtml(bob,h){
   return ['daily','biz','event'].map(k=>{
     const set=h[k], a=set.colors;
@@ -1583,17 +1630,12 @@ function tpoHtml(bob,h){
     const dv=c=>{const d=c.value-bob.value; return (d>=0?'+':'')+d.toFixed(1);};
     const dc=c=>{const d=c.chroma-bob.chroma; return (d>=0?'+':'')+d.toFixed(1);};
     return `<div class="tpoCard"><h4>${T(k)} <span class="badge">5${T('colorsUnit')}</span></h4>
-      <p class="pr">${rule}</p>
       <div class="tpoBar"><i class="main" style="background:${bob.hex}"></i>
         ${a.map(c=>`<i style="background:${c.hex}"></i>`).join('')}</div>
       <ul class="tpoList">
         <li><em style="background:${bob.hex}"></em><b>${bob.ks}</b> ${bob.pname||''} <span style="color:var(--gold)">★</span></li>
-        ${a.map(c=>`<li><em style="background:${c.hex}"></em>${c.ks}
-           <span style="opacity:.7">ΔV ${dv(c)} · ΔC ${dc(c)}</span>
-           ${c.__relax?`<span class="relaxTag">${T('relaxed')}</span>`:''}</li>`).join('')}
+        ${a.map(c=>`<li><em style="background:${c.hex}"></em>${c.ks}</li>`).join('')}
       </ul>
-      ${a.length<PARTNERS?`<p class="pr" style="color:#b4453a;margin:8px 0 0">${T('shortOf')} ${a.length}/${PARTNERS}</p>`:''}
-      ${set.relaxed?`<p class="pr" style="margin:8px 0 0">${T('relaxNote')}</p>`:''}
       </div>`;
   }).join('');
 }
@@ -1607,9 +1649,9 @@ function loadTypeImg(imgEl, code, n){
   const base=typeImgPath(code,n), ph=imgEl.dataset.ph?document.getElementById(imgEl.dataset.ph):null;
   imgEl.onerror=function(){
     if(imgEl.src.slice(-4).toLowerCase()==='.jpg'){ imgEl.src=base+'.png'; return; }
-    imgEl.onerror=null; imgEl.style.display='none'; if(ph) ph.style.display='';
+    imgEl.onerror=null; imgEl.style.display='none'; if(ph) ph.style.display='flex';
   };
-  imgEl.onload=function(){ imgEl.style.display=''; if(ph) ph.style.display='none'; };
+  imgEl.onload=function(){ imgEl.style.display='block'; if(ph) ph.style.display='none'; };
   imgEl.src=base+'.jpg';
 }
 function renderTypeInfo(){
@@ -1635,6 +1677,7 @@ function renderTypeInfo(){
     pal.mix.map((m,i)=>`<b>${m.ko}</b> ${m.n}${T('colorsUnit')}${i===0?` (${T('mainType')} 70%)`:' (15%)'}`).join(' · ');
   document.getElementById('tpoBox').innerHTML=bob?tpoHtml(bob,harmony(bob))
     :`<div class="wf" style="grid-column:1/-1">${T('noBob')}</div>`;
+  document.getElementById('fashionBox').innerHTML=fashionHtml(t.code);
   const avg=x=>(x.reduce((s,v)=>s+v,0)/x.length).toFixed(1);
   document.getElementById('typeKv').innerHTML=[
     [T('typeCode'),t.code],[T('enName'),t.en],[T('colorCount'),a.length],
@@ -1705,7 +1748,7 @@ function renderResult(){
   document.getElementById('rStyle').textContent=val('typeStyle')||'—';
   /* 결과 카드의 유형 이미지 — 유형설명의 1번 이미지와 같은 파일 */
   const setCardImg=(el,n,box)=>{ if(!el) return; el.style.display='none';
-    el.onload=function(){ el.style.display=''; if(box) box.style.display=''; };
+    el.onload=function(){ el.style.display='block'; if(box) box.style.display='block'; };
     el.onerror=function(){ if(el.src.slice(-4).toLowerCase()==='.jpg'){ el.src=typeImgPath(t.code,n)+'.png'; return; } el.onerror=null; el.style.display='none'; };
     el.src=typeImgPath(t.code,n)+'.jpg'; };
   setCardImg(document.getElementById('rTypeImg'),1,null);            // 유형 이미지 (헤더)
@@ -1740,8 +1783,11 @@ function renderResult(){
     document.getElementById('rTpo').innerHTML=['daily','biz','event'].map(k=>
       `<div><div class="b"><i style="background:${bob.hex};flex:1.6"></i>
         ${h[k].colors.map(c=>`<i style="background:${c.hex}"></i>`).join('')}</div>
-        <p>${T(k)}</p><p class="r">${T(k+'Rule')}</p></div>`).join('');
+        <p>${T(k)}</p></div>`).join('');
   }
+  // 패션 컬러 배색 — 결과 카드
+  const rf=document.getElementById('rFashion');
+  if(rf) rf.innerHTML=fashionCardHtml(t.code);
   // 완료 화면
   document.getElementById('tkName').textContent=(val('pName')||T('fName'))+(LANG==='en'?'':' 님');
   document.getElementById('tkType').textContent=SEN(t.season)+' · '+TYN(t)+'  ('+t.en+')';
