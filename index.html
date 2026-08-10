@@ -492,7 +492,8 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
         </span></label>
     </div>
 
-    <div class="row" style="margin-top:22px"><button class="btn" onclick="toSeasonGuard()" data-i18n="toSeason">시즌 선택으로 →</button></div>
+    <div class="row" style="margin-top:22px"><button class="btn" id="toSeasonBtn" onclick="toSeasonGuard()" data-i18n="toSeason">시즌 선택으로 →</button></div>
+    <p class="note" id="toSeasonNote" style="color:#b4453a;margin-top:8px"></p>
   </div>
 </section>
 
@@ -649,6 +650,18 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
   </div>
 </section>
 
+</div>
+
+<!-- ══ 동시접속 잠금 화면 ══ -->
+<div id="lockOverlay" style="display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(26,24,22,.94);color:#fff;align-items:center;justify-content:center;text-align:center;padding:30px">
+  <div style="max-width:420px">
+    <div style="font-size:40px;margin-bottom:14px">🔒</div>
+    <h2 id="lockTitle" style="margin:0 0 10px;font-size:20px">세션이 종료되었습니다</h2>
+    <p id="lockMsg" style="margin:0 0 22px;font-size:14px;line-height:1.7;color:#e6e0d8">
+      같은 코드로 다른 기기·창에서 접속되어 이 화면의 진단이 중단되었습니다.<br>이 코드는 한 곳에서만 사용할 수 있습니다.</p>
+    <button class="btn" onclick="location.reload()" style="min-width:160px">다시 로그인</button>
+  </div>
 </div>
 
 <!-- ══ A4 결과 카드 (화면 밖에서 렌더 → PNG 로 캡처) ══ -->
@@ -812,7 +825,7 @@ const I18N={ko:{
  toSeason:'시즌 선택으로 →', s2Title:'1단계 · 시즌 선택', s2Sub:'드레이핑 결과에 따라 4시즌 중 하나를 선택합니다.',
  backInfo:'← 진단자 정보', s3Title:'2단계 · 세부 유형 선택', s3Sub:'선택한 시즌 안에서 3가지 유형으로 다시 나뉩니다.',
  backSeason:'← 시즌 선택',
- s4Sub:'유형 색을 좁힌 뒤 색상 계열·명도·채도·톤으로 다시 걸러 교집합을 봅니다. 스와치 색면 클릭 = 베스트컬러 담기 · ★ = 베스트 오브 베스트 1색.',
+ s4Sub:'유형 색을 좁힌 뒤 색상 계열·명도·채도·톤으로 다시 걸러 교집합을 봅니다. 스와치 더블클릭 = 베스트컬러 담기 · ★ = 베스트 오브 베스트 1색.',
  showing:'표시 중', colorsUnit:'색', resetF:'필터 초기화', autoPick:'상위 12색 자동 추가', clearPicks:'모두 제거', toDesc:'유형 설명 →',
  fFam:'색상 계열', fHue:'색상', fVal:'명도', fChr:'채도', fTone:'톤', fType:'유형',
  v8:'매우 밝음', v7:'밝음', v56:'중간', v4:'어두움', v3:'매우 어두움',
@@ -836,7 +849,7 @@ const I18N={ko:{
  pickToggle:'추가하기 / 제거하기',
   swTogTip:'누르면 팔레트에 담기고, 다시 누르면 빠집니다', swStarTip:'베스트 오브 베스트 1색으로 지정',
   swInfoTip:'색 정보 보기', closeHint:'아무 곳이나 누르면 닫힙니다',
-  eduPalTitle:'컬러 배색 팔레트', noEduPal:'담은 색이 없습니다 — 스와치의 색 부분을 누르면 이곳에 담깁니다.', noPick:'베스트컬러 없음 — 스와치를 색면을 클릭해 담고, ★를 눌러 베스트 오브 베스트 1색을 정하세요. 최대 12색.',
+  eduPalTitle:'컬러 배색 팔레트', noEduPal:'담은 색이 없습니다 — 스와치의 색 부분을 누르면 이곳에 담깁니다.', noPick:'베스트컬러 없음 — 스와치를 더블클릭해 담고, ★를 눌러 베스트 오브 베스트 1색을 정하세요. 최대 12색.',
  noBob:'베스트 오브 베스트 1색이 지정되지 않았습니다. 팔레트 화면에서 ★를 눌러 지정하면 TPO 배색이 만들어집니다.',
  noHit:'조건을 모두 만족하는 색이 없습니다. 필터를 하나씩 해제해 보세요.',
  relHint:'금색 테두리 = 선택한 유형에 해당하는 항목',
@@ -846,7 +859,7 @@ const I18N={ko:{
  kColor:'Color no.', munsell:'KS 표기', hue:'색상', value:'명도', chroma:'채도', tone:'톤', wc:'웜쿨',
  assigned:'배정 유형', repColors:'대표', typeCode:'유형코드', enName:'영문명', colorCount:'해당 색 수',
  avgV:'평균 명도', avgC:'평균 채도', mainTone:'주요 톤', season:'시즌', type:'유형',
- daily:'데일리', biz:'비즈니스', event:'이벤트',
+ daily:'데일리', biz:'비즈니스', event:'이벤트', dailyA:'데일리 A', dailyB:'데일리 B',
  dailyRule:'유사색상 · 명도차 3~4 · 채도차 3 이하', bizRule:'유사색상 · 명도차 2~3 · 저채도만', fashionTitle:'패션 컬러 배색', fashionBadge:'유형별 상용 패션색', fashionTag:'패션',
  eventRule:'반대색상 · 명도차 3 이상 · 채도차 3 이상',
  relaxed:'완화', relaxNote:'※ 조건에 맞는 색이 부족해 일부는 기준을 완화해 채웠습니다', shortOf:'조건 충족 색 부족 —',
@@ -911,7 +924,7 @@ const I18N={ko:{
  kColor:'Color no.', munsell:'KS', hue:'Hue', value:'Value', chroma:'Chroma', tone:'Tone', wc:'Warm / Cool',
  assigned:'Assigned types', repColors:'representative', typeCode:'Type code', enName:'English name', colorCount:'Colours',
  avgV:'Avg value', avgC:'Avg chroma', mainTone:'Main tones', season:'Season', type:'Type',
- daily:'Daily', biz:'Business', event:'Event',
+ daily:'Daily', biz:'Business', event:'Event', dailyA:'Daily A', dailyB:'Daily B',
  dailyRule:'Analogous · ΔV 3–4 · ΔC ≤3', bizRule:'Analogous · ΔV 2–3 · low chroma only', fashionTitle:'Fashion Colour Combinations', fashionBadge:'Everyday fashion staples', fashionTag:'Fashion',
  eventRule:'Opposite hue · ΔV ≥3 · ΔC ≥3',
  relaxed:'relaxed', relaxNote:'* Not enough colours met the rule, so some were filled with relaxed criteria', shortOf:'Short of rule —',
@@ -1053,6 +1066,16 @@ function firstMissingInfo(){
   if(!document.getElementById('pAgree').checked) return {id:'pAgree',label:'개인정보 수집·이용 동의 / Consent'};
   return null;
 }
+/* 필수 항목이 다 채워지기 전에는 「시즌 선택으로」 버튼을 아예 못 누르게 한다.
+   입력·선택이 바뀔 때마다 다시 검사해서 버튼을 켜고 끈다. (관리자는 항상 켜짐) */
+function updateInfoButton(){
+  const b=document.getElementById('toSeasonBtn'); if(!b) return;
+  const note=document.getElementById('toSeasonNote');
+  if(isAdmin()){ b.disabled=false; if(note) note.textContent=''; return; }
+  const m=firstMissingInfo();
+  b.disabled=!!m;
+  if(note) note.textContent = m ? (LANG==='en'?('Required next: '+m.label):('아직 필요한 항목: '+m.label)) : '';
+}
 function toSeasonGuard(){
   if(isAdmin()){ go(2); return; }
   const m=firstMissingInfo();
@@ -1076,6 +1099,29 @@ function go(n){
   if(n===2) renderSeasons(); if(n===3) renderTypes();
   if(n===4){buildFilters();renderGrid();} if(n===5) renderTypeInfo(); if(n===6) renderResult();
 }
+/* ═══════════ 동시접속 차단 ═══════════
+   원리 — 로그인하면 이 창이 고유 세션ID 를 만들어 서버(consultants 탭)에 "현재 소유자"로 기록한다(claim).
+   이후 30초마다 서버에 신호(beat)를 보내는데, 그 사이 다른 기기가 같은 코드로 접속하면 소유자가 바뀌어,
+   이 창의 다음 신호에서 TAKEOVER 응답을 받고 잠긴다. (나중 접속 우선)
+   ※ 서버(Code.gs)가 claim/beat 를 지원해야 작동한다. 지원하지 않으면(구버전·DEMO) 기능은 조용히 꺼진다. */
+let HEARTBEAT=null;
+function newSessionId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+async function claimSession(code){
+  if(HEARTBEAT){ clearInterval(HEARTBEAT); HEARTBEAT=null; }
+  ST.session=newSessionId();
+  const r=await api('claim',{code:code, session:ST.session});
+  if(!r||!r.ok) return;                 /* 서버 미지원·DEMO·오류 → 동시접속 제어 미적용 */
+  HEARTBEAT=setInterval(async()=>{
+    try{
+      const b=await api('beat',{code:ST.code, session:ST.session});
+      if(b&&b.ok===false&&b.error==='TAKEOVER') lockSession();
+    }catch(e){/* 네트워크 오류로는 잠그지 않는다 */}
+  },30000);
+}
+function lockSession(){
+  if(HEARTBEAT){ clearInterval(HEARTBEAT); HEARTBEAT=null; }
+  const ov=document.getElementById('lockOverlay'); if(ov) ov.style.display='flex';
+}
 /* 진단자 정보 화면의 안내 문구를 역할에 따라 바꾼다 */
 function updateInfoRequirement(){
   const sub=document.querySelector('#s1 .sub'); if(!sub) return;
@@ -1085,6 +1131,7 @@ function updateInfoRequirement(){
   else sub.textContent = LANG==='en'
     ? 'All fields except skin colorimetry, plus consent, are required before season selection.'
     : '피부 측색을 제외한 모든 항목과 개인정보 수집·이용 동의를 작성해야 시즌 선택으로 넘어갑니다.';
+  updateInfoButton();
 }
 /* 로그인 때 받은 허용 모드 목록으로 판단한다 (역할 이름이 아니라 modes 를 쓴다) */
 function allowed(m){ return !ST.modes||ST.modes.includes(m); }
@@ -1122,6 +1169,7 @@ async function login(){
     :(LOGIN_ERR[r.error]||('확인 실패 — '+r.error))); return; }
 
   ST.code=v; ST.role=roleKey; ST.modes=modes;
+  claimSession(v);   /* 같은 코드 동시접속 차단 — 이 세션을 소유자로 등록하고 하트비트 시작 */
   /* 권한이 없는 모드 버튼은 감춘다 (비활성이 아니라 아예 보이지 않게) */
   ['mDiag','mEdu','mAdm'].forEach((id,i)=>{
     document.getElementById(id).classList.toggle('hide',!modes.includes(['diag','edu','adm'][i])); });
@@ -1143,6 +1191,7 @@ function setSkin(v){
   ST.skin=v;
   document.querySelectorAll('#skinOpts button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   document.getElementById('pSkinEtcWrap').style.display=v==='etc'?'block':'none';
+  updateInfoButton();
 }
 function skinLabel(){
   if(!ST.skin) return '';
@@ -1580,48 +1629,46 @@ function harmony(bob){
           oppGroup:oppositeGroup(bob.hue)};
 }
 /* ═══════════ 패션 컬러 배색 ═══════════
-   BOB 와 무관하게, 각 유형에 어울리는 "패션 산업 상용색"(브라운·베이지·네이비·무채색 등)으로
-   TPO 별 배색을 하나씩 제시한다. 색은 [hex, 색이름] 쌍. */
-const FC={
-  ivory:['#F0E6D2','아이보리'], cream:['#F5EFE0','크림'], scamel:['#C79A6B','소프트카멜'],
-  beige:['#D8C3A5','베이지'], wgray:['#A79B8E','웜그레이'], camel:['#B4885C','카멜'],
-  khaki:['#7A6A4F','카키'], brown:['#6E4B2F','브라운'], choco:['#3E2A20','초콜릿'],
-  mustard:['#C9A227','머스타드'], terra:['#B5651D','테라코타'], coral:['#F27E63','코랄'],
-  red:['#C0392B','레드'], wburg:['#7A2E2A','와인브라운'], wnavy:['#2A3550','웜네이비'],
-  white:['#FFFFFF','화이트'], lgray:['#CDCDCD','라이트그레이'], cbeige:['#CFC6BC','쿨베이지'],
-  greige:['#B7B0AA','그레이지'], silver:['#C4C4CC','실버'], navy:['#24324D','네이비'],
-  charcoal:['#363A40','차콜'], black:['#1A1A1A','블랙'], ppink:['#F3D3DA','파스텔핑크'],
-  drose:['#C99AA0','더스티로즈'], lav:['#C9BBDD','라벤더'], burg:['#6E2436','버건디'], mag:['#B0338C','마젠타']
-};
-const FASHION={
-  'SP-LT':{daily:['ivory','scamel','wgray'], biz:['beige','camel','wgray'],  event:['coral','ivory','scamel']},
-  'SP-BR':{daily:['ivory','camel','wnavy'],  biz:['wnavy','ivory','camel'],  event:['red','ivory','brown']},
-  'SP-WR':{daily:['cream','camel','khaki'],  biz:['beige','brown','wgray'],  event:['mustard','cream','brown']},
-  'SM-LT':{daily:['white','lgray','cbeige'], biz:['greige','silver','navy'], event:['ppink','white','lgray']},
-  'SM-MT':{daily:['greige','cbeige','lgray'],biz:['charcoal','greige','navy'],event:['drose','lgray','white']},
-  'SM-CL':{daily:['white','cbeige','lgray'], biz:['navy','silver','white'],  event:['lav','white','lgray']},
-  'AT-MT':{daily:['beige','khaki','wgray'],  biz:['brown','beige','khaki'],  event:['terra','beige','brown']},
-  'AT-DP':{daily:['camel','brown','cream'],  biz:['choco','khaki','beige'],  event:['wburg','camel','choco']},
-  'AT-WR':{daily:['camel','mustard','cream'],biz:['brown','khaki','beige'],  event:['terra','mustard','choco']},
-  'WT-BR':{daily:['white','lgray','black'],  biz:['navy','white','silver'],  event:['red','white','black']},
-  'WT-DP':{daily:['charcoal','white','silver'],biz:['black','navy','white'], event:['burg','black','white']},
-  'WT-CL':{daily:['white','lgray','charcoal'],biz:['navy','silver','white'], event:['mag','white','black']}
-};
+   BOB 와 무관하게, 각 유형에 어울리는 "패션 상용색"을 실제 팔레트(606색)에서 규칙으로 뽑는다.
+   유형의 온도(웜/쿨)에 따라 뽑는 색이 달라진다.
+     데일리A  브라운/베이지 — 웜: 주황(YR) 계열 / 쿨: 고명도·저채도(채도≤3) 베이지
+     데일리B  네이비        — 웜: 저명도 5B / 쿨: 저명도 남색(PB)
+     비즈니스 딥 뉴트럴      — 저명도(V≤5) · 저채도(채도≤3) */
+const FASHION_N=4;   // 배색 하나에 넣는 색 수
 function fashionBars(code){
-  const f=FASHION[code]; if(!f) return [];
-  return ['daily','biz','event'].map(k=>({key:k, cols:(f[k]||[]).map(id=>FC[id]).filter(Boolean)}));
+  const t=typeObj(code); if(!t) return [];
+  const warm=(t.season==='spring'||t.season==='autumn');
+  const pack=arr=>arr.slice(0,FASHION_N).map(c=>({hex:c.hex,name:cName(c)||c.ks,ks:c.ks}));
+  const byVasc=a=>a.slice().sort((x,y)=>x.value-y.value||y.chroma-x.chroma);
+  const byVdesc=a=>a.slice().sort((x,y)=>y.value-x.value||x.chroma-y.chroma);
+  // 데일리A
+  let A, aLabel;
+  if(warm){ A=pack(byVasc(COLORS.filter(c=>c.group==='주황'&&c.value<=6.5))); aLabel='브라운'; }
+  else    { A=pack(byVdesc(COLORS.filter(c=>c.chroma<=3&&c.value>=7)));      aLabel='베이지'; }
+  // 데일리B (네이비)
+  let B;
+  if(warm) B=pack(byVasc(COLORS.filter(c=>c.hue==='5B')));
+  else     B=pack(byVasc(COLORS.filter(c=>c.group==='남색')));
+  // 비즈니스 (저명도·저채도) — 유형 온도에 맞춰 (웜↔쿨), 무채색은 양쪽 공용
+  const okTemp=c=> warm ? c.temp!=='C' : c.temp!=='W';
+  const C=pack(byVasc(COLORS.filter(c=>c.chroma<=3&&c.value<=5&&okTemp(c))));
+  return [
+    {key:'dailyA', anchor:aLabel,  cols:A},
+    {key:'dailyB', anchor:'네이비', cols:B},
+    {key:'biz',    anchor:'딥 뉴트럴', cols:C}
+  ];
 }
 /* 유형설명 화면용 — 라벨 + 색 띠 + 색이름 */
 function fashionHtml(code){
-  return fashionBars(code).map(b=>`<div class="tpoCard"><h4>${T(b.key)} <span class="badge">${T('fashionTag')}</span></h4>
-    <div class="tpoBar">${b.cols.map(c=>`<i style="background:${c[0]}" title="${c[1]}"></i>`).join('')}</div>
-    <ul class="tpoList">${b.cols.map(c=>`<li><em style="background:${c[0]}"></em>${c[1]}</li>`).join('')}</ul>
+  return fashionBars(code).map(b=>`<div class="tpoCard"><h4>${T(b.key)} <span class="badge">${b.anchor}</span></h4>
+    <div class="tpoBar">${b.cols.map(c=>`<i style="background:${c.hex}" title="${c.name} · ${c.ks}"></i>`).join('')}</div>
+    <ul class="tpoList">${b.cols.map(c=>`<li><em style="background:${c.hex}"></em>${c.name} <span style="opacity:.6">${c.ks}</span></li>`).join('')}</ul>
     </div>`).join('');
 }
 /* 결과 카드용 — 작은 색 띠 3개 */
 function fashionCardHtml(code){
-  return fashionBars(code).map(b=>`<div><div class="b">${b.cols.map(c=>`<i style="background:${c[0]}"></i>`).join('')}</div>
-    <p>${T(b.key)}</p></div>`).join('');
+  return fashionBars(code).map(b=>`<div><div class="b">${b.cols.map(c=>`<i style="background:${c.hex}"></i>`).join('')}</div>
+    <p>${T(b.key)} · ${b.anchor}</p></div>`).join('');
 }
 function tpoHtml(bob,h){
   return ['daily','biz','event'].map(k=>{
@@ -2021,6 +2068,9 @@ function renderAdmin(){
 }
 
 applyLang(); renderSteps();
+/* 진단자 정보 폼에서 입력·선택이 바뀔 때마다 「시즌 선택으로」 버튼 상태를 다시 계산한다 */
+(function(){ const s1=document.getElementById('s1');
+  if(s1){ s1.addEventListener('input',updateInfoButton); s1.addEventListener('change',updateInfoButton); } })();
 </script>
 </body>
 </html>
