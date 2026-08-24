@@ -636,15 +636,6 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
   <h1 data-i18n="admTitle">관리자 모드</h1>
   <p class="sub" data-i18n="admSub">자동 배정 규칙의 결과를 확인하고 유형별 색 목록을 조정합니다.</p>
   <div class="card">
-    <h2 style="margin-top:0">결과 카드 복구</h2>
-    <p class="note" style="margin:0 0 10px">저장을 놓친 진단은 구글 시트 <b>records</b> 탭에서 해당 <b>행 전체를 복사</b>해 아래에 붙여넣으면 결과 카드를 다시 만들 수 있습니다. (한 줄 = 한 진단)</p>
-    <textarea id="restoreRow" placeholder="records 시트의 한 행을 통째로 복사해 여기에 붙여넣으세요 (탭으로 구분된 값)" style="min-height:80px;font-size:12px"></textarea>
-    <div class="row" style="margin-top:10px">
-      <button class="btn" onclick="restoreCard()">이 기록으로 결과 카드 만들기</button>
-    </div>
-    <p class="note" id="restoreMsg" style="margin-top:8px"></p>
-  </div>
-  <div class="card">
     <h2 style="margin-top:0" data-i18n="admCount">유형별 색 수 · 자동 배정 결과</h2>
     <table class="tbl" id="admTbl"></table>
     <p class="note" data-i18n="admNote">중성색(웜쿨지수 절댓값 15 미만)은 웜·쿨 양쪽에 배정되므로 합계가 776을 넘습니다.</p>
@@ -1841,64 +1832,6 @@ function renderResult(){
   document.getElementById('tkName').textContent=(val('pName')||T('fName'))+(LANG==='en'?'':' 님');
   document.getElementById('tkType').textContent=SEN(t.season)+' · '+TYN(t)+'  ('+t.en+')';
   document.getElementById('tkStrip').innerHTML=pal.map(c=>`<i style="background:${c.hex}"></i>`).join('');
-}
-
-/* ═══════════ 결과 카드 복구 ═══════════
-   records 시트의 한 행(탭 구분)을 붙여넣어 결과 카드를 다시 그린다.
-   열 순서는 Apps Script 의 HEAD_RECORDS 와 같다. */
-const REC_COLS = ['ts','code','role','name','email','birth','sex','tel','race','job','date',
-  'skin','hair','eye','skinL','areaDiff','redness','evenness',
-  'jawL','jawA','jawB','chkL','chkA','chkB',
-  'season','type','type_ko','bob','best','memo','agree','id'];
-function setVal(id,v){ const e=document.getElementById(id); if(e) e.value=(v==null?'':String(v)); }
-function restoreCard(){
-  const msg=document.getElementById('restoreMsg');
-  const raw=(document.getElementById('restoreRow').value||'').replace(/\r/g,'').trim();
-  if(!raw){ msg.textContent='records 행을 붙여넣어 주세요.'; return; }
-  // 탭 우선, 없으면 여러 칸 공백으로 나눔
-  let f = raw.indexOf('\t')>=0 ? raw.split('\t') : raw.split(/\s{2,}/);
-  const R={}; REC_COLS.forEach((k,i)=>R[k]=(f[i]!=null?String(f[i]).trim():''));
-  if(!R.type){ msg.textContent='유형코드(예: SP-LT) 열을 찾지 못했습니다. 행 전체를 복사했는지 확인하세요.'; return; }
-  const t=typeObj(R.type);
-  if(!t){ msg.textContent='알 수 없는 유형코드: '+R.type; return; }
-
-  // 상태 복원
-  ST.code=R.code||ST.code||'—';
-  ST.season=t.season;
-  ST.type=R.type;
-  ST.scope=new Set([R.type]);
-  ST.bob=R.bob||null;
-  ST.picks=(R.best||'').split(',').map(s=>s.trim()).filter(Boolean);
-
-  // 인적 정보 입력칸 채우기 (카드가 이 값을 읽는다)
-  setVal('pName',R.name); setVal('pSex',R.sex); setVal('pBirth',R.birth);
-  setVal('pJob',R.job); setVal('pDate',R.date);
-  setVal('pRace',R.race); setVal('oHair',R.hair); setVal('oEye',R.eye);
-
-  // 피부 명도 — 저장된 라벨을 키로 되돌린다
-  ST.skin=''; document.querySelectorAll('#skinOpts button').forEach(b=>{
-    if(b.textContent.replace(/\s/g,'').indexOf((R.skin||'').replace(/\s/g,''))>=0 && R.skin) ST.skin=b.dataset.v; });
-
-  // 측색값 — 턱/볼 평균값을 양쪽에 넣으면 calcLab 이 원래 결과를 재현한다
-  const num=x=>{ const n=parseFloat(x); return isNaN(n)?'':n; };
-  [['jl','jaw'],['jr','jaw'],['cl','chk'],['cr','chk']].forEach(([site,src])=>{
-    setVal('lab_'+site+'_L', num(R[src+'L'])); setVal('lab_'+site+'_a', num(R[src+'A'])); setVal('lab_'+site+'_b', num(R[src+'B']));
-  });
-  calcLab();
-
-  // 유형 설명·스타일링 문구는 기록에 없으므로 기본값 사용
-  if(TYPE_TEXT[t.code]){ setVal('typeDesc',TYPE_TEXT[t.code][LANG][0]); setVal('typeStyle',TYPE_TEXT[t.code][LANG][1]); }
-
-  msg.textContent = (R.name||'') + ' · ' + SEN(t.season) + ' ' + TYN(t) + ' 카드를 불러왔습니다.';
-  renderResult();
-  /* BOB 가 없는 기록도 카드를 만든다 (openCardModal 은 BOB 을 요구하므로 직접 연다) */
-  CARD_URL=''; document.getElementById('cardModal').classList.add('on');
-  setBody(`<div class="spin">${T('rendering')}</div>`);
-  setTimeout(()=>{ renderCardImage()
-    .then(url=>{ CARD_URL=url; setBody(`<img src="${url}" alt="result card">`); })
-    .catch(err=>{ setBody(`<div class="spin" style="text-align:left;padding:26px">
-      <b style="color:#b4453a">${T('errPng')}</b><br><br><span style="font-size:12px">${T('errPngHint')}</span></div>`); });
-  },90);
 }
 
 /* ── 결과 카드 팝업 ──────────────────────────
