@@ -1300,7 +1300,7 @@ function renderPrefQuestions(){
   box.querySelectorAll('.qopts').forEach(g=>{ const sel=PREF_SEL[g.dataset.q];
     if(sel) g.querySelectorAll('button').forEach(b=>{ if(sel.has(b.dataset.v)) b.classList.add('on'); }); });
   if(PREF_SEL.__fieldEtc){ const fe=document.getElementById('qFieldEtc'); if(fe) fe.value=PREF_SEL.__fieldEtc; }
-  refreshMemoTags();
+  refreshMemoTags(); updateNextAButton();
 }
 /* #qform 안 버튼 클릭 — 위임 처리 (한 번만 등록) */
 function prefWire(){ const box=document.getElementById('qform'); if(!box||box.dataset.wired) return; box.dataset.wired='1';
@@ -1312,9 +1312,9 @@ function prefWire(){ const box=document.getElementById('qform'); if(!box||box.da
     if(mode==='one'){ g.querySelectorAll('button').forEach(x=>x.classList.remove('on')); PREF_SEL[qid]=new Set([v]); btn.classList.add('on'); if(msg) msg.textContent=''; }
     else { if(!on && max && PREF_SEL[qid].size>=max){ if(msg) msg.textContent=(LANG==='en'?('Up to '+max+' selections.'):('최대 '+max+'개까지 선택할 수 있습니다.')); return; }
       btn.classList.toggle('on'); if(on) PREF_SEL[qid].delete(v); else PREF_SEL[qid].add(v); if(msg) msg.textContent=''; }
-    refreshMemoTags();
+    refreshMemoTags(); updateNextAButton();
   });
-  box.addEventListener('input', e=>{ if(e.target && e.target.id==='qFieldEtc'){ PREF_SEL.__fieldEtc=e.target.value; refreshMemoTags(); } });
+  box.addEventListener('input', e=>{ if(e.target && e.target.id==='qFieldEtc'){ PREF_SEL.__fieldEtc=e.target.value; refreshMemoTags(); updateNextAButton(); } });
 }
 function prefInit(){ renderPrefQuestions(); prefWire(); }
 /* 선택 내용을 #해시태그 배열로. only 를 주면 그 질문들만. */
@@ -1347,7 +1347,26 @@ function firstMissingA(){
     if(el.value==='__etc'&&id==='pRace'&&!val('pRaceEtc').trim()) return {id:'pRaceEtc',label:label+' (직접입력)'}; }
   return null;
 }
-function showStepA(){ const a=document.getElementById('s1a'),b=document.getElementById('s1b'); if(a)a.style.display=''; if(b)b.style.display='none'; }
+/* Q1~Q7 중 아직 답 안 한 첫 질문 */
+function firstMissingPref(){
+  for(const q of PREF_Q){
+    const sel=PREF_SEL[q.id];
+    if(!sel || sel.size===0) return {label:(LANG==='en'?q.en:q.ko)};
+    if(q.id==='field' && sel.has('기타') && !val('qFieldEtc').trim())
+      return {label:(LANG==='en'?'Q4 Other (text)':'Q4 기타 (직접 입력)')};
+  }
+  return null;
+}
+/* 1단계 [다음] 버튼 — 기본정보 + Q1~Q7 이 모두 채워져야 활성화 (관리자는 항상 활성) */
+function updateNextAButton(){
+  const b=document.getElementById('nextABtn'); if(!b) return;
+  const note=document.getElementById('nextANote');
+  if(isAdmin()){ b.disabled=false; if(note) note.textContent=''; return; }
+  const m=firstMissingA()||firstMissingPref();
+  b.disabled=!!m;
+  if(note) note.textContent = m ? (LANG==='en'?('Required next: '+m.label):('아직 필요한 항목: '+m.label)) : '';
+}
+function showStepA(){ const a=document.getElementById('s1a'),b=document.getElementById('s1b'); if(a)a.style.display=''; if(b)b.style.display='none'; updateNextAButton(); }
 function nextToConsultant(){
   if(!isAdmin()){ const m=firstMissingA(); if(m){ const el=document.getElementById(m.id);
     if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); try{ el.focus&&el.focus(); }catch(e){} }
@@ -1917,7 +1936,7 @@ function payload(){
     redness:L?+L.da.toFixed(2):null, evenness:L?+L.dE.toFixed(2):null,
     lab_raw:L?{jaw:L.jaw,cheek:L.chk,db:+L.db.toFixed(2),dAB:+L.dAB.toFixed(2)}:null,
     season:ST.season, type:ST.type, type_ko:typeObj(ST.type).ko,
-    bob:ST.bob, best:ST.picks, memo:memoWithPref(), agree:document.getElementById('pAgree').checked};
+    bob:ST.bob, best:ST.picks, memo:val('pMemo'), pref:prefTags().join(' · '), agree:document.getElementById('pAgree').checked};
 }
 function makeResult(){
   if(!ST.bob){ flashBobWarn(); return; }
@@ -2017,7 +2036,7 @@ function renderResult(){
 const REC_COLS = ['ts','code','role','name','email','birth','sex','tel','race','job','date',
   'skin','hair','eye','skinL','areaDiff','redness','evenness',
   'jawL','jawA','jawB','chkL','chkA','chkB',
-  'season','type','type_ko','bob','best','memo','agree','id'];
+  'season','type','type_ko','bob','best','memo','agree','pref','id'];
 function setVal(id,v){ const e=document.getElementById(id); if(e) e.value=(v==null?'':String(v)); }
 function restoreCard(){
   const msg=document.getElementById('restoreMsg');
@@ -2059,6 +2078,9 @@ function restoreCard(){
 
   msg.textContent = (R.name||'') + ' · ' + SEN(t.season) + ' ' + TYN(t) + ' 카드를 불러왔습니다.';
   renderResult();
+  /* 저장된 선호 태그(별도 열)를 카드에 그대로 표시 — 복구 시엔 PREF_SEL 이 비어 있으므로 직접 채운다 */
+  const rtg=document.getElementById('rTags');
+  if(rtg) rtg.innerHTML=(R.pref||'').split(' · ').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${x}</span>`).join('');
   /* BOB 가 없는 기록도 카드를 만든다 (openCardModal 은 BOB 을 요구하므로 직접 연다) */
   CARD_URL=''; document.getElementById('cardModal').classList.add('on');
   setBody(`<div class="spin">${T('rendering')}</div>`);
@@ -2298,7 +2320,8 @@ function renderAdmin(){
 applyLang(); renderSteps();
 /* 진단자 정보 폼에서 입력·선택이 바뀔 때마다 「시즌 선택으로」 버튼 상태를 다시 계산한다 */
 (function(){ const s1=document.getElementById('s1');
-  if(s1){ s1.addEventListener('input',updateInfoButton); s1.addEventListener('change',updateInfoButton); } })();
+  if(s1){ s1.addEventListener('input',()=>{updateInfoButton();updateNextAButton();});
+          s1.addEventListener('change',()=>{updateInfoButton();updateNextAButton();}); } })();
 prefInit();
 </script>
 </body>
