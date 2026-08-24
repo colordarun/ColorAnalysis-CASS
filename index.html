@@ -223,7 +223,40 @@ table.band .cell span{font-size:9.5px;color:var(--muted);margin-left:3px}
   transition:.22s;z-index:60;box-shadow:-10px 0 30px rgba(0,0,0,.1)}
 .detail.on{transform:none}
 /* 색 표시 박스 — 닫기 버튼 줄 아래로 내려 서로 겹치지 않게 한다 */
-.detail .big{height:88px;border-radius:10px;margin-bottom:16px;border:1px solid var(--line)}
+/* 상세 팝업 색면 — 정사각형 */
+.detail .big{aspect-ratio:1/1;height:auto;width:100%;border-radius:10px;margin-bottom:16px;border:1px solid var(--line)}
+/* 선호 배색 이미지 */
+.prefImg{width:100%;max-width:560px;border-radius:10px;border:1px solid var(--line);display:block;margin-bottom:10px}
+/* 진단 목적·선호 질문 */
+.qform{display:flex;flex-direction:column}
+.qrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:13px 0}
+.qrow+.qrow{border-top:1px solid var(--line)}   /* 질문 사이 구분선 */
+.qrow .ql{flex:0 0 100%;font-size:13px;color:var(--ink);font-weight:600}
+.qrow .qhint{flex:0 0 100%;font-size:11.5px;color:var(--muted);margin:-4px 0 0}
+.qopts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qopts button{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:5px 13px;
+  font-size:13px;color:var(--ink);cursor:pointer;transition:.12s}
+.qopts button.on{background:var(--accent);color:var(--onAccent);border-color:var(--accent)}
+/* Q1 배색 카드 — 5×2, 각 카드는 2색 배색 */
+.qopts.combos{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;flex:0 0 100%}
+.qopts.combos button{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  background:var(--panel);cursor:pointer;transition:.12s}
+.qopts.combos .bars{display:flex;height:50px}
+.qopts.combos .bars i{flex:1}
+.qopts.combos .cn{display:block;text-align:center;font-size:12px;font-weight:600;color:var(--muted);padding:5px 0}
+.qopts.combos button.on{background:var(--panel);color:var(--ink);border-color:var(--accent);box-shadow:0 0 0 2px rgba(93,124,110,.28)}
+.qopts.combos button.on .cn{color:var(--accent)}
+/* 컨설턴트 메모 밑 해시태그 */
+.memoTags{margin:0 0 8px;display:flex;flex-wrap:wrap;gap:5px}
+.memoTags span{font-size:12px;color:var(--accent);background:#eef2ef;border-radius:12px;padding:2px 10px}
+.dateHint{display:block;font-size:10.5px;color:var(--muted);margin-top:3px}
+.qopts input{max-width:150px}
+/* 결과 카드 진단자 해시태그 */
+.a4-tags{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:5px}
+.a4-tags span{font-size:9px;color:#5d7c6e;background:#eef2ef;border-radius:10px;padding:1px 8px}
+/* TPO 배색 — BOB 별표 */
+.bobstar{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;line-height:1;text-shadow:0 0 3px rgba(0,0,0,.6);pointer-events:none}
+.rc-tpo .bobstar{font-size:9px}
 .detail table{width:100%;border-collapse:collapse;font-size:12px}
 .detail td{padding:6px 0;border-bottom:1px solid var(--softLine)}
 .detail td:first-child{color:var(--muted);width:82px}
@@ -417,6 +450,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
   <p class="sub" data-i18n="s1Sub">이 정보는 결과 카드에 표시되고 구글 스프레드시트에 함께 저장됩니다. * 표시만 필수입니다.</p>
 
   <div class="card">
+    <div id="s1a">
     <div class="sect">
       <h3 style="margin-top:0" data-i18n="secBasic">기본 정보</h3>
       <div class="g2">
@@ -424,7 +458,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
         <label class="f"><span data-i18n="fEmail">이메일</span><input id="pEmail" type="email" placeholder="name@example.com"></label>
       </div>
       <div class="g3">
-        <label class="f"><span data-i18n="fBirth">생년월일</span><input id="pBirth" type="date"></label>
+        <label class="f"><span data-i18n="fBirth">생년월일</span><input id="pBirth" type="date"><small class="dateHint" data-i18n="fBirthHint">연도-월-일</small></label>
         <label class="f"><span data-i18n="fSex">성별</span><select id="pSex"></select></label>
         <label class="f"><span data-i18n="fTel">연락처</span><input id="pTel"></label>
       </div>
@@ -436,6 +470,19 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
       </div>
     </div>
 
+    <!-- ══ 진단 목적과 선호하는 이미지 (진단자 자가 작성) — JS 렌더링 ══ -->
+    <div class="sect" id="prefSect">
+      <h3 style="margin-top:0" data-i18n="prefTitle">진단 목적과 선호하는 이미지</h3>
+      <div id="qform" style="margin-top:6px"></div>
+    </div>
+    </div><!-- /s1a -->
+
+    <div class="row" style="margin-top:4px">
+      <button class="btn" id="nextABtn" onclick="nextToConsultant()" data-i18n="toConsultant">다음 (컨설턴트 작성) →</button>
+    </div>
+    <p class="note" id="nextANote" style="color:#b4453a;margin-top:8px"></p>
+
+    <div id="s1b" style="display:none">
     <div class="sect">
       <h3 data-i18n="secSkin">피부 명도</h3>
       <img class="skinImg" src="assets/skintone.png" alt="skin tone reference"
@@ -483,16 +530,21 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     </div>
 
     <div class="sect">
-      <label class="f"><span data-i18n="fMemo">컨설턴트 메모</span><textarea id="pMemo"></textarea></label>
-      <label class="f" style="margin-bottom:4px">
+      <label class="f"><span data-i18n="fMemo">컨설턴트 메모</span></label>
+      <div class="memoTags" id="memoTags"></div>
+      <textarea id="pMemo"></textarea>
+      <label class="f" style="margin-bottom:4px;margin-top:12px">
         <span><span data-i18n="fAgree">개인정보 수집·이용 동의</span> <span class="req">*</span></span>
         <span style="display:flex;align-items:center;gap:8px;color:var(--ink);font-size:13px">
           <input type="checkbox" id="pAgree" style="width:auto"> <span data-i18n="agreeText">진단 결과 발급·발송 및 기록 보관 목적의 수집에 동의합니다.</span>
         </span></label>
     </div>
 
-    <div class="row" style="margin-top:22px"><button class="btn" id="toSeasonBtn" onclick="toSeasonGuard()" data-i18n="toSeason">시즌 선택으로 →</button></div>
+    <div class="row" style="margin-top:22px">
+      <button class="btn ghost" onclick="backToClient()" data-i18n="backClient">← 자가 작성으로</button>
+      <button class="btn" id="toSeasonBtn" onclick="toSeasonGuard()" data-i18n="toSeason">시즌 선택으로 →</button></div>
     <p class="note" id="toSeasonNote" style="color:#b4453a;margin-top:8px"></p>
+    </div><!-- /s1b -->
   </div>
 </section>
 
@@ -682,6 +734,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div class="a4-who">
       <b id="rName">—</b>
       <p id="rMeta">—</p>
+      <div class="a4-tags" id="rTags"></div>
     </div>
     <div class="a4-type"><em id="rEn">—</em><b id="rKo">—</b><p id="rDesc">—</p></div>
     <div class="a4-2col">
@@ -810,8 +863,8 @@ const SKIN=[['V8+','v8'],['V7','v7'],['V5~6','v56'],['V4','v4'],['V3−','v3'],[
 const I18N={ko:{
  tagline:'YZ-Color Analysis Standard System(CASS)', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
  confirm:'확인',
- s1Title:'진단자 정보', s1Sub:'이 정보는 결과 카드에 표시되고 구글 스프레드시트에 함께 저장됩니다. * 표시만 필수입니다.',
- secBasic:'기본 정보', fName:'이름', fEmail:'이메일', fBirth:'생년월일', fSex:'성별',
+ s1Title:'진단자 정보', s1Sub:'앞부분(기본 정보·선호)은 진단자가, 피부 명도부터는 컨설턴트가 작성합니다.',
+ secBasic:'기본 정보', fName:'이름', fEmail:'이메일', fBirth:'생년월일', fBirthHint:'연도-월-일', fSex:'성별',
  fTel:'연락처', fRace:'인종', fRaceEtc:'인종 직접 입력', fJob:'직업', fDate:'진단일',
  secSkin:'피부 명도', fSkinEtc:'기타 직접 입력', secLab:'피부 측색',
  labIntro:'색채계로 측정한 4부위 값을 넣으면 아래 4가지가 자동 계산됩니다. 비워 두면 계산하지 않습니다.',
@@ -824,7 +877,7 @@ const I18N={ko:{
  secHairEye:'모발 · 눈동자', fHair:'모발 색', fHairEtc:'모발 색 직접 입력', fEye:'눈동자 색', fEyeEtc:'눈동자 색 직접 입력',
  fMemo:'컨설턴트 메모', memoPh:'선호이미지, 진단 목적, 피부색 특징, 드레이핑 반응, 요청사항 등',
  fAgree:'개인정보 수집·이용 동의', agreeText:'진단 결과 발급·발송 및 기록 보관 목적의 수집에 동의합니다.',
- toSeason:'시즌 선택으로 →', s2Title:'1단계 · 시즌 선택', s2Sub:'드레이핑 결과에 따라 4시즌 중 하나를 선택합니다.',
+ toSeason:'시즌 선택으로 →', toConsultant:'다음 (컨설턴트 작성) →', backClient:'← 자가 작성으로', prefTitle:'진단 목적과 선호하는 이미지', prefSub:'진단자 본인이 작성합니다.', s2Title:'1단계 · 시즌 선택', s2Sub:'드레이핑 결과에 따라 4시즌 중 하나를 선택합니다.',
  backInfo:'← 진단자 정보', s3Title:'2단계 · 세부 유형 선택', s3Sub:'선택한 시즌 안에서 3가지 유형으로 다시 나뉩니다.',
  backSeason:'← 시즌 선택',
  s4Sub:'유형 색을 좁힌 뒤 색상 계열·명도·채도·톤으로 다시 걸러 교집합을 봅니다. 스와치 더블클릭 = 베스트컬러 담기 · ★ = 베스트 오브 베스트 1색.',
@@ -874,8 +927,8 @@ const I18N={ko:{
 },en:{
  tagline:'YZ-Color Analysis Standard System(CASS)', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
  confirm:'Continue',
- s1Title:'Client Information', s1Sub:'Shown on the result card and saved to Google Sheets. Only * fields are required.',
- secBasic:'Basic', fName:'Name', fEmail:'Email', fBirth:'Date of birth', fSex:'Gender',
+ s1Title:'Client Information', s1Sub:'The client fills in the top part; the consultant fills in from skin value onward.',
+ secBasic:'Basic', fName:'Name', fEmail:'Email', fBirth:'Date of birth', fBirthHint:'YYYY-MM-DD', fSex:'Gender',
  fTel:'Phone', fRace:'Ethnicity', fRaceEtc:'Ethnicity (free text)', fJob:'Occupation', fDate:'Session date',
  secSkin:'Skin Lightness', fSkinEtc:'Other (free text)', secLab:'Skin Measurement',
  labIntro:'Enter the four measured areas and the four results below are calculated automatically. Left blank, nothing is calculated.',
@@ -888,7 +941,7 @@ const I18N={ko:{
  secHairEye:'Hair · Eyes', fHair:'Hair colour', fHairEtc:'Hair colour (free text)', fEye:'Eye colour', fEyeEtc:'Eye colour (free text)',
  fMemo:'Consultant notes', memoPh:'Preferred image, purpose, skin characteristics, draping response, requests…',
  fAgree:'Consent to collection and use of personal data', agreeText:'I consent to collection for issuing, sending and storing the diagnosis result.',
- toSeason:'To season →', s2Title:'Step 1 · Season', s2Sub:'Choose one of the four seasons based on the draping result.',
+ toSeason:'To season →', toConsultant:'Next (consultant) →', backClient:'← Back to self-report', prefTitle:'Diagnosis goals & preferred image', prefSub:'Filled in by the client.', s2Title:'Step 1 · Season', s2Sub:'Choose one of the four seasons based on the draping result.',
  backInfo:'← Client info', s3Title:'Step 2 · Sub-type', s3Sub:'Each season splits into three sub-types.',
  backSeason:'← Season',
  s4Sub:'Narrow by type first, then filter again to see the intersection. Double-click a swatch to add it; ★ marks the single best-of-best colour.',
@@ -1013,6 +1066,8 @@ function applyLang(){
     }
   });
   fillSelect('pSex','sex'); fillSelect('pRace','race'); fillSelect('oHair','hair'); fillSelect('oEye','eye');
+  const bd=document.getElementById('pBirth'); if(bd) bd.setAttribute('lang', LANG==='en'?'en-US':'ko-KR');
+  renderPrefQuestions();
   document.getElementById('pMemo').placeholder=T('memoPh');
   document.getElementById('eduSort').innerHTML=
     [['hue','sortHue'],['value','sortVal'],['chroma','sortChr'],['tone','sortTone']]
@@ -1091,7 +1146,7 @@ function toSeasonGuard(){
 }
 function go(n){
   if(n===2&&!ST.code) return;
-  if(n===1) updateInfoRequirement();
+  if(n===1){ updateInfoRequirement(); showStepA(); }
   /* 베스트 오브 베스트(★) 미지정이면 유형 설명 이후로 넘어갈 수 없다 */
   if(n>=5&&!ST.bob){ flashBobWarn(); return; }
   ST.screen=n;
@@ -1195,6 +1250,116 @@ function setSkin(v){
   document.getElementById('pSkinEtcWrap').style.display=v==='etc'?'block':'none';
   updateInfoButton();
 }
+
+/* ═══════════ 진단 목적과 선호하는 이미지 ═══════════
+   질문을 JS 로 그려 한국어·영어를 함께 지원한다. 선택은 PREF_SEL 에 담고,
+   컨설턴트 메모와 결과 카드에 #해시태그로 나타낸다. */
+const PREF_OPTS = {
+  tpo:[['데일리용','Daily'],['비즈니스용','Business'],['이벤트용','Event'],['이미지 전환','Image change'],['기타','Other']],
+  season:[['봄&여름','Spring & Summer'],['가을&겨울','Autumn & Winter']],
+  field:[['패션','Fashion'],['뷰티','Beauty'],['인테리어','Interior'],['기타','Other']],
+  value:[['밝고 화사한','Bright & vivid'],['차분하고 깊은','Calm & deep'],['둘 다 무관','No preference']],
+  chroma:[['선명하고 또렷한','Clear & sharp'],['은은하고 부드러운','Soft & muted'],['둘 다 무관','No preference']],
+  image:[['무난한','Understated'],['개성있는','Unique'],['은은한','Subtle'],['고상한','Refined'],['자연스러운','Natural'],
+         ['우아한','Elegant'],['현대적인','Modern'],['카리스마있는','Charismatic'],['빈티지한','Vintage'],['클래식한','Classic'],
+         ['귀여운','Cute'],['미니멀한','Minimal'],['발랄한','Lively']]
+};
+const PREF_Q = [
+  {id:'pref',   ko:'Q1. 선호하는 배색 — 아래 10가지 중 2가지', en:'Q1. Preferred combinations — pick 2 of 10', num:10, max:2, img:true},
+  {id:'tpo',    ko:'Q2. 진단 목적은? (최대 2개)', en:'Q2. Diagnosis purpose? (up to 2)', mode:'multi', max:2, opts:'tpo'},
+  {id:'season', ko:'Q3. 적용하고자 하는 계절은?', en:'Q3. Target season?', mode:'one', opts:'season'},
+  {id:'field',  ko:'Q4. 적용하고자 하는 분야는? (최대 2개)', en:'Q4. Target field? (up to 2)', mode:'multi', max:2, opts:'field', etc:true},
+  {id:'value',  ko:'Q5. 선호하는 이미지의 밝기는? (lightness)', en:'Q5. Preferred lightness?', mode:'one', opts:'value'},
+  {id:'chroma', ko:'Q6. 선호하는 이미지의 채도는? (saturation)', en:'Q6. Preferred saturation?', mode:'one', opts:'chroma'},
+  {id:'image',  ko:'Q7. 완성하고 싶은 이미지나 분위기는? (최대 3개)', en:'Q7. Desired image / mood? (up to 3)', mode:'multi', max:3, opts:'image'}
+];
+/* Q1 배색 — 첨부 이미지 기준 10가지 2색 배색 (좌·우 hex) */
+const PREF_COMBOS=[
+  ['#FFFFFF','#000000'],['#CBBB98','#8C7F5E'],['#C99BAD','#8E4C86'],['#0E4D34','#6E5836'],['#C9BBE4','#CDE9D2'],
+  ['#F09A16','#A6006A'],['#97CFEC','#7B4A17'],['#98AEC2','#2E2C6E'],['#ABABAB','#DBDBDB'],['#0E5C97','#97CFF3']
+];
+let PREF_SEL = {};
+function labelOf(optId,v){ const o=(PREF_OPTS[optId]||[]).find(x=>x[0]===v); return o?(LANG==='en'?o[1]:o[0]):v; }
+function renderPrefQuestions(){
+  const box=document.getElementById('qform'); if(!box) return; const en=LANG==='en';
+  box.innerHTML = PREF_Q.map(q=>{
+    let inner='';
+    if(q.img){
+      inner += `<div class="qopts combos" data-q="pref" data-max="${q.max}">`+
+        PREF_COMBOS.map((c,i)=>`<button type="button" data-v="${i+1}" title="${en?'Combo ':'배색 '}${i+1}">
+          <span class="bars">${c.map(h=>`<i style="background:${h}"></i>`).join('')}</span>
+          <span class="cn">${i+1}</span></button>`).join('')+`</div>`;
+    } else {
+      inner += `<div class="qopts" data-q="${q.id}" data-mode="${q.mode}"${q.max?` data-max="${q.max}"`:''}>`+
+        PREF_OPTS[q.opts].map(o=>`<button type="button" data-v="${o[0]}">${en?o[1]:o[0]}</button>`).join('')+
+        (q.etc?`<input id="qFieldEtc" placeholder="${en?'Other':'기타 입력'}">`:'')+`</div>`;
+    }
+    return `<div class="qrow"><span class="ql">${en?q.en:q.ko}</span>${inner}</div>`;
+  }).join('') + `<p class="note" id="prefMsg" style="margin:8px 0 0"></p>`;
+  // 이전 선택 복원 + 기타 텍스트
+  box.querySelectorAll('.qopts').forEach(g=>{ const sel=PREF_SEL[g.dataset.q];
+    if(sel) g.querySelectorAll('button').forEach(b=>{ if(sel.has(b.dataset.v)) b.classList.add('on'); }); });
+  if(PREF_SEL.__fieldEtc){ const fe=document.getElementById('qFieldEtc'); if(fe) fe.value=PREF_SEL.__fieldEtc; }
+  refreshMemoTags();
+}
+/* #qform 안 버튼 클릭 — 위임 처리 (한 번만 등록) */
+function prefWire(){ const box=document.getElementById('qform'); if(!box||box.dataset.wired) return; box.dataset.wired='1';
+  box.addEventListener('click', e=>{
+    const btn=e.target.closest('button[data-v]'); if(!btn) return;
+    const g=btn.closest('.qopts'), qid=g.dataset.q, mode=g.dataset.mode||'multi', max=g.dataset.max?+g.dataset.max:0;
+    PREF_SEL[qid]=PREF_SEL[qid]||new Set(); const v=btn.dataset.v, on=btn.classList.contains('on');
+    const msg=document.getElementById('prefMsg');
+    if(mode==='one'){ g.querySelectorAll('button').forEach(x=>x.classList.remove('on')); PREF_SEL[qid]=new Set([v]); btn.classList.add('on'); if(msg) msg.textContent=''; }
+    else { if(!on && max && PREF_SEL[qid].size>=max){ if(msg) msg.textContent=(LANG==='en'?('Up to '+max+' selections.'):('최대 '+max+'개까지 선택할 수 있습니다.')); return; }
+      btn.classList.toggle('on'); if(on) PREF_SEL[qid].delete(v); else PREF_SEL[qid].add(v); if(msg) msg.textContent=''; }
+    refreshMemoTags();
+  });
+  box.addEventListener('input', e=>{ if(e.target && e.target.id==='qFieldEtc'){ PREF_SEL.__fieldEtc=e.target.value; refreshMemoTags(); } });
+}
+function prefInit(){ renderPrefQuestions(); prefWire(); }
+/* 선택 내용을 #해시태그 배열로. only 를 주면 그 질문들만. */
+function prefTags(only){
+  const inc=id=> !only || only.indexOf(id)>=0;
+  const t=[];
+  if(inc('pref')) (PREF_SEL.pref||new Set()).forEach(n=> t.push(LANG==='en'?('#Combo'+n):('#배색'+n)));
+  ['tpo','season','field','value','chroma','image'].forEach(qid=>{ if(!inc(qid)) return;
+    (PREF_SEL[qid]||new Set()).forEach(v=>{
+      if(v==='기타'){ const et=val('qFieldEtc'); t.push((LANG==='en'?'#Other':'#기타')+(qid==='field'&&et?(':'+et):'')); }
+      else t.push('#'+labelOf(qid,v));
+    });
+  });
+  return t;
+}
+/* Q2~Q6 (진단 목적·계절·분야·밝기·채도) 해시태그 — 메모·저장용 */
+const MEMO_Q=['tpo','season','field','value','chroma'];
+function memoTags(){ return prefTags(MEMO_Q); }
+/* 컨설턴트 메모 아래 해시태그 표시 갱신 */
+function refreshMemoTags(){ const el=document.getElementById('memoTags'); if(el) el.innerHTML=memoTags().map(x=>`<span>${x}</span>`).join(''); }
+/* 저장용 메모 — 컨설턴트 메모 + Q2~Q6 해시태그 */
+function memoWithPref(){ return [val('pMemo'), memoTags().join(' ')].filter(Boolean).join('\n'); }
+
+/* 진단자 정보 2단계 — 자가 작성(A) → 컨설턴트 작성(B) */
+function firstMissingA(){
+  const need=[['pName','이름 / Name'],['pEmail','이메일 / Email'],['pBirth','생년월일 / Birth'],['pSex','성별 / Sex'],
+    ['pTel','연락처 / Tel'],['pRace','인종 / Ethnicity'],['pJob','직업 / Job'],['pDate','진단일 / Date']];
+  for(const [id,label] of need){ const el=document.getElementById(id);
+    if(!el||!String(el.value||'').trim()) return {id,label};
+    if(el.value==='__etc'&&id==='pRace'&&!val('pRaceEtc').trim()) return {id:'pRaceEtc',label:label+' (직접입력)'}; }
+  return null;
+}
+function showStepA(){ const a=document.getElementById('s1a'),b=document.getElementById('s1b'); if(a)a.style.display=''; if(b)b.style.display='none'; }
+function nextToConsultant(){
+  if(!isAdmin()){ const m=firstMissingA(); if(m){ const el=document.getElementById(m.id);
+    if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); try{ el.focus&&el.focus(); }catch(e){} }
+    document.getElementById('nextANote').textContent=(LANG==='en'?'Please complete: ':'다음 항목을 입력하세요: ')+m.label; return; } }
+  document.getElementById('nextANote').textContent='';
+  document.getElementById('s1a').style.display='none';
+  document.getElementById('s1b').style.display='';
+  refreshMemoTags();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function backToClient(){ document.getElementById('s1b').style.display='none';
+  document.getElementById('s1a').style.display=''; window.scrollTo({top:0,behavior:'smooth'}); }
 function skinLabel(){
   if(!ST.skin) return '';
   if(ST.skin==='etc') return val('pSkinEtc')||T('etcLabel');
@@ -1679,7 +1844,7 @@ function tpoHtml(bob,h){
     const dv=c=>{const d=c.value-bob.value; return (d>=0?'+':'')+d.toFixed(1);};
     const dc=c=>{const d=c.chroma-bob.chroma; return (d>=0?'+':'')+d.toFixed(1);};
     return `<div class="tpoCard"><h4>${T(k)} <span class="badge">5${T('colorsUnit')}</span></h4>
-      <div class="tpoBar"><i class="main" style="background:${bob.hex}"></i>
+      <div class="tpoBar"><i class="main" style="background:${bob.hex};position:relative"><span class="bobstar">★</span></i>
         ${a.map(c=>`<i style="background:${c.hex}"></i>`).join('')}</div>
       <ul class="tpoList">
         <li><em style="background:${bob.hex}"></em><b>${bob.ks}</b> ${bob.pname||''} <span style="color:var(--gold)">★</span></li>
@@ -1752,7 +1917,7 @@ function payload(){
     redness:L?+L.da.toFixed(2):null, evenness:L?+L.dE.toFixed(2):null,
     lab_raw:L?{jaw:L.jaw,cheek:L.chk,db:+L.db.toFixed(2),dAB:+L.dAB.toFixed(2)}:null,
     season:ST.season, type:ST.type, type_ko:typeObj(ST.type).ko,
-    bob:ST.bob, best:ST.picks, memo:val('pMemo'), agree:document.getElementById('pAgree').checked};
+    bob:ST.bob, best:ST.picks, memo:memoWithPref(), agree:document.getElementById('pAgree').checked};
 }
 function makeResult(){
   if(!ST.bob){ flashBobWarn(); return; }
@@ -1770,6 +1935,8 @@ function newSession(){
   ['jl','jr','cl','cr'].forEach(k=>['L','a','b'].forEach(x=>{
     const e=document.getElementById('lab_'+k+'_'+x); if(e) e.value=''; }));
   document.getElementById('pAgree').checked=false;
+  /* 선호 이미지·진단 목적 초기화 */
+  PREF_SEL={}; renderPrefQuestions(); showStepA();
   ST.season=null; ST.type=null; ST.picks=[]; ST.bob=null; ST.skin='';
   document.querySelectorAll('#skinOpts button').forEach(b=>b.classList.remove('on'));
   document.getElementById('shareOut').innerHTML='';
@@ -1790,6 +1957,7 @@ function renderResult(){
     [val('pSex'),val('pBirth'),pickVal('pRace','pRaceEtc'),val('pJob'),
      pickVal('oHair','oHairEtc')&&T('fHair')+' '+pickVal('oHair','oHairEtc'),
      pickVal('oEye','oEyeEtc')&&T('fEye')+' '+pickVal('oEye','oEyeEtc')].filter(Boolean).join('  ·  ')||'—';
+  const rtg=document.getElementById('rTags'); if(rtg) rtg.innerHTML=prefTags().map(x=>`<span>${x}</span>`).join('');
   document.getElementById('rCons').textContent=T('consultant')+' '+ST.code;
   document.getElementById('rEn').textContent=t.en.toUpperCase();
   document.getElementById('rKo').textContent=TYN(t)+(LANG==='en'?'':' · '+SEN(t.season));
@@ -1830,7 +1998,7 @@ function renderResult(){
   if(bob){
     const h=harmony(bob);
     document.getElementById('rTpo').innerHTML=['daily','biz','event'].map(k=>
-      `<div><div class="b"><i style="background:${bob.hex};flex:1.6"></i>
+      `<div><div class="b"><i style="background:${bob.hex};flex:1.6;position:relative"><span class="bobstar">★</span></i>
         ${h[k].colors.map(c=>`<i style="background:${c.hex}"></i>`).join('')}</div>
         <p>${T(k)}</p></div>`).join('');
   }
@@ -2131,6 +2299,7 @@ applyLang(); renderSteps();
 /* 진단자 정보 폼에서 입력·선택이 바뀔 때마다 「시즌 선택으로」 버튼 상태를 다시 계산한다 */
 (function(){ const s1=document.getElementById('s1');
   if(s1){ s1.addEventListener('input',updateInfoButton); s1.addEventListener('change',updateInfoButton); } })();
+prefInit();
 </script>
 </body>
 </html>
