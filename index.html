@@ -82,7 +82,7 @@ textarea{resize:vertical;min-height:64px}
 .loginMsg.wait{color:var(--muted)}
 
 .skinImg{width:100%;border:1px solid var(--line);border-radius:10px;display:block;margin-bottom:10px}
-.skinOpts{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.skinOpts{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .skinOpts button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:9px 4px;
   font-size:11px;color:var(--ink);line-height:1.35}
 .skinOpts button b{display:block;font-size:13px}
@@ -485,9 +485,9 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div id="s1b" style="display:none">
     <div class="sect">
       <h3 data-i18n="secSkin">피부 명도</h3>
-      <img class="skinImg" src="assets/skintone.png" alt="skin tone reference"
+      <img class="skinImg" id="skinImg" src="assets/skintone_WM.png" alt="skin tone reference"
            onerror="this.style.display='none';document.getElementById('skinAlt').style.display='flex'">
-      <div class="imgslot" id="skinAlt" style="display:none;height:120px;margin-bottom:10px">assets/skintone.png</div>
+      <div class="imgslot" id="skinAlt" style="display:none;height:120px;margin-bottom:10px">assets/skintone_WM.png</div>
       <div class="skinOpts" id="skinOpts"></div>
       <label class="f" id="pSkinEtcWrap" style="display:none;margin-top:10px"><span data-i18n="fSkinEtc">기타 직접 입력</span><input id="pSkinEtc"></label>
     </div>
@@ -856,8 +856,8 @@ const TONE_ORDER=['vv','lt','st','pl','sf','dl','dp','dk','wh','vltgy','ltgy','g
 const V_BANDS=[['v8','V8+',v=>v>=8],['v7','V7',v=>v>=7&&v<8],['v56','V5–6',v=>v>=5&&v<7],
                ['v4','V4',v=>v>=4&&v<5],['v3','V3−',v=>v<4]];
 const C_BANDS=[['hiC','C 8+',c=>c>=8],['midC','C 4–7.5',c=>c>=4&&c<8],['loC','C 0.5–3.5',c=>c>=0.5&&c<4],['achC','C 0',c=>c<0.5]];
-/* 피부 명도 5단계 — 명도 필터와 같은 구간·같은 라벨 */
-const SKIN=[['V8+','v8'],['V7','v7'],['V5~6','v56'],['V4','v4'],['V3−','v3'],['etc',null]];
+/* 피부 명도 6단계 (+기타). 라벨 i18n 키는 v8·v7·v6·v5·v4·v3 */
+const SKIN=[['V8+','v8'],['V7','v7'],['V6','v6'],['V5','v5'],['V4','v4'],['V3−','v3'],['etc',null]];
 
 /* ═══════════ 다국어 ═══════════ */
 const I18N={ko:{
@@ -883,7 +883,7 @@ const I18N={ko:{
  s4Sub:'유형 색을 좁힌 뒤 색상 계열·명도·채도·톤으로 다시 걸러 교집합을 봅니다. 스와치 더블클릭 = 베스트컬러 담기 · ★ = 베스트 오브 베스트 1색.',
  showing:'표시 중', colorsUnit:'색', resetF:'필터 초기화', autoPick:'상위 12색 자동 추가', clearPicks:'모두 제거', toDesc:'유형 설명 →',
  fFam:'색상 계열', fHue:'색상', fVal:'명도', fChr:'채도', fTone:'톤', fType:'유형',
- v8:'매우 밝음', v7:'밝음', v56:'중간', v4:'어두움', v3:'매우 어두움',
+ v8:'매우 밝음', v7:'밝음', v6:'중간 밝음', v5:'중간', v56:'중간', v4:'어두움', v3:'매우 어두움',
  hiC:'고채도', midC:'중채도', loC:'저채도', achC:'무채색', warm:'웜', cool:'쿨',
  s5Sub:'결과 카드에 들어갈 내용입니다. 텍스트는 편집할 수 있습니다.',
  tpoTitle:'TPO 활용 배색', tpoBadge:'베스트 오브 베스트 기준', typeTraits:'유형 특성',
@@ -947,7 +947,7 @@ const I18N={ko:{
  s4Sub:'Narrow by type first, then filter again to see the intersection. Double-click a swatch to add it; ★ marks the single best-of-best colour.',
  showing:'Showing', colorsUnit:' colours', resetF:'Reset filters', autoPick:'Auto-pick top 12', clearPicks:'Clear all', toDesc:'Type description →',
  fFam:'Hue Family', fHue:'Hue', fVal:'Value', fChr:'Chroma', fTone:'Tone', fType:'Type',
- v8:'Very light', v7:'Light', v56:'Medium', v4:'Deep', v3:'Very deep',
+ v8:'Very light', v7:'Light', v6:'Medium light', v5:'Medium', v56:'Medium', v4:'Deep', v3:'Very deep',
  hiC:'High chroma', midC:'Mid chroma', loC:'Low chroma', achC:'Achromatic', warm:'Warm', cool:'Cool',
  s5Sub:'This is what goes on the result card. The text is editable.',
  tpoTitle:'TPO Combinations', tpoBadge:'based on best-of-best', typeTraits:'Type profile',
@@ -1374,8 +1374,18 @@ function nextToConsultant(){
   document.getElementById('nextANote').textContent='';
   document.getElementById('s1a').style.display='none';
   document.getElementById('s1b').style.display='';
+  updateSkinImg();
   refreshMemoTags();
   window.scrollTo({top:0,behavior:'smooth'});
+}
+/* 성별에 따라 피부 명도 안내 이미지를 바꾼다.
+   남성 → skintone_MN.png · 여성·기타(미선택 포함) → skintone_WM.png */
+function updateSkinImg(){
+  const g=val('pSex');
+  const file=(g==='남성'||g==='Male')?'assets/skintone_MN.png':'assets/skintone_WM.png';
+  const img=document.getElementById('skinImg');
+  if(img){ img.style.display='block'; img.src=file; }
+  const alt=document.getElementById('skinAlt'); if(alt){ alt.style.display='none'; alt.textContent=file; }
 }
 function backToClient(){ document.getElementById('s1b').style.display='none';
   document.getElementById('s1a').style.display=''; window.scrollTo({top:0,behavior:'smooth'}); }
