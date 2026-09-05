@@ -769,14 +769,14 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
   </div>
 </div>
 
-<!-- 색 정보 팝업 — 아무 곳이나 누르면 닫힌다 -->
-<div class="detail" id="detail" onclick="closeDetail()">
+<!-- 색 정보 팝업 — X 버튼을 눌러야만 닫힌다 -->
+<div class="detail" id="detail">
   <button class="x" onclick="closeDetail()">×</button>
   <div class="big" id="dBig"></div>
   <b id="dName" style="font-size:15px"></b>
   <p id="dTypes"></p>
   <table id="dTbl"></table>
-  <p class="note" style="margin-top:14px;text-align:center" data-i18n="closeHint">아무 곳이나 누르면 닫힙니다</p>
+  <button class="btn ghost" onclick="closeDetail()" style="margin-top:16px;width:100%" data-i18n="closeBtn">✕ 닫기</button>
   <div class="row" id="dActs" style="display:none"></div>
 </div>
 
@@ -903,7 +903,7 @@ const I18N={ko:{
  allHues:'전체 색상', vcFine:'명도 × 채도 낱칸', vcBand:'명도 5구간 × 채도 4구간', zonePrefix:'표시 중인 톤 구역 —',
  pickToggle:'추가하기 / 제거하기',
   swTogTip:'누르면 팔레트에 담기고, 다시 누르면 빠집니다', swStarTip:'베스트 오브 베스트 1색으로 지정',
-  swInfoTip:'색 정보 보기', closeHint:'아무 곳이나 누르면 닫힙니다',
+  swInfoTip:'색 정보 보기', closeHint:'아무 곳이나 누르면 닫힙니다', closeBtn:'✕ 닫기',
   eduPalTitle:'컬러 배색 팔레트', noEduPal:'담은 색이 없습니다 — 스와치의 색 부분을 누르면 이곳에 담깁니다.', noPick:'베스트컬러 없음 — 스와치를 더블클릭해 담고, ★를 눌러 베스트 오브 베스트 1색을 정하세요. 최대 12색.',
  noBob:'베스트 오브 베스트 1색이 지정되지 않았습니다. 팔레트 화면에서 ★를 눌러 지정하면 TPO 배색이 만들어집니다.',
  noHit:'조건을 모두 만족하는 색이 없습니다. 필터를 하나씩 해제해 보세요.',
@@ -967,7 +967,7 @@ const I18N={ko:{
  allHues:'All hues', vcFine:'value × chroma cells', vcBand:'5 value bands × 4 chroma bands', zonePrefix:'Tone zone shown —',
  pickToggle:'Add / remove', noPick:'No best colours yet — double-click a swatch to add, then press ★ to set the single best-of-best. Up to 12.',
  swTogTip:'Click to add to the palette, click again to remove', swStarTip:'Set as best-of-best',
-  swInfoTip:'Show colour details', closeHint:'Click anywhere to close',
+  swInfoTip:'Show colour details', closeHint:'Click anywhere to close', closeBtn:'✕ Close',
   eduPalTitle:'Colour combination palette', noEduPal:'No colours yet — click the colour area of a swatch to add it here.',
   pickToggle:'Add / Remove',
   noBob:'No best-of-best colour set. Press ★ on the palette screen to build the TPO combinations.',
@@ -976,7 +976,7 @@ const I18N={ko:{
  sex:['','Female','Male','Other'], race:['','East Asian','Southeast Asian','Central/West Asian','European','African','Latin American','__etc'],
  raceEtcLabel:'Mixed / other (free text)', hair:['','Blonde','Brown','Dark brown','Black','Dyed','__etc'], eye:['','Blue','Green','Black','Brown','__etc'],
  selectPh:'Select', etcLabel:'Other (free text)', of:'of', total:'total',
- kColor:'Color no.', munsell:'KS', hue:'Hue', value:'Value', chroma:'Chroma', tone:'Tone', wc:'Warm / Cool',
+ kColor:'Color no.', munsell:'KS', hue:'Hue', value:'Lightness', chroma:'Saturation', tone:'Tone', wc:'Warm / Cool',
  assigned:'Assigned types', repColors:'representative', typeCode:'Type code', enName:'English name', colorCount:'Colours',
  avgV:'Avg value', avgC:'Avg chroma', mainTone:'Main tones', season:'Season', type:'Type',
  daily:'Daily', biz:'Business', event:'Event', dailyA:'Daily A', dailyB:'Daily B',
@@ -1724,13 +1724,13 @@ function openDetail(id){
     <br><span class="dSub">${c.pname||'—'} · ${cName(c)}</span>`;
   document.getElementById('dTypes').innerHTML=
     `<b>${TEMPNAME(c.temp)}</b> - ${c.types.map(t=>TYN(typeObj(t))).join(', ')}`;
-  /* 표 — 숨김 항목: KS 표기·팬톤 컬러명·색이름(머리로 올림) · 색상 계열 · RGB */
+  /* 표 — 노출: Color no. · 톤 · 색상 계열 · 명도 · 채도
+     숨김: KS·팬톤명·색이름(머리로 올림) · 색상(hue) · Pantone · NCS · L*a*b* · HEX · CMYK · RGB */
   document.getElementById('dTbl').innerHTML=[
     [T('kColor'),c.id],
     [T('tone'),c.tone+'('+TONE(c.tone)+')'],
-    [T('hue'),c.hue+' ('+GRP(c.group)+')'],[T('fFam'),FAM(famOf(c))],
-    [T('value'),c.value],[T('chroma'),c.chroma],
-    ['Pantone',c.pantone],['NCS',c.ncs],['L*a*b*',c.lab],['HEX',c.hex],['CMYK',c.cmyk]
+    [T('fFam'),FAM(famOf(c))],
+    [T('value'),c.value],[T('chroma'),c.chroma]
   ].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
   /* 진단 모드의 팔레트 단계에서만 담기·BOB 버튼을 보인다 */
   document.getElementById('dActs').style.display=(ST.mode==='diag'&&ST.screen===4)?'flex':'none';
