@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YZ-Color Analysis Standard System(CASS) · 색다른컬러연구소</title>
+<title>UZ-Color Analysis Standard System(CASS) · 색다른컬러연구소</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root{
@@ -438,7 +438,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
   <div class="hd">
     <div class="logo">
       <img src="assets/logo_tras.png" alt="DARUN COLOR INSTITUTE" onerror="this.style.display='none'">
-      <small data-i18n="tagline">YZ-Color Analysis Standard System(CASS)</small>
+      <small data-i18n="tagline">UZ-Color Analysis Standard System(CASS)</small>
     </div>
     <div class="steps" id="steps"></div>
     <div class="modeBtns" id="modeSw">
@@ -463,9 +463,9 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
 <section class="screen on" id="s0">
   <div class="login">
     <div class="card">
-      <img class="loginLogo" src="assets/logo_tras.png" alt="YZ-Color Analysis Standard System(CASS)"
+      <img class="loginLogo" src="assets/logo_tras.png" alt="UZ-Color Analysis Standard System(CASS)"
            onerror="this.style.display='none'">
-      <p class="loginSys">YZ-Color Analysis Standard System(CASS)</p>
+      <p class="loginSys">UZ-Color Analysis Standard System(CASS)</p>
       <input id="ccode" placeholder="AD / ED / CS - 0000" maxlength="24" autocomplete="off"
              onkeydown="if(event.key==='Enter')login()">
       <p class="loginMsg" id="cmsg"></p>
@@ -742,7 +742,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
         무채색으로 살기엔 세상은 너무나 다채롭습니다. 색으로 더 풍성한 하루가 되길 바랍니다!</p>
       <img class="tkLogo" src="assets/logo_tras.png" alt="DARUN COLOR INSTITUTE"
          onerror="this.style.display='none'">
-    <p class="tkSign">YZ-Color Analysis Standard System(CASS)<br><small>@2026 YUZEN by DCI. All rights reserved.</small></p>
+    <p class="tkSign">UZ-Color Analysis Standard System(CASS)<br><small>@2026 YUZEN by DCI. All rights reserved.</small></p>
       <div class="row" style="justify-content:center;margin-top:24px">
         <button class="btn" onclick="openCardModal()" data-i18n="viewCard">결과 카드 다시 보기</button>
       </div>
@@ -816,7 +816,7 @@ body.dark .warnBox{background:#2c1f1d;border-color:#5c3a34;color:#e0a99f}
     <div class="a4-head">
       <div class="a4-brand">
         <img src="assets/logo_tras.png" alt="" onerror="this.style.display='none'">
-        <span>YZ-COLOR ANALYSIS STANDARD SYSTEM (CASS)</span>
+        <span>UZ-COLOR ANALYSIS STANDARD SYSTEM (CASS)</span>
       </div>
       <div class="a4-meta"><span id="rDate">—</span><br><span id="rCons">—</span></div>
     </div>
@@ -957,7 +957,7 @@ const SKIN=[['V8+','v8'],['V7','v7'],['V6','v6'],['V5','v5'],['V4','v4'],['V3−
 
 /* ═══════════ 다국어 ═══════════ */
 const I18N={ko:{
- tagline:'YZ-Color Analysis Standard System(CASS)', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
+ tagline:'UZ-Color Analysis Standard System(CASS)', mDiag:'진단', mEdu:'교육', mAdm:'관리자',
  confirm:'확인',
  s1Title:'진단자 정보', s1Sub:'앞부분(기본 정보·선호)은 진단자가, 피부 명도부터는 컨설턴트가 작성합니다.',
  secBasic:'기본 정보', fName:'이름', fEmail:'이메일', fBirth:'생년월일', fBirthHint:'연도-월-일', fSex:'성별',
@@ -1021,7 +1021,7 @@ const I18N={ko:{
  viewCard:'결과 카드 다시 보기', newSession:'새 진단 시작',
  thanksMsg:'오늘 찾은 색이 일상에서 오래 쓰이길 바랍니다.<br>무채색으로 살기엔 세상은 너무나 다채롭습니다. 색으로 더 풍성한 하루가 되길 바랍니다!'
 },en:{
- tagline:'YZ-Color Analysis Standard System(CASS)', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
+ tagline:'UZ-Color Analysis Standard System(CASS)', mDiag:'Diagnosis', mEdu:'Education', mAdm:'Admin',
  confirm:'Continue',
  s1Title:'Client Information', s1Sub:'The client fills in the top part; the consultant fills in from skin value onward.',
  secBasic:'Basic', fName:'Name', fEmail:'Email', fBirth:'Date of birth', fBirthHint:'YYYY-MM-DD', fSex:'Gender',
@@ -1627,7 +1627,7 @@ function calcLab(){
   const Lavg=(v.jl.L+v.jr.L+v.cl.L+v.cr.L)/4;
   const dL=chk.L-jaw.L, da=chk.a-jaw.a, db=chk.b-jaw.b;
   const dE=Math.sqrt(dL*dL+da*da+db*db);
-  window.LABRES={Lavg,jaw,chk,dL,da,db,dAB:Math.sqrt(da*da+db*db),dE};
+  window.LABRES={Lavg,jaw,chk,dL,da,db,dAB:Math.sqrt(da*da+db*db),dE,raw:v};
   const f=x=>x.toFixed(1), s=x=>(x>=0?'+':'')+x.toFixed(1);
   const card=(k,d,v2)=>`<div class="labCard"><span>${T(k)}</span><b>${v2}</b><em>${T(d)}</em></div>`;
   box.innerHTML=`<div class="labCards">
@@ -2233,13 +2233,15 @@ function renderTypeInfo(){
 function payload(){
   const L=window.LABRES;
   return {code:ST.code, role:ROLE[ST.role]?ROLE[ST.role].key:'', timestamp:new Date().toISOString(),
+    flow:ST.flow, flow_ko:(ST.flow==='pref'?'선호 기반':'드레이핑'),
     name:val('pName'), email:val('pEmail'), birth:val('pBirth'), sex:val('pSex'), tel:val('pTel'),
     race:pickVal('pRace','pRaceEtc'), job:val('pJob'), date:val('pDate'), skin:skinLabel(),
     hair:pickVal('oHair','oHairEtc'), eye:pickVal('oEye','oEyeEtc'),
     skin_lightness:L?+L.Lavg.toFixed(2):null, area_diff:L?+L.dL.toFixed(2):null,
     redness:L?+L.da.toFixed(2):null, evenness:L?+L.dE.toFixed(2):null,
-    lab_raw:L?{jaw:L.jaw,cheek:L.chk,db:+L.db.toFixed(2),dAB:+L.dAB.toFixed(2)}:null,
-    season:ST.season, type:ST.type, type_ko:typeObj(ST.type).ko,
+    lab_raw:L?{jaw:L.jaw,cheek:L.chk,db:+L.db.toFixed(2),dAB:+L.dAB.toFixed(2),sites:L.raw}:null,
+    season:ST.season, time:(ST.season?SEN(ST.season):''), type:ST.type, type_ko:typeObj(ST.type).ko,
+    style_group:(ST.flow==='pref'&&ST.mc?(GROUP_NAME[ST.mc]||ST.mc):''),
     bob:ST.bob, best:ST.picks, memo:val('pMemo'), pref:prefTags().join(' · '), agree:document.getElementById('pAgree').checked};
 }
 function makeResult(){
@@ -2337,10 +2339,13 @@ function renderResult(){
 /* ═══════════ 결과 카드 복구 ═══════════
    records 시트의 한 행(탭 구분)을 붙여넣어 결과 카드를 다시 그린다.
    열 순서는 Apps Script 의 HEAD_RECORDS 와 같다. */
-const REC_COLS = ['ts','code','role','name','email','birth','sex','tel','race','job','date',
+/* records 시트 열 순서와 정확히 일치해야 함(복구 시 붙여넣은 행을 이 순서로 해석) */
+const REC_COLS = ['ts','code','role','flow','name','email','birth','sex','tel','race','job','date',
   'skin','hair','eye','skinL','areaDiff','redness','evenness',
   'jawL','jawA','jawB','chkL','chkA','chkB',
-  'season','type','type_ko','bob','best','memo','agree','pref','id'];
+  'jlL','jlA','jlB','jrL','jrA','jrB','clL','clA','clB','crL','crA','crB',
+  'db','dab',
+  'season','type','type_ko','style_group','bob','best','memo','agree','pref','id'];
 function setVal(id,v){ const e=document.getElementById(id); if(e) e.value=(v==null?'':String(v)); }
 function restoreCard(){
   const msg=document.getElementById('restoreMsg');
