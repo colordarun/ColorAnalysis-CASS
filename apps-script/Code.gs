@@ -17,10 +17,24 @@
  *     ※ 기존 records 는 열 구성이 달라 어긋나므로, records 를 'records(구)' 로 이름 바꾸고
  *       새 [records] 시트를 만든 뒤 setup() 을 실행하는 것을 권장.
  *
+ * ★ 추가 (2026-09) — consultants 에 코드당 회차 기준 유효성 검사를 추가했다.
+ *     추가 열: '검증방식'(N열, "기간" 또는 "횟수"), '허용횟수'(O열, 숫자).
+ *     검증방식="횟수"인 코드는 누적 진단수(J열, 이미 있던 열)가 허용횟수에 닿으면 로그인 실패(COUNT_OVER).
+ *     검증방식이 비어있거나 "기간"이면 기존과 동일하게 만료일(G열)만 확인 — 기존 코드는 전부 그대로 작동.
+ *     verifyCode_ 의 성공 응답에 method(검증방식)·remaining(잔여횟수)을 추가해, 화면에 잔여회차/만료일을
+ *     표시할 수 있게 했다 (프론트는 CASSv3_template.html 에서 이미 이 값을 받을 준비를 해 두었다).
+ *
+ * ★ 추가 (2026-10) — 역할 'Draper'(드레이핑 전용) 추가. 코드 접두사 DR.
+ *     CS(Consultant)=선호진단 전용, DR(Draper)=드레이핑 전용으로 프런트가 진단방식을 자동 결정한다.
+ *     둘 다 modes 는 ['diag'] 로 동일하며, 흐름(선호/드레이핑)만 역할로 갈린다.
+ *
  * ※ 적용 순서
  *   1) (권장) 기존 'records' 탭 이름을 'records(구)' 로 바꾼다. (옛 기록 보관용)
- *   2) 이 파일을 통째로 붙여넣고 setup() 을 한 번 실행한다 → 새 [records] 가 새 머리글로 만들어진다.
- *   3) 배포 > 배포 관리 > (기존 배포) 수정 > 새 버전 으로 재배포한다. (새 배포 아님)
+ *   2) 이 파일을 통째로 붙여넣고 setup() 을 한 번 실행한다 → 새 [records] 가 새 머리글로 만들어지고,
+ *      consultants 헤더에도 '검증방식'·'허용횟수' 두 칸이 비어있는 채로 추가된다.
+ *   3) consultants 시트에서 횟수제로 팔 코드는 '검증방식'에 "횟수", '허용횟수'에 숫자(10, 50 등)를 직접 입력한다.
+ *      기간제로 계속 팔 코드는 두 칸 다 비워두거나 '검증방식'에 "기간"만 적어도 된다 (동작은 같음).
+ *   4) 배포 > 배포 관리 > (기존 배포) 수정 > 새 버전 으로 재배포한다. (새 배포 아님)
  */
 
 // ─────────────────────────────────────────────────────────────
@@ -30,10 +44,10 @@ var SHEET_CONSULTANTS = 'consultants';
 var SHEET_RECORDS     = 'records';
 var SHEET_RULES       = 'rules';
 
-// A     B     C     D     E     F      G      H       I        J        K        L        M
+// A     B     C     D     E     F      G      H       I        J        K        L        M        N        O
 var HEAD_CONSULTANTS = [
   '코드', '역할', '이름', '국적', '소속', '발급일', '만료일', '활성여부', '최근접속', '누적 진단수',
-  '가입개월', '현재세션', '세션시각'
+  '가입개월', '현재세션', '세션시각', '검증방식', '허용횟수'
 ];
 
 var HEAD_RECORDS = [
@@ -66,6 +80,8 @@ var COL_COUNT    = 10;  // J 누적 진단수
 var COL_MONTHS   = 11;  // K 가입개월      (수동 전용 — 앱이 건드리지 않음)
 var COL_SESSION  = 12;  // L 현재세션      (동시접속 차단)
 var COL_SESSTIME = 13;  // M 세션시각
+var COL_METHOD   = 14;  // N 검증방식      ("기간" / "횟수", 빈칸=기간과 동일)
+var COL_MAXCOUNT = 15;  // O 허용횟수      (검증방식="횟수"일 때만 사용)
 
 var SESSION_TIMEOUT_MS = 2 * 60 * 1000;   // 2분
 
@@ -82,10 +98,11 @@ function setup() {
   if (cs.getLastRow() < 2) {
     var today = new Date();
     var next  = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
-    // 코드, 역할, 이름, 국적, 소속, 발급일, 만료일, 활성, 최근접속, 누적, 가입개월, 현재세션, 세션시각
-    cs.appendRow(['AD-26001-KR', 'Admin',      '유잰',  'KR', '색다른컬러연구소', today, next, 'Y', '', 0, 12, '', '']);
-    cs.appendRow(['ED-26001-KR', 'Educator',   '(예시)', 'KR', '',                today, next, 'Y', '', 0, 12, '', '']);
-    cs.appendRow(['CS-26001-KR', 'Consultant', '(예시)', 'KR', '',                today, next, 'Y', '', 0, 12, '', '']);
+    // 코드, 역할, 이름, 국적, 소속, 발급일, 만료일, 활성, 최근접속, 누적, 가입개월, 현재세션, 세션시각, 검증방식, 허용횟수
+    cs.appendRow(['AD-26001-KR', 'Admin',      '유잰',  'KR', '색다른컬러연구소', today, next, 'Y', '', 0, 12, '', '', '기간', '']);
+    cs.appendRow(['ED-26001-KR', 'Educator',   '(예시)', 'KR', '',                today, next, 'Y', '', 0, 12, '', '', '기간', '']);
+    cs.appendRow(['CS-26001-KR', 'Consultant', '(예시)', 'KR', '',                today, next, 'Y', '', 0, 12, '', '', '기간', '']);
+    cs.appendRow(['DR-26001-KR', 'Draper',     '(예시)', 'KR', '',                today, next, 'Y', '', 0, 12, '', '', '기간', '']);
   }
   try {
     SpreadsheetApp.getUi().alert('설정 완료 — consultants / records / rules 머리글이 정리되었습니다.');
@@ -140,11 +157,12 @@ var ROLE_SCOPE = {
   'ADMIN':      ['diag', 'edu', 'adm'],
   'EDUCATOR':   ['edu'],
   'CONSULTANT': ['diag'],
+  'DRAPER':     ['diag'],
   'MASTER':     ['diag', 'edu']
 };
-var ROLE_LABEL  = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant', 'MASTER': 'Master' };
-var ROLE_PREFIX = { 'ADMIN': 'AD',    'EDUCATOR': 'ED',       'CONSULTANT': 'CS',         'MASTER': 'MS'     };
-var PREFIX_ROLE = { 'AD': 'ADMIN',    'ED': 'EDUCATOR',       'CS': 'CONSULTANT',         'MS': 'MASTER'     };
+var ROLE_LABEL  = { 'ADMIN': 'Admin', 'EDUCATOR': 'Educator', 'CONSULTANT': 'Consultant', 'DRAPER': 'Draper', 'MASTER': 'Master' };
+var ROLE_PREFIX = { 'ADMIN': 'AD',    'EDUCATOR': 'ED',       'CONSULTANT': 'CS',         'DRAPER': 'DR',      'MASTER': 'MS'     };
+var PREFIX_ROLE = { 'AD': 'ADMIN',    'ED': 'EDUCATOR',       'CS': 'CONSULTANT',         'DR': 'DRAPER',      'MS': 'MASTER'     };
 
 function normCode_(s) {
   return String(s === null || s === undefined ? '' : s).toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -175,15 +193,26 @@ function verifyCode_(code) {
     var org       = rows[i][COL_ORG    - 1];
     var expiry    = rows[i][COL_EXPIRY - 1];
     var active    = String(rows[i][COL_ACTIVE - 1]).trim().toUpperCase();
+    // ★ 추가 — 검증방식(N열)·허용횟수(O열)·누적진단수(J열, 기존 열 재사용)
+    var method    = String(rows[i][COL_METHOD   - 1] || '').trim();   // '횟수' 가 아니면 전부 '기간'과 동일하게 취급
+    var maxCount  = Number(rows[i][COL_MAXCOUNT - 1]) || 0;
+    var usedCount = Number(rows[i][COL_COUNT    - 1]) || 0;
 
-    // 역할 칸이 비면 코드 접두사(AD/ED/CS/MS)로 보완
+    // 역할 칸이 비면 코드 접두사(AD/ED/CS/DR/MS)로 보완
     if (!ROLE_SCOPE[role]) {
       var byPrefix = PREFIX_ROLE[key.substring(0, 2)];
       if (byPrefix) role = byPrefix;
     }
 
     if (active !== 'Y') return { ok: false, error: 'INACTIVE' };
-    if (expiry instanceof Date && expiry < new Date()) return { ok: false, error: 'EXPIRED' };
+
+    // ★ 변경 — 검증방식에 따라 분기. 기존 '기간' 체크는 그대로 두고, '횟수'만 새로 추가.
+    if (method === '횟수') {
+      if (usedCount >= maxCount) return { ok: false, error: 'COUNT_OVER' };
+    } else {
+      if (expiry instanceof Date && expiry < new Date()) return { ok: false, error: 'EXPIRED' };
+    }
+
     if (!ROLE_SCOPE[role]) return { ok: false, error: 'BAD_ROLE' };
 
     sh.getRange(i + 1, COL_LASTSEEN).setValue(new Date());   // I 최근접속
@@ -195,6 +224,9 @@ function verifyCode_(code) {
       nation: nation,
       org:  org,
       modes: ROLE_SCOPE[role],
+      // ★ 추가 — 화면에 잔여회차/만료일을 표시하기 위한 값
+      method: method === '횟수' ? '횟수' : '기간',
+      remaining: method === '횟수' ? Math.max(maxCount - usedCount, 0) : null,
       expiry: expiry instanceof Date
         ? Utilities.formatDate(expiry, 'Asia/Seoul', 'yyyy-MM-dd') : ''
     };
@@ -271,7 +303,7 @@ function saveRecord_(r) {
     r.memo || '', r.agree ? 'Y' : 'N', r.pref || '', id
   ]);
 
-  // J 누적 진단수 +1 (다른 열은 건드리지 않음)
+  // J 누적 진단수 +1 (다른 열은 건드리지 않음)  ※ '1회 진단 = 1회 사용' 카운팅 지점 — 회차제와 그대로 맞물림, 변경 없음
   var cs = ss.getSheetByName(SHEET_CONSULTANTS);
   var rows = cs.getDataRange().getValues();
   for (var i = 1; i < rows.length; i++) {
@@ -320,20 +352,25 @@ function readRecord_(id) {
 
 // ─────────────────────────────────────────────────────────────
 // 관리 도구 — 코드 발급
-//   아래 4줄만 바꿔서 실행하면 consultants 맨 아래에 새 코드가 추가된다.
-//   코드 형식: 역할코드-YYNNN-국적   예) CS-26001-KR
+//   아래 줄만 바꿔서 실행하면 consultants 맨 아래에 새 코드가 추가된다.
+//   코드 형식: 역할코드-YYNNN-국적   예) CS-26001-KR · DR-26001-KR
+//   ★ 추가 — 회차제로 발급하려면 method='횟수', maxCount=10 처럼 지정한다. 기간제는 method='기간' (또는 그대로 둠).
 // ─────────────────────────────────────────────────────────────
 function issueCode() {
-  var role   = 'Consultant';        // Admin / Educator / Consultant / Master
-  var name   = '(이름)';
-  var nation = 'KR';                // 국적 코드 (2자리 권장)
-  var org    = '색다른컬러연구소';   // 취득기관
-  var months = 3;                   // 가입개월 (숫자)
+  var role     = 'Consultant';        // Admin / Educator / Consultant / Draper / Master
+  var name     = '(이름)';
+  var nation   = 'KR';                // 국적 코드 (2자리 권장)
+  var org      = '색다른컬러연구소';   // 취득기관
+  var months   = 3;                   // 가입개월 (숫자)
+  var method   = '기간';              // ★ 추가 — '기간' 또는 '횟수'
+  var maxCount = 0;                   // ★ 추가 — method='횟수'일 때만 의미 있음 (예: 10, 50)
 
   var key = String(role).trim().toUpperCase();
-  if (!ROLE_SCOPE[key]) throw new Error('역할은 Admin / Educator / Consultant / Master 중 하나여야 합니다: ' + role);
+  if (!ROLE_SCOPE[key]) throw new Error('역할은 Admin / Educator / Consultant / Draper / Master 중 하나여야 합니다: ' + role);
   months = Number(months) || 0;
   nation = String(nation).trim().toUpperCase();
+  method = (String(method).trim() === '횟수') ? '횟수' : '기간';
+  maxCount = Number(maxCount) || 0;
 
   var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_CONSULTANTS);
   var prefix = ROLE_PREFIX[key];
@@ -356,9 +393,10 @@ function issueCode() {
   var today  = new Date();
   var expiry = new Date(today.getFullYear(), today.getMonth() + months, today.getDate());
 
-  // 코드, 역할, 이름, 국적, 소속, 발급일, 만료일, 활성, 최근접속, 누적, 가입개월, 현재세션, 세션시각
-  sh.appendRow([code, ROLE_LABEL[key], name, nation, org, today, expiry, 'Y', '', 0, months, '', '']);
+  // 코드, 역할, 이름, 국적, 소속, 발급일, 만료일, 활성, 최근접속, 누적, 가입개월, 현재세션, 세션시각, 검증방식, 허용횟수
+  sh.appendRow([code, ROLE_LABEL[key], name, nation, org, today, expiry, 'Y', '', 0, months, '', '', method, (method === '횟수' ? maxCount : '')]);
   Logger.log('발급: ' + code + ' / ' + ROLE_LABEL[key] + ' / 국적 ' + nation +
              ' / 가입 ' + months + '개월 / 만료 ' +
-             Utilities.formatDate(expiry, 'Asia/Seoul', 'yyyy-MM-dd'));
+             Utilities.formatDate(expiry, 'Asia/Seoul', 'yyyy-MM-dd') +
+             ' / 검증방식 ' + method + (method === '횟수' ? (' / 허용횟수 ' + maxCount) : ''));
 }

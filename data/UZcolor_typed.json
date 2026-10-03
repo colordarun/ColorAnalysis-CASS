@@ -200,37 +200,37 @@
    {
     "key": "보라",
     "ko": "보라",
-    "count": 158
-   },
-   {
-    "key": "파랑",
-    "ko": "파랑",
-    "count": 128
+    "count": 164
    },
    {
     "key": "초록",
     "ko": "초록",
-    "count": 124
+    "count": 132
+   },
+   {
+    "key": "파랑",
+    "ko": "파랑",
+    "count": 130
    },
    {
     "key": "빨강",
     "ko": "빨강",
-    "count": 119
+    "count": 120
    },
    {
     "key": "주황",
     "ko": "주황",
-    "count": 73
+    "count": 76
    },
    {
     "key": "무채색",
     "ko": "무채색",
-    "count": 64
+    "count": 69
    },
    {
     "key": "노랑",
     "ko": "노랑",
-    "count": 61
+    "count": 56
    }
   ],
   "groups": [
@@ -239,9 +239,7 @@
     "hues": [
      "1.25R",
      "2.5R",
-     "3.75R",
      "5R",
-     "6.25R",
      "7.5R",
      "8.75R",
      "10R"
@@ -264,7 +262,6 @@
      "5Y",
      "6.25Y",
      "7.5Y",
-     "8.75Y",
      "10Y"
     ]
    },
@@ -286,7 +283,6 @@
      "5G",
      "6.25G",
      "7.5G",
-     "8.75G",
      "10G"
     ]
    },
@@ -294,7 +290,6 @@
     "group": "청록",
     "hues": [
      "2.5BG",
-     "3.75BG",
      "5BG",
      "6.25BG",
      "7.5BG",
@@ -306,11 +301,9 @@
     "hues": [
      "1.25B",
      "2.5B",
-     "3.75B",
      "5B",
      "6.25B",
      "7.5B",
-     "8.75B",
      "10B"
     ]
    },
@@ -319,7 +312,6 @@
     "hues": [
      "1.25PB",
      "2.5PB",
-     "3.75PB",
      "5PB",
      "6PB",
      "7.5PB",
@@ -331,11 +323,9 @@
     "hues": [
      "1.25P",
      "2.5P",
-     "3.75P",
      "5P",
      "6.25P",
      "7.5P",
-     "8.75P",
      "10P"
     ]
    },
@@ -344,7 +334,6 @@
     "hues": [
      "1.25RP",
      "2.5RP",
-     "3.75RP",
      "5RP",
      "6.25RP",
      "7.5RP",
@@ -361,9 +350,7 @@
   "hue_order": [
    "1.25R",
    "2.5R",
-   "3.75R",
    "5R",
-   "6.25R",
    "7.5R",
    "8.75R",
    "10R",
@@ -376,7 +363,6 @@
    "5Y",
    "6.25Y",
    "7.5Y",
-   "8.75Y",
    "10Y",
    "2.5GY",
    "5GY",
@@ -388,40 +374,32 @@
    "5G",
    "6.25G",
    "7.5G",
-   "8.75G",
    "10G",
    "2.5BG",
-   "3.75BG",
    "5BG",
    "6.25BG",
    "7.5BG",
    "10BG",
    "1.25B",
    "2.5B",
-   "3.75B",
    "5B",
    "6.25B",
    "7.5B",
-   "8.75B",
    "10B",
    "1.25PB",
    "2.5PB",
-   "3.75PB",
    "5PB",
    "6PB",
    "7.5PB",
    "10PB",
    "1.25P",
    "2.5P",
-   "3.75P",
    "5P",
    "6.25P",
    "7.5P",
-   "8.75P",
    "10P",
    "1.25RP",
    "2.5RP",
-   "3.75RP",
    "5RP",
    "6.25RP",
    "7.5RP",
@@ -505,8 +483,8 @@
     "wh(2)"
    ],
    "SN-MR": [
-    "br",
-    "lt"
+    "lt",
+    "vv"
    ],
    "CM-SS": [
     "dl",
@@ -533,6 +511,7 @@
     "sf"
    ],
    "MT-DW": [
+    "gy",
     "ltgy",
     "wh(2)"
    ],
@@ -544,18 +523,18 @@
    ],
    "DK-NT": [
     "dk",
-    "dkgy",
     "dp"
    ],
    "ST-NT": [
     "bk",
+    "dkgy",
     "vltgy",
     "wh(1)"
    ]
   },
   "total_master": 2977,
-  "total_app": 727,
-  "hidden": 2250,
+  "total_app": 747,
+  "hidden": 2230,
   "unassigned": 0,
   "override": 0
  },
@@ -628,12 +607,12 @@
    "pnameko": "모브 분필색",
    "cname": "모브 분필색",
    "name": "아주 밝은 회 빨강",
-   "tone": "vltgy",
+   "tone": "vv",
    "temp": "C",
    "types": [
-    "ST-NT"
+    "BR-NT"
    ],
-   "mc": "HV-LC"
+   "mc": "MV-HC"
   },
   {
    "id": "UZ-0040",
@@ -709,6 +688,31 @@
     "MT-DW"
    ],
    "mc": "HV-LC"
+  },
+  {
+   "id": "UZ-0043",
+   "hue": "2.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 7.0,
+   "chroma": 4.0,
+   "ks": "2.5R 7/4",
+   "lab": "70.77 / 15.69 / 5.71",
+   "rgb": "205 / 163 / 163",
+   "cmyk": "",
+   "hex": "#CDA3A3",
+   "ncs": "2020-R",
+   "pantone": "15-1611",
+   "pname": "Bridal Rose",
+   "pnameko": "웨딩 로즈",
+   "cname": "웨딩 로즈",
+   "name": "흐린 빨강",
+   "tone": "sf",
+   "temp": "C",
+   "types": [
+    "CM-DW"
+   ],
+   "mc": "MV-MC"
   },
   {
    "id": "UZ-0045",
@@ -856,7 +860,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -911,6 +915,56 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0072",
+   "hue": "2.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 3.0,
+   "chroma": 9.0,
+   "ks": "2.5R 3/9",
+   "lab": "38 / 37 / 8",
+   "rgb": "151 / 1 / 54",
+   "cmyk": "4 / 100 / 63 / 18",
+   "hex": "#970136",
+   "ncs": "3060-R10B",
+   "pantone": "19-1863",
+   "pname": "Scooter",
+   "pnameko": "스쿠터",
+   "cname": "스쿠터",
+   "name": "진한 빨강",
+   "tone": "dp",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-0074",
+   "hue": "2.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 2.0,
+   "chroma": 2.0,
+   "ks": "2.5R 2/2",
+   "lab": "20.16 / 11 / 1.25",
+   "rgb": "65 / 43 / 47",
+   "cmyk": "",
+   "hex": "#412B2F",
+   "ncs": "8010-R10B",
+   "pantone": "19-1518",
+   "pname": "Puce",
+   "pnameko": "퓨스",
+   "cname": "퓨스",
+   "name": "검은 빨강",
+   "tone": "bk",
+   "temp": "C",
+   "types": [
+    "ST-NT"
+   ],
+   "mc": "LV-LC"
+  },
+  {
    "id": "UZ-0076",
    "hue": "2.5R",
    "group": "빨강",
@@ -936,56 +990,29 @@
    "mc": "LV-MC"
   },
   {
-   "id": "UZ-0082",
-   "hue": "3.75R",
+   "id": "UZ-0078",
+   "hue": "2.5R",
    "group": "빨강",
    "family": "빨강",
-   "value": 8.0,
-   "chroma": 4.0,
-   "ks": "3.75R 8/4",
-   "lab": "80.43 / 15.54 / 7.08",
-   "rgb": "233 / 189 / 187",
-   "cmyk": "",
-   "hex": "#E9BDBB",
-   "ncs": "",
-   "pantone": "13-1208",
-   "pname": "Peachy Keen",
-   "pnameko": "딱 좋은 복숭아",
-   "cname": "딱 좋은 복숭아",
-   "name": "연한 빨강",
-   "tone": "pl",
-   "temp": "WC",
+   "value": 2.0,
+   "chroma": 7.0,
+   "ks": "2.5R 2/7",
+   "lab": "32 / 23 / 0",
+   "rgb": "105 / 2 / 51",
+   "cmyk": "11 / 100 / 26 / 50",
+   "hex": "#690233",
+   "ncs": "5040-R20B",
+   "pantone": "19-1725",
+   "pname": "Tawny Port",
+   "pnameko": "황갈색 포트와인",
+   "cname": "황갈색 포트와인",
+   "name": "진한 빨강",
+   "tone": "dp",
+   "temp": "C",
    "types": [
-    "LT-MR",
-    "LT-DW"
+    "DK-NT"
    ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-0083",
-   "hue": "3.75R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 8.0,
-   "chroma": 6.0,
-   "ks": "3.75R 8/6",
-   "lab": "80.39 / 24.38 / 10.99",
-   "rgb": "251 / 182 / 180",
-   "cmyk": "",
-   "hex": "#FBB6B4",
-   "ncs": "",
-   "pantone": "14-1418",
-   "pname": "Peach Melba",
-   "pnameko": "프랑스 복숭아 디저트",
-   "cname": "프랑스 복숭아 디저트",
-   "name": "연한 빨강",
-   "tone": "pl",
-   "temp": "WC",
-   "types": [
-    "LT-MR",
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
+   "mc": "LV-MC"
   },
   {
    "id": "UZ-0117",
@@ -1268,7 +1295,8 @@
    "temp": "WC",
    "types": [
     "CM-SS",
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -1325,33 +1353,6 @@
    "mc": "MV-MC"
   },
   {
-   "id": "UZ-0134",
-   "hue": "5R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 6.0,
-   "chroma": 10.0,
-   "ks": "5R 6/10",
-   "lab": "60.81 / 41.72 / 21.05",
-   "rgb": "223 / 115 / 112",
-   "cmyk": "",
-   "hex": "#DF7370",
-   "ncs": "",
-   "pantone": "17-1643",
-   "pname": "Porcelain Rose",
-   "pnameko": "장미빛 도자기",
-   "cname": "장미빛 도자기",
-   "name": "환한 빨강",
-   "tone": "br",
-   "temp": "WC",
-   "types": [
-    "BR-MR",
-    "SN-MR",
-    "BR-NT"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-0135",
    "hue": "5R",
    "group": "빨강",
@@ -1373,35 +1374,10 @@
    "temp": "WC",
    "types": [
     "BR-MR",
+    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-0138",
-   "hue": "5R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 5.0,
-   "chroma": 4.0,
-   "ks": "5R 5/4",
-   "lab": "50.9 / 17.57 / 8.21",
-   "rgb": "155 / 110 / 108",
-   "cmyk": "1 / 45 / 21 / 42",
-   "hex": "#9B6E6C",
-   "ncs": "4030-Y90R",
-   "pantone": "18-1435",
-   "pname": "Withered Rose",
-   "pnameko": "빈티지 로즈",
-   "cname": "빈티지 로즈",
-   "name": "탁한 빨강",
-   "tone": "dl",
-   "temp": "WC",
-   "types": [
-    "CM-SS",
-    "CM-DW"
-   ],
-   "mc": "MV-MC"
   },
   {
    "id": "UZ-0139",
@@ -1477,6 +1453,7 @@
    "temp": "WC",
    "types": [
     "BR-MR",
+    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
@@ -1582,6 +1559,7 @@
    "temp": "WC",
    "types": [
     "BR-MR",
+    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
@@ -1716,57 +1694,6 @@
     "DK-NT"
    ],
    "mc": "LV-MC"
-  },
-  {
-   "id": "UZ-0179",
-   "hue": "6.25R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 6.0,
-   "chroma": 10.0,
-   "ks": "6.25R 6/10",
-   "lab": "60.81 / 41.32 / 24.75",
-   "rgb": "223 / 115 / 105",
-   "cmyk": "",
-   "hex": "#DF7369",
-   "ncs": "",
-   "pantone": "17-1643",
-   "pname": "Porcelain Rose",
-   "pnameko": "장미빛 도자기",
-   "cname": "장미빛 도자기",
-   "name": "환한 빨강",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-0187",
-   "hue": "6.25R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 5.0,
-   "chroma": 14.0,
-   "ks": "6.25R 5/14",
-   "lab": "50.66 / 59.2 / 35.47",
-   "rgb": "218 / 65 / 64",
-   "cmyk": "",
-   "hex": "#DA4140",
-   "ncs": "",
-   "pantone": "18-1561",
-   "pname": "Orange.com",
-   "pnameko": "디지털 오렌지",
-   "cname": "디지털 오렌지",
-   "name": "형광의 빨강",
-   "tone": "nn",
-   "temp": "W",
-   "types": [
-    "BR-MR"
-   ],
-   "mc": "MV-HC"
   },
   {
    "id": "UZ-0204",
@@ -2071,32 +1998,6 @@
    "mc": "MV-MC"
   },
   {
-   "id": "UZ-0216",
-   "hue": "7.5R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 6.0,
-   "chroma": 8.0,
-   "ks": "7.5R 6/8",
-   "lab": "60.85 / 32.13 / 22.07",
-   "rgb": "210 / 123 / 110",
-   "cmyk": "",
-   "hex": "#D27B6E",
-   "ncs": "",
-   "pantone": "16-1532",
-   "pname": "Crabapple",
-   "pnameko": "야생 사과",
-   "cname": "야생 사과",
-   "name": "환한 빨강",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-0217",
    "hue": "7.5R",
    "group": "빨강",
@@ -2115,6 +2016,31 @@
    "cname": "잔불의 온기",
    "name": "환한 빨강",
    "tone": "br",
+   "temp": "W",
+   "types": [
+    "BR-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-0218",
+   "hue": "7.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 6.0,
+   "chroma": 11.0,
+   "ks": "7.5R 6/11",
+   "lab": "",
+   "rgb": "239 / 112 / 93",
+   "cmyk": "",
+   "hex": "#EF705D",
+   "ncs": "1060-Y80R",
+   "pantone": "16-1539",
+   "pname": "Coral",
+   "pnameko": "산호",
+   "cname": "산호",
+   "name": "선명한 빨강",
+   "tone": "vv",
    "temp": "W",
    "types": [
     "BR-MR",
@@ -2143,7 +2069,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -2223,6 +2150,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0224",
+   "hue": "7.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 5.0,
+   "chroma": 9.0,
+   "ks": "7.5R 5/9",
+   "lab": "",
+   "rgb": "180 / 83 / 66",
+   "cmyk": "",
+   "hex": "#B45342",
+   "ncs": "3050-Y80R",
+   "pantone": "16-1440",
+   "pname": "Langoustino",
+   "pnameko": "잘 익은 랑구스티노",
+   "cname": "잘 익은 랑구스티노",
+   "name": "짙은 빨강",
+   "tone": "st",
+   "temp": "W",
+   "types": [
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-0225",
    "hue": "7.5R",
    "group": "빨강",
@@ -2268,7 +2220,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -2281,39 +2234,14 @@
    "chroma": 14.0,
    "ks": "7.5R 5/14",
    "lab": "50.65 / 57.89 / 41.2",
-   "rgb": "217 / 66 / 54",
+   "rgb": "239 / 62 / 33",
    "cmyk": "0 / 94 / 72 / 0",
-   "hex": "#D94236",
+   "hex": "#EF3E21",
    "ncs": "1080-Y80R",
    "pantone": "17-1562",
    "pname": "K-Mandarin Red",
    "pnameko": "다홍",
    "cname": "다홍",
-   "name": "형광의 빨강",
-   "tone": "nn",
-   "temp": "W",
-   "types": [
-    "BR-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-0228",
-   "hue": "7.5R",
-   "group": "빨강",
-   "family": "빨강",
-   "value": 5.0,
-   "chroma": 15.0,
-   "ks": "7.5R 5/15",
-   "lab": "49.6 / 73.6 / 53.1",
-   "rgb": "234 / 20 / 31",
-   "cmyk": "0 / 100 / 100 / 0",
-   "hex": "#EA141F",
-   "ncs": "",
-   "pantone": "",
-   "pname": "K-Vivid Red",
-   "pnameko": "선홍KS",
-   "cname": "선홍KS",
    "name": "형광의 빨강",
    "tone": "nn",
    "temp": "W",
@@ -2467,6 +2395,32 @@
    "cname": "토마토색",
    "name": "선명한 빨강",
    "tone": "vv",
+   "temp": "W",
+   "types": [
+    "BR-MR",
+    "SN-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-0236",
+   "hue": "7.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 4.0,
+   "chroma": 14.0,
+   "ks": "7.5R 4/14",
+   "lab": "40.39 / 58.69 / 40.18",
+   "rgb": "185 / 32 / 33",
+   "cmyk": "0 / 100 / 90 / 5",
+   "hex": "#B92021",
+   "ncs": "1580-Y90R",
+   "pantone": "18-1564",
+   "pname": "K-Red",
+   "pnameko": "빨강KS",
+   "cname": "빨강KS",
+   "name": "형광의 빨강",
+   "tone": "nn",
    "temp": "W",
    "types": [
     "BR-MR"
@@ -2653,6 +2607,32 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0246",
+   "hue": "7.5R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 2.5,
+   "chroma": 8.0,
+   "ks": "7.5R 2.5/8",
+   "lab": "",
+   "rgb": "116 / 11 / 13",
+   "cmyk": "",
+   "hex": "#740B0D",
+   "ncs": "4550-Y90R",
+   "pantone": "19-1337",
+   "pname": "Fired Brick",
+   "pnameko": "가마에 구운 벽돌",
+   "cname": "가마에 구운 벽돌",
+   "name": "진한 빨강",
+   "tone": "dp",
+   "temp": "W",
+   "types": [
+    "DK-SS",
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-0248",
    "hue": "7.5R",
    "group": "빨강",
@@ -2749,8 +2729,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -2902,8 +2881,32 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-0307",
+   "hue": "10R",
+   "group": "빨강",
+   "family": "빨강",
+   "value": 6.0,
+   "chroma": 13.0,
+   "ks": "10R 6/13",
+   "lab": "",
+   "rgb": "242 / 115 / 51",
+   "cmyk": "",
+   "hex": "#F27333",
+   "ncs": "1070-Y60R",
+   "pantone": "16-1462",
+   "pname": "Golden Poppy",
+   "pnameko": "캘리포니아 양귀비",
+   "cname": "캘리포니아 양귀비",
+   "name": "환한 빨강",
+   "tone": "br",
+   "temp": "W",
+   "types": [
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -2928,8 +2931,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -3567,7 +3569,34 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-0464",
+   "hue": "5YR",
+   "group": "주황",
+   "family": "주황",
+   "value": 7.0,
+   "chroma": 13.0,
+   "ks": "5YR 7/13",
+   "lab": "",
+   "rgb": "255 / 156 / 0",
+   "cmyk": "",
+   "hex": "#FF9C00",
+   "ncs": "0585-Y30R",
+   "pantone": "14-1159",
+   "pname": "Zinnia",
+   "pnameko": "백일홍",
+   "cname": "백일홍",
+   "name": "선명한 주황",
+   "tone": "vv",
+   "temp": "W",
+   "types": [
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -3772,6 +3801,56 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0474",
+   "hue": "5YR",
+   "group": "주황",
+   "family": "무채색",
+   "value": 5.0,
+   "chroma": 1.0,
+   "ks": "5YR 5/1",
+   "lab": "50.97 / 3.25 / 4.85",
+   "rgb": "131 / 119 / 113",
+   "cmyk": "0 / 20 / 10 / 60",
+   "hex": "#837771",
+   "ncs": "6005-Y50R",
+   "pantone": "17-1418",
+   "pname": "Ginger Snap",
+   "pnameko": "진저스냅",
+   "cname": "진저스냅",
+   "name": "회 주황",
+   "tone": "gy",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
+  },
+  {
+   "id": "UZ-0475",
+   "hue": "5YR",
+   "group": "주황",
+   "family": "주황",
+   "value": 5.0,
+   "chroma": 2.0,
+   "ks": "5YR 5/2",
+   "lab": "50.94 / 6.29 / 9.7",
+   "rgb": "138 / 117 / 105",
+   "cmyk": "4 / 28 / 31 / 53",
+   "hex": "#8A7569",
+   "ncs": "5010-Y50R",
+   "pantone": "17-1321",
+   "pname": "Woodsmoke",
+   "pnameko": "장작 연기",
+   "cname": "장작 연기",
+   "name": "회 주황",
+   "tone": "gy",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-0476",
    "hue": "5YR",
    "group": "주황",
@@ -3838,6 +3917,31 @@
    "pname": "Thai Curry",
    "pnameko": "태국식 카레",
    "cname": "태국식 카레",
+   "name": "짙은 주황",
+   "tone": "st",
+   "temp": "W",
+   "types": [
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-0479",
+   "hue": "5YR",
+   "group": "주황",
+   "family": "주황",
+   "value": 5.0,
+   "chroma": 9.0,
+   "ks": "5YR 5/9",
+   "lab": "",
+   "rgb": "175 / 92 / 0",
+   "cmyk": "",
+   "hex": "#AF5C00",
+   "ncs": "3560-Y40R",
+   "pantone": "18-1163",
+   "pname": "Pumpkin Spice",
+   "pnameko": "호박 향신료",
+   "cname": "호박 향신료",
    "name": "짙은 주황",
    "tone": "st",
    "temp": "W",
@@ -3973,6 +4077,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0491",
+   "hue": "5YR",
+   "group": "주황",
+   "family": "주황",
+   "value": 3.0,
+   "chroma": 5.0,
+   "ks": "5YR 3/5",
+   "lab": "",
+   "rgb": "115 / 61 / 34",
+   "cmyk": "",
+   "hex": "#733D22",
+   "ncs": "6030-Y60R",
+   "pantone": "18-1230",
+   "pname": "Coconut Shell",
+   "pnameko": "코코넛 껍데기",
+   "cname": "코코넛 껍데기",
+   "name": "어두운 주황",
+   "tone": "dk",
+   "temp": "W",
+   "types": [
+    "DK-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-0492",
    "hue": "5YR",
    "group": "주황",
@@ -4093,8 +4222,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -4424,32 +4552,6 @@
     "SN-MR"
    ],
    "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-0616",
-   "hue": "10YR",
-   "group": "주황",
-   "family": "주황",
-   "value": 8.0,
-   "chroma": 12.0,
-   "ks": "10YR 8/12",
-   "lab": "80.36 / 15.5 / 75.42",
-   "rgb": "255 / 186 / 43",
-   "cmyk": "",
-   "hex": "#FFBA2B",
-   "ncs": "",
-   "pantone": "14-0957",
-   "pname": "Spectra Yellow",
-   "pnameko": "스펙트럼 노랑",
-   "cname": "스펙트럼 노랑",
-   "name": "환한 주황",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
   },
   {
    "id": "UZ-0617",
@@ -5000,60 +5102,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-0699",
-   "hue": "2.5Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 14.0,
-   "ks": "2.5Y 8/14",
-   "lab": "80.4 / 8.84 / 93.52",
-   "rgb": "252 / 190 / 0",
-   "cmyk": "0 / 17 / 100 / 0",
-   "hex": "#FCBE00",
-   "ncs": "0580-Y10R",
-   "pantone": "14-0957",
-   "pname": "K-Sunflower Yellow",
-   "pnameko": "해바라기색",
-   "cname": "해바라기색",
-   "name": "환한 노랑",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-0700",
-   "hue": "2.5Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 16.0,
-   "ks": "2.5Y 8/16",
-   "lab": "80.29 / 10.1 / 106.68",
-   "rgb": "255 / 189 / 0",
-   "cmyk": "",
-   "hex": "#FFBD00",
-   "ncs": "",
-   "pantone": "13-0859",
-   "pname": "Lemon Chrome",
-   "pnameko": "레몬 크롬",
-   "cname": "레몬 크롬",
-   "name": "환한 노랑",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -5259,6 +5308,32 @@
    "mc": "HV-LC"
   },
   {
+   "id": "UZ-0763",
+   "hue": "5Y",
+   "group": "노랑",
+   "family": "노랑",
+   "value": 8.5,
+   "chroma": 8.0,
+   "ks": "5Y 8.5/8",
+   "lab": "",
+   "rgb": "252 / 225 / 108",
+   "cmyk": "",
+   "hex": "#FCE16C",
+   "ncs": "0550-Y",
+   "pantone": "12-0737",
+   "pname": "Goldfinch",
+   "pnameko": "검은머리방울새",
+   "cname": "검은머리방울새",
+   "name": "밝은 노랑",
+   "tone": "lt",
+   "temp": "W",
+   "types": [
+    "LT-MR",
+    "SN-MR"
+   ],
+   "mc": "HV-MC"
+  },
+  {
    "id": "UZ-0764",
    "hue": "5Y",
    "group": "노랑",
@@ -5305,8 +5380,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -5463,32 +5537,6 @@
    "mc": "HV-MC"
   },
   {
-   "id": "UZ-0772",
-   "hue": "5Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 12.0,
-   "ks": "5Y 8/12",
-   "lab": "80.48 / -2.07 / 84.58",
-   "rgb": "234 / 197 / 0",
-   "cmyk": "0 / 20 / 90 / 0",
-   "hex": "#EAC500",
-   "ncs": "",
-   "pantone": "13-0859",
-   "pname": "K-Banana",
-   "pnameko": "바나나색",
-   "cname": "바나나색",
-   "name": "환한 노랑",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-0773",
    "hue": "5Y",
    "group": "노랑",
@@ -5509,8 +5557,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -5615,32 +5662,6 @@
    "mc": "MV-MC"
   },
   {
-   "id": "UZ-0779",
-   "hue": "5Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 7.0,
-   "chroma": 8.0,
-   "ks": "5Y 7/8",
-   "lab": "70.83 / -1.55 / 56.19",
-   "rgb": "200 / 171 / 66",
-   "cmyk": "",
-   "hex": "#C8AB42",
-   "ncs": "2050-Y",
-   "pantone": "15-0850",
-   "pname": "Ceylon Yellow",
-   "pnameko": "황금빛 실론",
-   "cname": "황금빛 실론",
-   "name": "밝은 노랑",
-   "tone": "lt",
-   "temp": "W",
-   "types": [
-    "LT-MR",
-    "SN-MR"
-   ],
-   "mc": "HV-MC"
-  },
-  {
    "id": "UZ-0780",
    "hue": "5Y",
    "group": "노랑",
@@ -5665,31 +5686,6 @@
     "SN-MR"
    ],
    "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-0781",
-   "hue": "5Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 7.0,
-   "chroma": 12.0,
-   "ks": "5Y 7/12",
-   "lab": "70.81 / -0.43 / 83.8",
-   "rgb": "207 / 170 / 0",
-   "cmyk": "",
-   "hex": "#CFAA00",
-   "ncs": "1080-Y",
-   "pantone": "14-0755",
-   "pname": "Sulphur",
-   "pnameko": "유황",
-   "cname": "유황",
-   "name": "짙은 노랑",
-   "tone": "st",
-   "temp": "W",
-   "types": [
-    "RC-SS"
-   ],
-   "mc": "LV-MC"
   },
   {
    "id": "UZ-0783",
@@ -5843,6 +5839,31 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-0791",
+   "hue": "5Y",
+   "group": "노랑",
+   "family": "노랑",
+   "value": 5.0,
+   "chroma": 5.0,
+   "ks": "5Y 5/5",
+   "lab": "",
+   "rgb": "132 / 117 / 57",
+   "cmyk": "",
+   "hex": "#847539",
+   "ncs": "5030-G90Y",
+   "pantone": "17-0836",
+   "pname": "Ecru Olive",
+   "pnameko": "천연 올리브",
+   "cname": "천연 올리브",
+   "name": "탁한 노랑",
+   "tone": "dl",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-0792",
    "hue": "5Y",
    "group": "노랑",
@@ -5944,6 +5965,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-0802",
+   "hue": "5Y",
+   "group": "노랑",
+   "family": "노랑",
+   "value": 3.0,
+   "chroma": 3.0,
+   "ks": "5Y 3/3",
+   "lab": "",
+   "rgb": "78 / 64 / 21",
+   "cmyk": "",
+   "hex": "#4E4015",
+   "ncs": "7020-G90Y",
+   "pantone": "19-0618",
+   "pname": "Beech",
+   "pnameko": "너도밤나무",
+   "cname": "너도밤나무",
+   "name": "어두운 노랑",
+   "tone": "dk",
+   "temp": "W",
+   "types": [
+    "DK-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-0806",
    "hue": "5Y",
    "group": "노랑",
@@ -5989,8 +6035,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -6040,8 +6085,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -6066,8 +6110,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -6121,106 +6164,6 @@
     "DK-SS"
    ],
    "mc": "LV-MC"
-  },
-  {
-   "id": "UZ-0876",
-   "hue": "8.75Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 9.0,
-   "chroma": 2.0,
-   "ks": "8.75Y 9/2",
-   "lab": "90.19719732 / -4.29765724 / 17.03926757",
-   "rgb": "232 / 228 / 194",
-   "cmyk": "",
-   "hex": "#E8E4C2",
-   "ncs": "",
-   "pantone": "12-0607",
-   "pname": "Green Essence",
-   "pnameko": "식물 추출 에센스",
-   "cname": "식물 추출 에센스",
-   "name": "흰 노랑",
-   "tone": "wh(2)",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
-  },
-  {
-   "id": "UZ-0877",
-   "hue": "8.75Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 9.0,
-   "chroma": 4.0,
-   "ks": "8.75Y 9/4",
-   "lab": "90.19719732 / -7.15233296 / 31.23312708",
-   "rgb": "236 / 229 / 167",
-   "cmyk": "",
-   "hex": "#ECE5A7",
-   "ncs": "",
-   "pantone": "12-0520",
-   "pname": "Pale Lime Yellow",
-   "pnameko": "연한 라임 옐로우",
-   "cname": "연한 라임 옐로우",
-   "name": "연한 노랑",
-   "tone": "pl",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-0880",
-   "hue": "8.75Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 4.0,
-   "ks": "8.75Y 8/4",
-   "lab": "80.53822586 / -7.082570313 / 29.62101424",
-   "rgb": "207 / 202 / 144",
-   "cmyk": "",
-   "hex": "#CFCA90",
-   "ncs": "",
-   "pantone": "13-0522",
-   "pname": "Pale Green",
-   "pnameko": "연한 그린",
-   "cname": "연한 그린",
-   "name": "연한 노랑",
-   "tone": "pl",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-0881",
-   "hue": "8.75Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 6.0,
-   "ks": "8.75Y 8/6",
-   "lab": "80.53822586 / -9.629393561 / 43.58448914",
-   "rgb": "210 / 203 / 117",
-   "cmyk": "",
-   "hex": "#D2CB75",
-   "ncs": "",
-   "pantone": "14-0636",
-   "pname": "Muted Lime",
-   "pnameko": "뮤티드 라임",
-   "cname": "뮤티드 라임",
-   "name": "연한 노랑",
-   "tone": "pl",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
   },
   {
    "id": "UZ-0906",
@@ -6323,6 +6266,31 @@
    "mc": "HV-MC"
   },
   {
+   "id": "UZ-0910",
+   "hue": "10Y",
+   "group": "노랑",
+   "family": "노랑",
+   "value": 8.5,
+   "chroma": 8.0,
+   "ks": "10Y 8.5/8",
+   "lab": "",
+   "rgb": "255 / 253 / 123",
+   "cmyk": "",
+   "hex": "#FFFD7B",
+   "ncs": "0550-G80Y",
+   "pantone": "12-0633",
+   "pname": "Canary Yellow",
+   "pnameko": "노란 카나리아",
+   "cname": "노란 카나리아",
+   "name": "밝은 노랑",
+   "tone": "lt",
+   "temp": "C",
+   "types": [
+    "LT-DW"
+   ],
+   "mc": "HV-MC"
+  },
+  {
    "id": "UZ-0911",
    "hue": "10Y",
    "group": "노랑",
@@ -6346,6 +6314,31 @@
     "LT-DW"
    ],
    "mc": "HV-MC"
+  },
+  {
+   "id": "UZ-0912",
+   "hue": "10Y",
+   "group": "노랑",
+   "family": "노랑",
+   "value": 8.5,
+   "chroma": 11.0,
+   "ks": "10Y 8.5/11",
+   "lab": "",
+   "rgb": "255 / 255 / 10",
+   "cmyk": "",
+   "hex": "#FFFF0A",
+   "ncs": "0570-G80Y",
+   "pantone": "13-0650",
+   "pname": "Sulphur Spring",
+   "pnameko": "유황 온천수",
+   "cname": "유황 온천수",
+   "name": "밝은 노랑",
+   "tone": "br",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
   },
   {
    "id": "UZ-0913",
@@ -6498,31 +6491,6 @@
    "mc": "MV-HC"
   },
   {
-   "id": "UZ-0920",
-   "hue": "10Y",
-   "group": "노랑",
-   "family": "노랑",
-   "value": 8.0,
-   "chroma": 13.0,
-   "ks": "10Y 8/13",
-   "lab": "",
-   "rgb": "234 / 226 / 7",
-   "cmyk": "",
-   "hex": "#EAE207",
-   "ncs": "0570-G80Y",
-   "pantone": "13-0650",
-   "pname": "Sulphur Spring",
-   "pnameko": "유황 온천수",
-   "cname": "유황 온천수",
-   "name": "밝은 노랑",
-   "tone": "br",
-   "temp": "C",
-   "types": [
-    "BR-NT"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-0923",
    "hue": "10Y",
    "group": "노랑",
@@ -6568,7 +6536,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -6593,7 +6562,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -6643,8 +6613,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -6669,8 +6638,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -7054,6 +7022,31 @@
    "mc": "HV-MC"
   },
   {
+   "id": "UZ-1059",
+   "hue": "5GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 7.0,
+   "chroma": 11.0,
+   "ks": "5GY 7/11",
+   "lab": "",
+   "rgb": "161 / 212 / 20",
+   "cmyk": "",
+   "hex": "#A1D414",
+   "ncs": "0575-G40Y",
+   "pantone": "14-0452",
+   "pname": "Lime Green",
+   "pnameko": "라임 그린",
+   "cname": "라임 그린",
+   "name": "밝은 연두",
+   "tone": "br",
+   "temp": "W",
+   "types": [
+    "BR-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
    "id": "UZ-1060",
    "hue": "5GY",
    "group": "연두",
@@ -7074,7 +7067,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -7174,7 +7168,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -7199,7 +7194,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -7526,8 +7522,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -7657,6 +7652,32 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-1202",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 7.0,
+   "chroma": 9.0,
+   "ks": "10GY 7/9",
+   "lab": "",
+   "rgb": "104 / 194 / 96",
+   "cmyk": "57 / 0 / 28 / 45",
+   "hex": "#68C260",
+   "ncs": "4030-B70G",
+   "pantone": "14-0156",
+   "pname": "Summer Green",
+   "pnameko": "여름 그린",
+   "cname": "여름 그린",
+   "name": "밝은 연두",
+   "tone": "lt",
+   "temp": "W",
+   "types": [
+    "LT-MR",
+    "SN-MR"
+   ],
+   "mc": "HV-MC"
+  },
+  {
    "id": "UZ-1205",
    "hue": "10GY",
    "group": "연두",
@@ -7732,6 +7753,32 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-1210",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 6.0,
+   "chroma": 11.0,
+   "ks": "10GY 6/11",
+   "lab": "",
+   "rgb": "50 / 170 / 54",
+   "cmyk": "",
+   "hex": "#32AA36",
+   "ncs": "2040-B70G",
+   "pantone": "16-6340",
+   "pname": "Classic Green",
+   "pnameko": "클래식 그린",
+   "cname": "클래식 그린",
+   "name": "선명한 연두",
+   "tone": "vv",
+   "temp": "W",
+   "types": [
+    "BR-MR",
+    "SN-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
    "id": "UZ-1211",
    "hue": "10GY",
    "group": "연두",
@@ -7752,10 +7799,34 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-1213",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "무채색",
+   "value": 5.0,
+   "chroma": 1.0,
+   "ks": "10GY 5/1",
+   "lab": "51.02 / -4.83 / 3.83",
+   "rgb": "116 / 124 / 115",
+   "cmyk": "",
+   "hex": "#747C73",
+   "ncs": "6005-G20Y",
+   "pantone": "17-6206",
+   "pname": "Shadow",
+   "pnameko": "그림자",
+   "cname": "그림자",
+   "name": "회 연두",
+   "tone": "gy",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
   },
   {
    "id": "UZ-1215",
@@ -7781,6 +7852,31 @@
     "CM-SS"
    ],
    "mc": "MV-MC"
+  },
+  {
+   "id": "UZ-1218",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 5.0,
+   "chroma": 9.0,
+   "ks": "10GY 5/9",
+   "lab": "",
+   "rgb": "44 / 140 / 49",
+   "cmyk": "39 / 0 / 21 / 0",
+   "hex": "#2C8C31",
+   "ncs": "1030-B70G",
+   "pantone": "16-6339",
+   "pname": "Vibrant Green",
+   "pnameko": "바이브런트그린",
+   "cname": "바이브런트그린",
+   "name": "짙은 연두",
+   "tone": "st",
+   "temp": "W",
+   "types": [
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
   },
   {
    "id": "UZ-1219",
@@ -7883,6 +7979,32 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-1225",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 4.0,
+   "chroma": 7.0,
+   "ks": "10GY 4/7",
+   "lab": "",
+   "rgb": "51 / 125 / 55",
+   "cmyk": "",
+   "hex": "#337D37",
+   "ncs": "3560-G20Y",
+   "pantone": "17-0145",
+   "pname": "Online Lime",
+   "pnameko": "온라인 라임",
+   "cname": "온라인 라임",
+   "name": "진한 연두",
+   "tone": "dp",
+   "temp": "W",
+   "types": [
+    "DK-SS",
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-1226",
    "hue": "10GY",
    "group": "연두",
@@ -7959,6 +8081,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-1231",
+   "hue": "10GY",
+   "group": "연두",
+   "family": "초록",
+   "value": 2.5,
+   "chroma": 3.0,
+   "ks": "10GY 2.5/3",
+   "lab": "",
+   "rgb": "36 / 64 / 39",
+   "cmyk": "",
+   "hex": "#244027",
+   "ncs": "7020-G10Y",
+   "pantone": "19-6311",
+   "pname": "Greener Pastures",
+   "pnameko": "더 푸른 목초지",
+   "cname": "더 푸른 목초지",
+   "name": "어두운 연두",
+   "tone": "dk",
+   "temp": "W",
+   "types": [
+    "DK-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-1233",
    "hue": "10GY",
    "group": "연두",
@@ -8009,32 +8156,6 @@
    "mc": "LV-MC"
   },
   {
-   "id": "UZ-1248",
-   "hue": "1.25G",
-   "group": "초록",
-   "family": "초록",
-   "value": 6.0,
-   "chroma": 10.0,
-   "ks": "1.25G 6/10",
-   "lab": "61.38408225 / -47.21318566 / 28.98550195",
-   "rgb": "60 / 168 / 95",
-   "cmyk": "",
-   "hex": "#3CA85F",
-   "ncs": "",
-   "pantone": "16-6138",
-   "pname": "Kelly Green",
-   "pnameko": "켈리 그린",
-   "cname": "켈리 그린",
-   "name": "환한 초록",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-1262",
    "hue": "1.25G",
    "group": "초록",
@@ -8081,8 +8202,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -8417,7 +8537,8 @@
    "temp": "WC",
    "types": [
     "CM-SS",
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -8495,7 +8616,6 @@
    "temp": "WC",
    "types": [
     "BR-MR",
-    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
@@ -8548,6 +8668,7 @@
    "temp": "WC",
    "types": [
     "BR-MR",
+    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
@@ -8574,6 +8695,7 @@
    "temp": "WC",
    "types": [
     "BR-MR",
+    "SN-MR",
     "BR-NT"
    ],
    "mc": "MV-HC"
@@ -8600,7 +8722,7 @@
    "temp": "WC",
    "types": [
     "DK-SS",
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -8679,7 +8801,7 @@
    "temp": "WC",
    "types": [
     "DK-SS",
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -8834,31 +8956,6 @@
     "BR-NT"
    ],
    "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-1446",
-   "hue": "8.75G",
-   "group": "초록",
-   "family": "초록",
-   "value": 9.0,
-   "chroma": 2.0,
-   "ks": "8.75G 9/2",
-   "lab": "90.26 / -13.25 / 3.12",
-   "rgb": "202 / 234 / 221",
-   "cmyk": "",
-   "hex": "#CAEADD",
-   "ncs": "",
-   "pantone": "12-5209",
-   "pname": "Soothing Sea",
-   "pnameko": "잔잔한 바다",
-   "cname": "잔잔한 바다",
-   "name": "흰 초록",
-   "tone": "wh(2)",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
   },
   {
    "id": "UZ-1480",
@@ -9156,7 +9253,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -9206,7 +9304,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -9234,31 +9332,6 @@
     "ST-NT"
    ],
    "mc": "LV-LC"
-  },
-  {
-   "id": "UZ-1575",
-   "hue": "3.75BG",
-   "group": "청록",
-   "family": "초록",
-   "value": 9.0,
-   "chroma": 2.0,
-   "ks": "3.75BG 9/2",
-   "lab": "90.26 / -7.26 / 0.48",
-   "rgb": "212 / 231 / 226",
-   "cmyk": "",
-   "hex": "#D4E7E2",
-   "ncs": "",
-   "pantone": "12-5508",
-   "pname": "Hushed Green",
-   "pnameko": "비밀스런 그린",
-   "cname": "비밀스런 그린",
-   "name": "흰 청록",
-   "tone": "wh(2)",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
   },
   {
    "id": "UZ-1603",
@@ -9506,7 +9579,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -9536,6 +9610,31 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-1616",
+   "hue": "5BG",
+   "group": "청록",
+   "family": "초록",
+   "value": 6.0,
+   "chroma": 6.0,
+   "ks": "5BG 6/6",
+   "lab": "61.26 / -30.64 / -4.02",
+   "rgb": "64 / 163 / 154",
+   "cmyk": "",
+   "hex": "#40A39A",
+   "ncs": "2040-B70G",
+   "pantone": "15-5519",
+   "pname": "Turquoise",
+   "pnameko": "터쿼이즈",
+   "cname": "터쿼이즈",
+   "name": "흐린 청록",
+   "tone": "sf",
+   "temp": "C",
+   "types": [
+    "CM-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-1618",
    "hue": "5BG",
    "group": "청록",
@@ -9554,6 +9653,31 @@
    "cname": "수영장 그린",
    "name": "환한 청록",
    "tone": "br",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-1619",
+   "hue": "5BG",
+   "group": "청록",
+   "family": "초록",
+   "value": 5.5,
+   "chroma": 10.0,
+   "ks": "5BG 5.5/10",
+   "lab": "",
+   "rgb": "0 / 150 / 136",
+   "cmyk": "",
+   "hex": "#009688",
+   "ncs": "2060-B70G",
+   "pantone": "17-5335",
+   "pname": "Spectra Green",
+   "pnameko": "스펙트럼 그린",
+   "cname": "스펙트럼 그린",
+   "name": "선명한 청록",
+   "tone": "vv",
    "temp": "C",
    "types": [
     "BR-NT"
@@ -9636,6 +9760,56 @@
    "mc": "MV-HC"
   },
   {
+   "id": "UZ-1633",
+   "hue": "5BG",
+   "group": "청록",
+   "family": "초록",
+   "value": 4.0,
+   "chroma": 9.0,
+   "ks": "5BG 4/9",
+   "lab": "",
+   "rgb": "0 / 106 / 97",
+   "cmyk": "",
+   "hex": "#006A61",
+   "ncs": "4050-B60G",
+   "pantone": "18-5020",
+   "pname": "Parasailing",
+   "pnameko": "패러세일링 블루",
+   "cname": "패러세일링 블루",
+   "name": "진한 청록",
+   "tone": "dp",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-1635",
+   "hue": "5BG",
+   "group": "청록",
+   "family": "초록",
+   "value": 3.0,
+   "chroma": 2.0,
+   "ks": "5BG 3/2",
+   "lab": "30.45 / -9.01 / -1.96",
+   "rgb": "53 / 76 / 74",
+   "cmyk": "49 / 3 / 20 / 86",
+   "hex": "#354C4A",
+   "ncs": "7010-B70G",
+   "pantone": "19-5411",
+   "pname": "Trekking Green",
+   "pnameko": "도보 여행 그린",
+   "cname": "도보 여행 그린",
+   "name": "어두운 회 청록",
+   "tone": "dkgy",
+   "temp": "C",
+   "types": [
+    "ST-NT"
+   ],
+   "mc": "LV-LC"
+  },
+  {
    "id": "UZ-1638",
    "hue": "5BG",
    "group": "청록",
@@ -9654,6 +9828,31 @@
    "cname": "울창한 수풀",
    "name": "진한 청록",
    "tone": "dp",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-1640",
+   "hue": "5BG",
+   "group": "청록",
+   "family": "초록",
+   "value": 2.5,
+   "chroma": 6.0,
+   "ks": "5BG 2.5/6",
+   "lab": "",
+   "rgb": "31 / 87 / 76",
+   "cmyk": "",
+   "hex": "#1F574C",
+   "ncs": "6530-B50G",
+   "pantone": "19-5414",
+   "pname": "June Bug",
+   "pnameko": "6월의 딱정벌레",
+   "cname": "6월의 딱정벌레",
+   "name": "어두운 청록",
+   "tone": "dk",
    "temp": "C",
    "types": [
     "DK-NT"
@@ -9881,7 +10080,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -9981,7 +10181,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -10283,8 +10483,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -10334,7 +10533,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -10564,32 +10764,6 @@
     "DK-SS"
    ],
    "mc": "LV-MC"
-  },
-  {
-   "id": "UZ-1840",
-   "hue": "3.75B",
-   "group": "파랑",
-   "family": "파랑",
-   "value": 6.0,
-   "chroma": 8.0,
-   "ks": "3.75B 6/8",
-   "lab": "61.3 / -28.17 / -23.17",
-   "rgb": "0 / 163 / 188",
-   "cmyk": "",
-   "hex": "#00A3BC",
-   "ncs": "",
-   "pantone": "16-4728",
-   "pname": "Peacock Blue",
-   "pnameko": "공작새 파랑",
-   "cname": "공작새 파랑",
-   "name": "환한 파랑",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
   },
   {
    "id": "UZ-1857",
@@ -10893,57 +11067,6 @@
    "mc": "MV-MC"
   },
   {
-   "id": "UZ-1871",
-   "hue": "5B",
-   "group": "파랑",
-   "family": "파랑",
-   "value": 6.0,
-   "chroma": 6.0,
-   "ks": "5B 6/6",
-   "lab": "61.23 / -19.38 / -18.42",
-   "rgb": "74 / 159 / 180",
-   "cmyk": "",
-   "hex": "#4A9FB4",
-   "ncs": "2040-B20G",
-   "pantone": "16-4525",
-   "pname": "Maui Blue",
-   "pnameko": "마우이 바다",
-   "cname": "마우이 바다",
-   "name": "흐린 파랑",
-   "tone": "sf",
-   "temp": "W",
-   "types": [
-    "CM-SS"
-   ],
-   "mc": "MV-MC"
-  },
-  {
-   "id": "UZ-1873",
-   "hue": "5B",
-   "group": "파랑",
-   "family": "파랑",
-   "value": 6.0,
-   "chroma": 9.0,
-   "ks": "5B 6/9",
-   "lab": "",
-   "rgb": "0 / 167 / 197",
-   "cmyk": "",
-   "hex": "#00A7C5",
-   "ncs": "1555-B10G",
-   "pantone": "16-4728",
-   "pname": "Peacock Blue",
-   "pnameko": "공작새 파랑",
-   "cname": "공작새 파랑",
-   "name": "환한 파랑",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-1874",
    "hue": "5B",
    "group": "파랑",
@@ -10964,10 +11087,34 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-1875",
+   "hue": "5B",
+   "group": "파랑",
+   "family": "무채색",
+   "value": 5.0,
+   "chroma": 1.0,
+   "ks": "5B 5/1",
+   "lab": "51.02 / -3.22 / -2.88",
+   "rgb": "113 / 123 / 126",
+   "cmyk": "",
+   "hex": "#717B7E",
+   "ncs": "5005-B20G",
+   "pantone": "17-4405",
+   "pname": "Monument",
+   "pnameko": "기념비 석조",
+   "cname": "기념비 석조",
+   "name": "회 파랑",
+   "tone": "gy",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
   },
   {
    "id": "UZ-1876",
@@ -11011,6 +11158,31 @@
    "pname": "Storm Blue",
    "pnameko": "폭풍우 블루",
    "cname": "폭풍우 블루",
+   "name": "탁한 파랑",
+   "tone": "dl",
+   "temp": "W",
+   "types": [
+    "CM-SS"
+   ],
+   "mc": "MV-MC"
+  },
+  {
+   "id": "UZ-1878",
+   "hue": "5B",
+   "group": "파랑",
+   "family": "파랑",
+   "value": 5.0,
+   "chroma": 5.0,
+   "ks": "5B 5/5",
+   "lab": "",
+   "rgb": "61 / 128 / 149",
+   "cmyk": "",
+   "hex": "#3D8095",
+   "ncs": "4030-B10G",
+   "pantone": "17-4724",
+   "pname": "Pagoda Blue",
+   "pnameko": "파고다 블루",
+   "cname": "파고다 블루",
    "name": "탁한 파랑",
    "tone": "dl",
    "temp": "W",
@@ -11065,7 +11237,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -11090,8 +11263,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -11154,9 +11326,9 @@
    "chroma": 7.0,
    "ks": "5B 4/7",
    "lab": "",
-   "rgb": "0 / 75 / 92",
+   "rgb": "0 / 102 / 126",
    "cmyk": "",
-   "hex": "#004B5C",
+   "hex": "#00667E",
    "ncs": "5045-B10G",
    "pantone": "18-4528",
    "pname": "Mosaic Blue",
@@ -11188,6 +11360,32 @@
    "pname": "Turkish Tile",
    "pnameko": "터키 타일",
    "cname": "터키 타일",
+   "name": "진한 파랑",
+   "tone": "dp",
+   "temp": "W",
+   "types": [
+    "DK-SS",
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-1888",
+   "hue": "5B",
+   "group": "파랑",
+   "family": "파랑",
+   "value": 4.0,
+   "chroma": 9.0,
+   "ks": "5B 4/9",
+   "lab": "",
+   "rgb": "0 / 114 / 138",
+   "cmyk": "",
+   "hex": "#00728A",
+   "ncs": "3060-B10G",
+   "pantone": "18-4525",
+   "pname": "Caribbean Sea",
+   "pnameko": "카리브해 블루",
+   "cname": "카리브해 블루",
    "name": "진한 파랑",
    "tone": "dp",
    "temp": "W",
@@ -11273,6 +11471,32 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-1894",
+   "hue": "5B",
+   "group": "파랑",
+   "family": "파랑",
+   "value": 3.0,
+   "chroma": 7.0,
+   "ks": "5B 3/7",
+   "lab": "",
+   "rgb": "24 / 90 / 114",
+   "cmyk": "100 / 16 / 12 / 56",
+   "hex": "#185A72",
+   "ncs": "5045-B10G",
+   "pantone": "19-4540",
+   "pname": "Deep Lagoon",
+   "pnameko": "깊은 산호초 석호",
+   "cname": "깊은 산호초 석호",
+   "name": "진한 파랑",
+   "tone": "dp",
+   "temp": "W",
+   "types": [
+    "DK-SS",
+    "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-1895",
    "hue": "5B",
    "group": "파랑",
@@ -11295,6 +11519,31 @@
    "types": [
     "DK-SS",
     "RC-SS"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-1897",
+   "hue": "5B",
+   "group": "파랑",
+   "family": "파랑",
+   "value": 2.5,
+   "chroma": 6.0,
+   "ks": "5B 2.5/6",
+   "lab": "",
+   "rgb": "19 / 71 / 89",
+   "cmyk": "",
+   "hex": "#134759",
+   "ncs": "6030-B10G",
+   "pantone": "19-4329",
+   "pname": "Corsair",
+   "pnameko": "해적선 블루",
+   "cname": "해적선 블루",
+   "name": "어두운 파랑",
+   "tone": "dk",
+   "temp": "W",
+   "types": [
+    "DK-SS"
    ],
    "mc": "LV-MC"
   },
@@ -11422,31 +11671,6 @@
     "BR-NT"
    ],
    "mc": "MV-HC"
-  },
-  {
-   "id": "UZ-1972",
-   "hue": "8.75B",
-   "group": "파랑",
-   "family": "파랑",
-   "value": 9.0,
-   "chroma": 2.0,
-   "ks": "8.75B 9/2",
-   "lab": "89.11 / -4.51 / -5.29",
-   "rgb": "209 / 227 / 234",
-   "cmyk": "",
-   "hex": "#D1E3EA",
-   "ncs": "",
-   "pantone": "12-4604",
-   "pname": "Skylight",
-   "pnameko": "하늘빛 창문",
-   "cname": "하늘빛 창문",
-   "name": "흰 파랑",
-   "tone": "wh(2)",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
   },
   {
    "id": "UZ-2001",
@@ -11719,7 +11943,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -11844,7 +12069,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -12199,81 +12425,6 @@
    "mc": "MV-HC"
   },
   {
-   "id": "UZ-2115",
-   "hue": "3.75PB",
-   "group": "남색",
-   "family": "파랑",
-   "value": 9.0,
-   "chroma": 2.0,
-   "ks": "3.75PB 9/2",
-   "lab": "90.2 / -1.24 / -5.47",
-   "rgb": "219 / 228 / 237",
-   "cmyk": "",
-   "hex": "#DBE4ED",
-   "ncs": "",
-   "pantone": "11-4604",
-   "pname": "Billowing Sail",
-   "pnameko": "흰색 돛",
-   "cname": "흰색 돛",
-   "name": "흰 남색",
-   "tone": "wh(2)",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
-  },
-  {
-   "id": "UZ-2117",
-   "hue": "3.75PB",
-   "group": "남색",
-   "family": "파랑",
-   "value": 8.0,
-   "chroma": 4.0,
-   "ks": "3.75PB 8/4",
-   "lab": "80.57 / -2.65 / -14.29",
-   "rgb": "180 / 203 / 226",
-   "cmyk": "",
-   "hex": "#B4CBE2",
-   "ncs": "",
-   "pantone": "13-4200",
-   "pname": "Omphalodes",
-   "pnameko": "옴팔로데스꽃",
-   "cname": "옴팔로데스꽃",
-   "name": "연한 남색",
-   "tone": "pl",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-2122",
-   "hue": "3.75PB",
-   "group": "남색",
-   "family": "파랑",
-   "value": 7.0,
-   "chroma": 8.0,
-   "ks": "3.75PB 7/8",
-   "lab": "70.96 / -3.96 / -30.67",
-   "rgb": "126 / 178 / 229",
-   "cmyk": "",
-   "hex": "#7EB2E5",
-   "ncs": "",
-   "pantone": "14-4320",
-   "pname": "Baltic Sea",
-   "pnameko": "발틱 블루",
-   "cname": "발틱 블루",
-   "name": "밝은 남색",
-   "tone": "lt",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
    "id": "UZ-2147",
    "hue": "5PB",
    "group": "남색",
@@ -12549,6 +12700,31 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-2158",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "파랑",
+   "value": 7.0,
+   "chroma": 7.0,
+   "ks": "5PB 7/7",
+   "lab": "",
+   "rgb": "146 / 183 / 235",
+   "cmyk": "",
+   "hex": "#92B7EB",
+   "ncs": "1040-R80B",
+   "pantone": "15-3920",
+   "pname": "Placid Blue",
+   "pnameko": "평온한 하늘",
+   "cname": "평온한 하늘",
+   "name": "흐린 남색",
+   "tone": "sf",
+   "temp": "C",
+   "types": [
+    "CM-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-2159",
    "hue": "5PB",
    "group": "남색",
@@ -12594,7 +12770,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -12674,6 +12851,32 @@
    "mc": "MV-HC"
   },
   {
+   "id": "UZ-2166",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "무채색",
+   "value": 5.0,
+   "chroma": 1.0,
+   "ks": "5PB 5/1",
+   "lab": "51 / 0.1 / -3.78",
+   "rgb": "118 / 122 / 128",
+   "cmyk": "",
+   "hex": "#767A80",
+   "ncs": "5005-R80B",
+   "pantone": "17-0000",
+   "pname": "Frost Gray",
+   "pnameko": "서리 낀 겨울",
+   "cname": "서리 낀 겨울",
+   "name": "회 남색",
+   "tone": "gy",
+   "temp": "C",
+   "types": [
+    "CM-DW",
+    "MT-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-2167",
    "hue": "5PB",
    "group": "남색",
@@ -12694,7 +12897,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -12792,6 +12996,31 @@
    "cname": "초롱꽃 보라",
    "name": "환한 남색",
    "tone": "br",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-2172",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "파랑",
+   "value": 5.0,
+   "chroma": 11.0,
+   "ks": "5PB 5/11",
+   "lab": "",
+   "rgb": "0 / 127 / 196",
+   "cmyk": "",
+   "hex": "#007FC4",
+   "ncs": "2060-R90B",
+   "pantone": "18-4252",
+   "pname": "Blue Aster",
+   "pnameko": "과꽃",
+   "cname": "과꽃",
+   "name": "선명한 남색",
+   "tone": "vv",
    "temp": "C",
    "types": [
     "BR-NT"
@@ -12969,7 +13198,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -12992,6 +13221,31 @@
    "cname": "모란꽃",
    "name": "어두운 남색",
    "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2186",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "파랑",
+   "value": 3.0,
+   "chroma": 7.0,
+   "ks": "5PB 3/7",
+   "lab": "",
+   "rgb": "0 / 62 / 119",
+   "cmyk": "",
+   "hex": "#003E77",
+   "ncs": "5040-R80B",
+   "pantone": "19-4052",
+   "pname": "Classic Blue",
+   "pnameko": "클래식 블루",
+   "cname": "클래식 블루",
+   "name": "진한 남색",
+   "tone": "dp",
    "temp": "C",
    "types": [
     "DK-NT"
@@ -13049,6 +13303,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-2190",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "파랑",
+   "value": 2.5,
+   "chroma": 6.0,
+   "ks": "5PB 2.5/6",
+   "lab": "",
+   "rgb": "16 / 54 / 96",
+   "cmyk": "",
+   "hex": "#103660",
+   "ncs": "6030-R80B",
+   "pantone": "19-4035",
+   "pname": "Dark Blue",
+   "pnameko": "다크 블루",
+   "cname": "다크 블루",
+   "name": "어두운 남색",
+   "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-2192",
    "hue": "5PB",
    "group": "남색",
@@ -13090,6 +13369,31 @@
    "pname": "K-Dark Navy",
    "pnameko": "감색",
    "cname": "감색",
+   "name": "어두운 남색",
+   "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2194",
+   "hue": "5PB",
+   "group": "남색",
+   "family": "파랑",
+   "value": 2.0,
+   "chroma": 5.0,
+   "ks": "5PB 2/5",
+   "lab": "",
+   "rgb": "9 / 41 / 77",
+   "cmyk": "",
+   "hex": "#09294D",
+   "ncs": "7020-R80B",
+   "pantone": "19-4029",
+   "pname": "Navy Peony",
+   "pnameko": "모란꽃",
+   "cname": "모란꽃",
    "name": "어두운 남색",
    "tone": "dk",
    "temp": "C",
@@ -13444,7 +13748,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -13794,7 +14098,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -13819,7 +14123,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -14299,56 +14603,6 @@
    "mc": "LV-MC"
   },
   {
-   "id": "UZ-2413",
-   "hue": "3.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 8.0,
-   "chroma": 4.0,
-   "ks": "3.75P 8/4",
-   "lab": "80.5 / 8.56 / -11.76",
-   "rgb": "206 / 195 / 222",
-   "cmyk": "",
-   "hex": "#CEC3DE",
-   "ncs": "",
-   "pantone": "13-3820",
-   "pname": "Lavender Fog",
-   "pnameko": "라벤더 새벽 안개",
-   "cname": "라벤더 새벽 안개",
-   "name": "연한 보라",
-   "tone": "pl",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-2417",
-   "hue": "3.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 7.0,
-   "chroma": 8.0,
-   "ks": "3.75P 7/8",
-   "lab": "70.8 / 20.03 / -24.93",
-   "rgb": "188 / 163 / 219",
-   "cmyk": "",
-   "hex": "#BCA3DB",
-   "ncs": "",
-   "pantone": "15-3817",
-   "pname": "Lavender",
-   "pnameko": "라벤더",
-   "cname": "라벤더",
-   "name": "밝은 보라",
-   "tone": "lt",
-   "temp": "C",
-   "types": [
-    "LT-DW"
-   ],
-   "mc": "HV-MC"
-  },
-  {
    "id": "UZ-2442",
    "hue": "5P",
    "group": "보라",
@@ -14512,9 +14766,9 @@
    "hex": "#B1ABB6",
    "ncs": "3010-R50B",
    "pantone": "14-3805",
-   "pname": "Iris",
-   "pnameko": "붓꽃",
-   "cname": "붓꽃",
+   "pname": "Mystic Iris",
+   "pnameko": "신비한 붓꽃",
+   "cname": "신비한 붓꽃",
    "name": "밝은 회 보라",
    "tone": "ltgy",
    "temp": "C",
@@ -14574,6 +14828,31 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-2451",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 7.0,
+   "chroma": 7.0,
+   "ks": "5P 7/7",
+   "lab": "",
+   "rgb": "205 / 167 / 224",
+   "cmyk": "",
+   "hex": "#CDA7E0",
+   "ncs": "1040-R50B",
+   "pantone": "16-3617",
+   "pname": "Sheer Lilac",
+   "pnameko": "엷은 라일락",
+   "cname": "엷은 라일락",
+   "name": "밝은 보라",
+   "tone": "lt",
+   "temp": "C",
+   "types": [
+    "LT-DW"
+   ],
+   "mc": "HV-MC"
+  },
+  {
    "id": "UZ-2452",
    "hue": "5P",
    "group": "보라",
@@ -14619,7 +14898,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -14640,6 +14920,31 @@
    "pname": "Rhapsody",
    "pnameko": "랩소디",
    "cname": "랩소디",
+   "name": "흐린 보라",
+   "tone": "sf",
+   "temp": "C",
+   "types": [
+    "CM-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
+   "id": "UZ-2456",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 6.0,
+   "chroma": 5.0,
+   "ks": "5P 6/5",
+   "lab": "",
+   "rgb": "159 / 129 / 171",
+   "cmyk": "",
+   "hex": "#9F81AB",
+   "ncs": "3030-R50B",
+   "pantone": "16-3525",
+   "pname": "Regal Orchid",
+   "pnameko": "황실 오키드",
+   "cname": "황실 오키드",
    "name": "흐린 보라",
    "tone": "sf",
    "temp": "C",
@@ -14699,6 +15004,32 @@
    "mc": "MV-HC"
   },
   {
+   "id": "UZ-2459",
+   "hue": "5P",
+   "group": "보라",
+   "family": "무채색",
+   "value": 5.0,
+   "chroma": 1.0,
+   "ks": "5P 5/1",
+   "lab": "50.99 / 2.76 / -2.89",
+   "rgb": "124 / 120 / 126",
+   "cmyk": "10 / 14 / 0 / 57",
+   "hex": "#7C787E",
+   "ncs": "5005-R50B",
+   "pantone": "17-3802",
+   "pname": "Gull",
+   "pnameko": "갈매기 깃털",
+   "cname": "갈매기 깃털",
+   "name": "회 보라",
+   "tone": "gy",
+   "temp": "C",
+   "types": [
+    "CM-DW",
+    "MT-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
    "id": "UZ-2460",
    "hue": "5P",
    "group": "보라",
@@ -14717,6 +15048,32 @@
    "cname": "산등성이 암석",
    "name": "회 보라",
    "tone": "gy",
+   "temp": "C",
+   "types": [
+    "CM-DW",
+    "MT-DW"
+   ],
+   "mc": "MV-MC"
+  },
+  {
+   "id": "UZ-2461",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 5.0,
+   "chroma": 4.0,
+   "ks": "5P 5/4",
+   "lab": "50.97 / 11.6 / -12.19",
+   "rgb": "132 / 116 / 142",
+   "cmyk": "33 / 45 / 0 / 29",
+   "hex": "#84748E",
+   "ncs": "5020-R50B",
+   "pantone": "17-3612",
+   "pname": "Orchid Mist",
+   "pnameko": "안개빛 오키드",
+   "cname": "안개빛 오키드",
+   "name": "탁한 보라",
+   "tone": "dl",
    "temp": "C",
    "types": [
     "CM-DW"
@@ -14799,6 +15156,31 @@
    "mc": "MV-HC"
   },
   {
+   "id": "UZ-2465",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 4.5,
+   "chroma": 9.0,
+   "ks": "5P 4.5/9",
+   "lab": "",
+   "rgb": "157 / 100 / 168",
+   "cmyk": "",
+   "hex": "#9D64A8",
+   "ncs": "2050-R50B",
+   "pantone": "18-3628",
+   "pname": "Bellflower",
+   "pnameko": "도라지꽃",
+   "cname": "도라지꽃",
+   "name": "선명한 보라",
+   "tone": "vv",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
+  },
+  {
    "id": "UZ-2468",
    "hue": "5P",
    "group": "보라",
@@ -14849,6 +15231,31 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-2472",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 4.0,
+   "chroma": 11.0,
+   "ks": "5P 4/11",
+   "lab": "",
+   "rgb": "138 / 78 / 153",
+   "cmyk": "",
+   "hex": "#8A4E99",
+   "ncs": "3050-R50B",
+   "pantone": "18-3533",
+   "pname": "Dewberry",
+   "pnameko": "이슬 맺힌 산딸기",
+   "cname": "이슬 맺힌 산딸기",
+   "name": "선명한 보라",
+   "tone": "vv",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
+  },
+  {
    "id": "UZ-2473",
    "hue": "5P",
    "group": "보라",
@@ -14874,6 +15281,31 @@
    "mc": "MV-HC"
   },
   {
+   "id": "UZ-2474",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 3.5,
+   "chroma": 8.0,
+   "ks": "5P 3.5/8",
+   "lab": "",
+   "rgb": "125 / 87 / 135",
+   "cmyk": "",
+   "hex": "#7D5787",
+   "ncs": "3050-R50B",
+   "pantone": "19-3536",
+   "pname": "Amaranth Purple",
+   "pnameko": "아마란스 퍼플",
+   "cname": "아마란스 퍼플",
+   "name": "진한 보라",
+   "tone": "dp",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-2476",
    "hue": "5P",
    "group": "보라",
@@ -14894,7 +15326,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -14965,6 +15397,31 @@
    "pname": "K-Purple",
    "pnameko": "보라KS",
    "cname": "보라KS",
+   "name": "진한 보라",
+   "tone": "dp",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2482",
+   "hue": "5P",
+   "group": "보라",
+   "family": "보라",
+   "value": 2.5,
+   "chroma": 7.0,
+   "ks": "5P 2.5/7",
+   "lab": "",
+   "rgb": "75 / 46 / 96",
+   "cmyk": "",
+   "hex": "#4B2E60",
+   "ncs": "5040-R50B",
+   "pantone": "",
+   "pname": "Beyond Space",
+   "pnameko": "우주의 바깥 너머",
+   "cname": "우주의 바깥 너머",
    "name": "진한 보라",
    "tone": "dp",
    "temp": "C",
@@ -15399,107 +15856,6 @@
    "mc": "LV-MC"
   },
   {
-   "id": "UZ-2558",
-   "hue": "8.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 8.0,
-   "chroma": 4.0,
-   "ks": "8.75P 8/4",
-   "lab": "80.48 / 12.52 / -6.89",
-   "rgb": "218 / 192 / 213",
-   "cmyk": "",
-   "hex": "#DAC0D5",
-   "ncs": "",
-   "pantone": "12-2903",
-   "pname": "Light Lilac",
-   "pnameko": "밝은 라일락",
-   "cname": "밝은 라일락",
-   "name": "연한 보라",
-   "tone": "pl",
-   "temp": "W",
-   "types": [
-    "LT-MR"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-2559",
-   "hue": "8.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 8.0,
-   "chroma": 6.0,
-   "ks": "8.75P 8/6",
-   "lab": "80.45 / 19.8 / -11.16",
-   "rgb": "228 / 188 / 221",
-   "cmyk": "",
-   "hex": "#E4BCDD",
-   "ncs": "",
-   "pantone": "13-2805",
-   "pname": "Pink Mist",
-   "pnameko": "분홍 안개물빛",
-   "cname": "분홍 안개물빛",
-   "name": "연한 보라",
-   "tone": "pl",
-   "temp": "W",
-   "types": [
-    "LT-MR"
-   ],
-   "mc": "HV-MC"
-  },
-  {
-   "id": "UZ-2560",
-   "hue": "8.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 7.0,
-   "chroma": 2.0,
-   "ks": "8.75P 7/2",
-   "lab": "70.84 / 5.59 / -3.01",
-   "rgb": "181 / 170 / 179",
-   "cmyk": "",
-   "hex": "#B5AAB3",
-   "ncs": "",
-   "pantone": "14-3906",
-   "pname": "Raindrops",
-   "pnameko": "빗방울 그레이",
-   "cname": "빗방울 그레이",
-   "name": "밝은 회 보라",
-   "tone": "ltgy",
-   "temp": "W",
-   "types": [
-    "CM-SS"
-   ],
-   "mc": "HV-LC"
-  },
-  {
-   "id": "UZ-2563",
-   "hue": "8.75P",
-   "group": "보라",
-   "family": "보라",
-   "value": 7.0,
-   "chroma": 8.0,
-   "ks": "8.75P 7/8",
-   "lab": "70.75 / 27.88 / -16.06",
-   "rgb": "210 / 156 / 203",
-   "cmyk": "",
-   "hex": "#D29CCB",
-   "ncs": "",
-   "pantone": "15-3214",
-   "pname": "Orchid",
-   "pnameko": "서양란",
-   "cname": "서양란",
-   "name": "밝은 보라",
-   "tone": "lt",
-   "temp": "W",
-   "types": [
-    "LT-MR",
-    "SN-MR"
-   ],
-   "mc": "HV-MC"
-  },
-  {
    "id": "UZ-2588",
    "hue": "10P",
    "group": "보라",
@@ -15826,32 +16182,6 @@
    "mc": "MV-MC"
   },
   {
-   "id": "UZ-2603",
-   "hue": "10P",
-   "group": "보라",
-   "family": "보라",
-   "value": 6.0,
-   "chroma": 8.0,
-   "ks": "10P 6/8",
-   "lab": "60.92 / 29.23 / -14.39",
-   "rgb": "186 / 129 / 173",
-   "cmyk": "",
-   "hex": "#BA81AD",
-   "ncs": "",
-   "pantone": "16-3320",
-   "pname": "Violet",
-   "pnameko": "바이올렛",
-   "cname": "바이올렛",
-   "name": "환한 보라",
-   "tone": "br",
-   "temp": "W",
-   "types": [
-    "BR-MR",
-    "SN-MR"
-   ],
-   "mc": "MV-HC"
-  },
-  {
    "id": "UZ-2604",
    "hue": "10P",
    "group": "보라",
@@ -15872,8 +16202,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -15898,8 +16227,7 @@
    "tone": "br",
    "temp": "W",
    "types": [
-    "BR-MR",
-    "SN-MR"
+    "BR-MR"
    ],
    "mc": "MV-HC"
   },
@@ -16024,6 +16352,31 @@
    "tone": "br",
    "temp": "W",
    "types": [
+    "BR-MR"
+   ],
+   "mc": "MV-HC"
+  },
+  {
+   "id": "UZ-2612",
+   "hue": "10P",
+   "group": "보라",
+   "family": "보라",
+   "value": 5.0,
+   "chroma": 11.0,
+   "ks": "10P 5/11",
+   "lab": "",
+   "rgb": "172 / 69 / 151",
+   "cmyk": "",
+   "hex": "#AC4597",
+   "ncs": "2060-R40B",
+   "pantone": "17-3023",
+   "pname": "Rosebud",
+   "pnameko": "장미 꽃망울 핑크",
+   "cname": "장미 꽃망울 핑크",
+   "name": "선명한 보라",
+   "tone": "vv",
+   "temp": "W",
+   "types": [
     "BR-MR",
     "SN-MR"
    ],
@@ -16050,7 +16403,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -16150,7 +16504,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -16175,7 +16530,8 @@
    "tone": "vv",
    "temp": "W",
    "types": [
-    "BR-MR"
+    "BR-MR",
+    "SN-MR"
    ],
    "mc": "MV-HC"
   },
@@ -16602,7 +16958,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -16677,7 +17034,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -16730,31 +17087,6 @@
     "DK-NT"
    ],
    "mc": "LV-MC"
-  },
-  {
-   "id": "UZ-2710",
-   "hue": "3.75RP",
-   "group": "자주",
-   "family": "보라",
-   "value": 7.0,
-   "chroma": 2.0,
-   "ks": "3.75RP 7/2",
-   "lab": "70.83 / 6.74 / -0.48",
-   "rgb": "186 / 169 / 174",
-   "cmyk": "",
-   "hex": "#BAA9AE",
-   "ncs": "",
-   "pantone": "15-3802",
-   "pname": "Cloud Gray",
-   "pnameko": "먹구름",
-   "cname": "먹구름",
-   "name": "밝은 회 자주",
-   "tone": "ltgy",
-   "temp": "C",
-   "types": [
-    "MT-DW"
-   ],
-   "mc": "HV-LC"
   },
   {
    "id": "UZ-2741",
@@ -17077,7 +17409,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -17157,6 +17490,31 @@
    "mc": "MV-MC"
   },
   {
+   "id": "UZ-2758",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 6.0,
+   "chroma": 10.0,
+   "ks": "5RP 6/10",
+   "lab": "60.86 / 40.68 / -3.53",
+   "rgb": "211 / 118 / 154",
+   "cmyk": "0 / 80 / 5 / 0",
+   "hex": "#D3769A",
+   "ncs": "1050-R30B",
+   "pantone": "15-2217",
+   "pname": "Aurora Pink",
+   "pnameko": "오로라 핑크",
+   "cname": "오로라 핑크",
+   "name": "환한 자주",
+   "tone": "br",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "MV-HC"
+  },
+  {
    "id": "UZ-2759",
    "hue": "5RP",
    "group": "자주",
@@ -17202,7 +17560,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -17352,7 +17711,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -17407,6 +17766,56 @@
    "mc": "LV-MC"
   },
   {
+   "id": "UZ-2774",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 4.0,
+   "chroma": 10.0,
+   "ks": "5RP 4/10",
+   "lab": "40.52 / 43.81 / -6.49",
+   "rgb": "156 / 62 / 107",
+   "cmyk": "",
+   "hex": "#9C3E6B",
+   "ncs": "3050-R30B",
+   "pantone": "18-2326",
+   "pname": "Cactus Flower",
+   "pnameko": "선인장 꽃",
+   "cname": "선인장 꽃",
+   "name": "짙은 자주",
+   "tone": "st",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2775",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 4.0,
+   "chroma": 11.0,
+   "ks": "5RP 4/11",
+   "lab": "",
+   "rgb": "147 / 19 / 97",
+   "cmyk": "",
+   "hex": "#931361",
+   "ncs": "3055-R30B",
+   "pantone": "18-2328",
+   "pname": "Fuchsia Red",
+   "pnameko": "푸시아 레드",
+   "cname": "푸시아 레드",
+   "name": "짙은 자주",
+   "tone": "st",
+   "temp": "C",
+   "types": [
+    "BR-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
    "id": "UZ-2776",
    "hue": "5RP",
    "group": "자주",
@@ -17452,7 +17861,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -17473,6 +17882,31 @@
    "pname": "Grape Wine",
    "pnameko": "포도주",
    "cname": "포도주",
+   "name": "어두운 자주",
+   "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2781",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 3.0,
+   "chroma": 5.0,
+   "ks": "5RP 3/5",
+   "lab": "",
+   "rgb": "106 / 61 / 77",
+   "cmyk": "",
+   "hex": "#6A3D4D",
+   "ncs": "6020-R20B",
+   "pantone": "18-1716",
+   "pname": "Damson",
+   "pnameko": "댐슨 자두",
+   "cname": "댐슨 자두",
    "name": "어두운 자주",
    "tone": "dk",
    "temp": "C",
@@ -17550,6 +17984,56 @@
    "cname": "멕시코 초콜릿 소스",
    "name": "어두운 자주",
    "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2788",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 2.0,
+   "chroma": 5.0,
+   "ks": "5RP 2/5",
+   "lab": "",
+   "rgb": "85 / 42 / 64",
+   "cmyk": "",
+   "hex": "#552A40",
+   "ncs": "6030-R30B",
+   "pantone": "19-2420",
+   "pname": "Pickled Beet",
+   "pnameko": "식초에 절인 비트",
+   "cname": "식초에 절인 비트",
+   "name": "어두운 자주",
+   "tone": "dk",
+   "temp": "C",
+   "types": [
+    "DK-NT"
+   ],
+   "mc": "LV-MC"
+  },
+  {
+   "id": "UZ-2790",
+   "hue": "5RP",
+   "group": "자주",
+   "family": "보라",
+   "value": 2.0,
+   "chroma": 7.0,
+   "ks": "5RP 2/7",
+   "lab": "",
+   "rgb": "91 / 16 / 79",
+   "cmyk": "",
+   "hex": "#5B104F",
+   "ncs": "5040-R40B",
+   "pantone": "19-2524",
+   "pname": "Dark Purple",
+   "pnameko": "다크 퍼플",
+   "cname": "다크 퍼플",
+   "name": "진한 자주",
+   "tone": "dp",
    "temp": "C",
    "types": [
     "DK-NT"
@@ -17777,7 +18261,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -18127,7 +18611,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -18252,7 +18737,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -18377,7 +18863,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -18477,7 +18963,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -18752,7 +19238,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -18777,7 +19264,8 @@
    "tone": "gy",
    "temp": "C",
    "types": [
-    "CM-DW"
+    "CM-DW",
+    "MT-DW"
    ],
    "mc": "MV-MC"
   },
@@ -18802,7 +19290,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
@@ -18827,7 +19315,7 @@
    "tone": "dkgy",
    "temp": "C",
    "types": [
-    "DK-NT"
+    "ST-NT"
    ],
    "mc": "LV-LC"
   },
